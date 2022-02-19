@@ -6,17 +6,35 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/18 19:25:56 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/19 18:36:30 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHEL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
-typedef struct s_command_line
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <stdbool.h>
+
+/*
+* Hay que declarar todas las listas antes de definirlas para que el *next pueda
+* ser del tipo de la lista
+*/
+typedef struct s_command_line t_cmd_line;
+
+struct s_command_line
 {
-	char 			*str;
-	t_command_line	*next;
-} t_command_line;
+	char 		*str;
+	t_cmd_line	*next;
+};
+
+typedef enum quote
+{
+	NONE,
+	SINGLE,
+	DOUBLE,
+	END
+}	t_quote;
 
 #endif

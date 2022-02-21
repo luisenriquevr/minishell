@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readlinepruebas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/20 20:23:43 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/21 22:12:14 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ void get_cmd_line(char *str, t_cmd_line **cmd_line)
 	{
 		while (str[curr_pos])
 		{
+			// hola | adios
 			look_for_pipe(str, &curr_pos);
 			fill_cmd_list(cmd_line, str, curr_pos, cmd_start);
 			cmd_start = curr_pos;
@@ -232,7 +233,90 @@ void print_list(char *str)
 	printf("%s\n", str);
 }
 
-int main(void)
+void check_redirection(char *str, int *i)
+{
+	char redirection;
+
+	redirection = str[*i];
+	/*Check for <, >, << or >> and get the index to the end of redirection */
+	while (str[*i] && str[*i] == redirection)
+		(*i)++;
+}
+
+void check_arg(char *s, int *i)
+{
+	t_quote quote;
+
+	quote = NONE;
+	while (s[*i])
+	{
+		if (s[*i] == '"')
+		{
+			if (quote == NONE)
+				quote = DOUBLE;
+			else if (quote == DOUBLE)
+				quote = NONE;
+		}
+		if (s[*i] == '\'')
+		{
+			if (quote == NONE)
+				quote = SINGLE;
+			else if (quote == SINGLE)
+				quote = NONE;
+		}
+		if ((s[*i] == ' ' || s[*i] == '<' || s[*i] == '>') && quote == NONE)
+			break ;
+		(*i)++;
+	}
+}
+
+void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
+{
+	/*
+	* Crear una estructura de t_token
+	* Inicializar la estructura con todo a null
+	* Copiar con ft_strncpy en str del nuevo t_token
+	* Chequear el tipo de lo que haya en token->str y poner token->type
+	* Añadir el token relleno al final de la lista de token dentro del comando
+	*/
+}
+
+void tokenize_cmd(t_cmd_line **cmd)
+{
+	int curr_pos;
+	int cmd_start;
+
+	curr_pos = 0;
+	cmd_start = 0;
+	while ((*cmd)->str)
+	{
+		while ((*cmd)->str[curr_pos] == ' ')
+			curr_pos++;
+		cmd_start = curr_pos;
+		if ((*cmd)->str[curr_pos])
+		{
+			if ((*cmd)->str[curr_pos] == '<' || (*cmd)->str[curr_pos] == '>')
+				check_redirection((*cmd)->str, &curr_pos);
+			else
+				check_arg((*cmd)->str, &curr_pos);
+			fill_token_list(cmd, (*cmd)->str, curr_pos, cmd_start);
+		}
+	}
+}
+
+void tokenizer(t_cmd_line **cmd_line)
+{
+	t_cmd_line *current_node;
+
+	current_node = *cmd_line; /* *cmd_line representa el primer nodo*/
+	while (current_node)
+	{
+		tokenize_cmd(&current_node);
+		current_node = current_node->next;
+	}
+}
+
+int main(void) //int argc, char **argv, char **env
 {
 	char			*str;
 	t_cmd_line	*cmd_line;
@@ -253,6 +337,8 @@ int main(void)
 		*	Redirecciones
 		*	Ejecución
 		*/
+		tokenizer(cmd_line);
+		ft_lstiter(cmd_line, print_list);
 		free(str);
 	}
 	return (0);

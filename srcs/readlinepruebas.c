@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   readlinepruebas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/21 22:12:14 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/23 20:43:00 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
+#include "libft.h"
 #include <readline/readline.h>
 
 int exit_status; //Variable global
@@ -86,6 +87,7 @@ void check_str(char *str)
 * del estado de las comillas porque ya se ha repetido ese código dos veces.
 * La función avanza sobre el puntero del str hasta la posición del pipe.
 */
+
 void look_for_pipe(char *str, int *current_position)
 {
 	t_quote quote;
@@ -212,7 +214,7 @@ void get_cmd_line(char *str, t_cmd_line **cmd_line)
 }
 
 /*
-* Función de listas pero adaptada a nuestra estructura. No sé si me convence
+* Función de listas pero adaptada a nuestra estructura. No sé si me convence: NO
 */
 void	ft_lstiter(t_cmd_line *lst, void (*f)(char *))
 {
@@ -279,6 +281,13 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 	* Chequear el tipo de lo que haya en token->str y poner token->type
 	* Añadir el token relleno al final de la lista de token dentro del comando
 	*/
+
+	t_token token;
+
+	token = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
+	if (!token) //en vez de if (token == NULL) ?
+		exit_status = 4;
+
 }
 
 void tokenize_cmd(t_cmd_line **cmd)
@@ -290,7 +299,7 @@ void tokenize_cmd(t_cmd_line **cmd)
 	cmd_start = 0;
 	while ((*cmd)->str)
 	{
-		while ((*cmd)->str[curr_pos] == ' ')
+		while ((*cmd)->str[curr_pos] == ' ') //Sustituir por ft_ispace?
 			curr_pos++;
 		cmd_start = curr_pos;
 		if ((*cmd)->str[curr_pos])

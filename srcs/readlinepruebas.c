@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/25 22:40:35 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/25 22:53:40 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,17 @@ void set_token_type(t_token *t)
 		else if (t->str[0] == '>')
 			t->type = GREATER;
 	}
-	i
+	if (len == 2)
+	{
+		if (t->str[0] == '<' && t->str[1] == '<')
+			t->type = HERE_DOC;
+		else if (t->str[0] == '>' && t->str[1] == '>')
+			t->type = D_GREATER;
+	}
+	if (check_builtin(t->str))
+		t->type = BUILTIN;
+	if (length != 0 && t->type == NONE)
+		t->type = ARG;
 }
 
 void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)

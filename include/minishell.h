@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/25 21:24:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/25 22:16:13 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,32 +47,19 @@ typedef enum quote
 	END
 }	t_quote;
 
-
-enum type{
-    NONE, //defaut set
-    ARG, //word
-    FILE_IN, //word == '<'
-    HERE_DOC, // word == '<<'
-    FILE_OUT, //word == '>'
-    FILE_OUT_SUR, //word == '>>'
-    OPEN_FILE, // word following '<'
-    LIMITOR, // word following '<<'
-    EXIT_FILE, // word followinf '>'
-    EXIT_FILE_RET; // word following '>>'
-}
 typedef enum token_type
 {
 	NONE,
 	ARG,
 	BUILTIN,
-	REDIR_OUT, //<
+	LESS, //<
 	HERE_DOC, //<<
 	LIMITOR,//Palabra después de <<
-	REDIR_IN, //>
-	APPEND, //>>
-
-
-	END
+	GREATER, //>
+	D_GREATER, //>>
+	OUT_FILE_APPEND, //Palabra después de >>
+	OUT_FILE, //Palabra después de >
+	IN_FILE //Palabra después de <
 }	t_type;
 
 #endif

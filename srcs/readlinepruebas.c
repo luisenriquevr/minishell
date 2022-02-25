@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/23 20:43:00 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/25 21:24:52 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,12 +282,15 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 	* Añadir el token relleno al final de la lista de token dentro del comando
 	*/
 
-	t_token token;
+	t_token *token;
 
 	token = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
 	if (!token) //en vez de if (token == NULL) ?
 		exit_status = 4;
-
+	token->str = NULL;
+	token->type = NONE;
+	token->exp = false;
+	token->next = NULL;
 }
 
 void tokenize_cmd(t_cmd_line **cmd)

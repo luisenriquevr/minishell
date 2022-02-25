@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/23 20:43:10 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/25 21:24:51 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ struct s_cmd_line
 struct s_token
 {
 	char *str;
-	int type;
+	t_type type;
+	bool exp;
 	t_token *next;
 };
 
@@ -45,5 +46,33 @@ typedef enum quote
 	DOUBLE,
 	END
 }	t_quote;
+
+
+enum type{
+    NONE, //defaut set
+    ARG, //word
+    FILE_IN, //word == '<'
+    HERE_DOC, // word == '<<'
+    FILE_OUT, //word == '>'
+    FILE_OUT_SUR, //word == '>>'
+    OPEN_FILE, // word following '<'
+    LIMITOR, // word following '<<'
+    EXIT_FILE, // word followinf '>'
+    EXIT_FILE_RET; // word following '>>'
+}
+typedef enum token_type
+{
+	NONE,
+	ARG,
+	BUILTIN,
+	REDIR_OUT, //<
+	HERE_DOC, //<<
+	LIMITOR,//Palabra después de <<
+	REDIR_IN, //>
+	APPEND, //>>
+
+
+	END
+}	t_type;
 
 #endif

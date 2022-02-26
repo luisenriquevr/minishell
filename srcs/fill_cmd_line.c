@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 13:01:41 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 22:46:40 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 	if (new->str == NULL)
 		exit_status = 4;
 	new->str = ft_strncpy(new->str, str + start, end - start);
-	ft_lstadd_back(cmd_line, new);
+	lstadd_back_cmd(cmd_line, new);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 13:01:37 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 22:28:48 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,44 @@
 
 extern int exit_status;
 
-/*
-* Función de listas pero adaptada a nuestra estructura. No sé si me convence
-*/
-t_cmd_line	*ft_lstlast(t_cmd_line *lst)
-{
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
-}
+// void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back)
+// {
+// 	t_commande_line	*cur;
 
+// 	cur = *first;
+// 	if (cur == NULL)
+// 		*first = add_back;
+// 	else
+// 	{
+// 		while (cur->next)
+// 			cur = cur->next;
+// 		cur->next = add_back;
+// 	}
+// }
 /*
-* Función de listas pero adaptada a nuestra estructura. No sé si me convence
+* Función de listas pero adaptada a nuestra estructura.
 */
-void	ft_lstadd_back(t_cmd_line **lst, t_cmd_line *new)
+void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new)
 {
 	t_cmd_line *last;
 
 	if (lst)
 	{
-		if (*lst)
+		last = *lst;
+		if (last == NULL)
+			*lst = new;
+		else
 		{
-			last = ft_lstlast(*lst);
+			while (last->next)
+				last = last->next;
 			last->next = new;
 		}
-		else
-			*lst = new;
 	}
 }
 /*
-* Función de listas pero adaptada a nuestra estructura. No sé si me convence: NO
+* Función de listas pero adaptada a nuestra estructura.
 */
-void	ft_lstiter(t_cmd_line *lst, void (*f)(char *))
+void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *))
 {
 	if (!lst || !f)
 		return ;
@@ -67,4 +69,25 @@ void	ft_lstiter(t_cmd_line *lst, void (*f)(char *))
 void print_list(char *str)
 {
 	printf("%s\n", str);
+}
+
+/*
+* Función de listas pero adaptada a nuestra estructura.
+*/
+void	lstadd_back_token(t_token **lst, t_token *new)
+{
+	t_token *last;
+
+	if (lst)
+	{
+		last = *lst;
+		if (last == NULL)
+			*lst = new;
+		else
+		{
+			while (last->next)
+				last = last->next;
+			last->next = new;
+		}
+	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   previous_checker.c                                 :+:      :+:    :+:   */
+/*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 13:01:22 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 22:01:29 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,23 @@
 #include "libft.h"
 
 extern int exit_status;
+
+bool check_builtin(char *arg)
+{
+	/*
+	* Los builtins son> echo, cd, pwd, export, unset, env, exit.
+	*/
+	if (arg != NULL)
+	{
+		if (ft_strcmp(arg, "echo") || ft_strcmp(arg, "export") 
+		|| ft_strcmp(arg, "unset") || ft_strcmp(arg, "exit")
+		|| ft_strcmp(arg, "env") || ft_strcmp(arg, "cd")
+		|| ft_strcmp(arg, "pwd"))
+			return (true);
+
+	}
+	return (false);
+}
 /*
 * Esta función recibe por parámetro la línea de comandos y cuando encuentra
 * una comilla del tipo que sea setea el tipo de comillas a ese tipo y hasta

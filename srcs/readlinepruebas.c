@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/26 12:41:02 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 22:31:00 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(void) //int argc, char **argv, char **env
 		add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
 		check_str(str);
 		get_cmd_line(str, &cmd_line);
-		ft_lstiter(cmd_line, print_list);
+		lstiter_cmd(cmd_line, print_list);
 		/*Aquí iría a continuación:
 		*	Tokenizer
 		*	Expander
@@ -36,8 +36,8 @@ int main(void) //int argc, char **argv, char **env
 		*	Redirecciones
 		*	Ejecución
 		*/
-		tokenizer(cmd_line);
-		ft_lstiter(cmd_line, print_list);
+		tokenizer(&cmd_line);
+		lstiter_cmd(cmd_line, print_list);
 		free(str);
 	}
 	return (0);

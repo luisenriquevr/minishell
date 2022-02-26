@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 13:06:06 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 22:26:32 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "libft.h"
 
 extern int exit_status;
-
+/*
+* Esta funcion mide la longitud del comando que hay guardado en el token
+* y asigna al token el tipo que corresponda en funcion de la longitud.
+* Si no es ninguno de los tipos pero mide mas de cero se le asigna el tipo ARG.
+* Duda: si el str fuera >>> se le asignaria el tipo ARG, eso se gestiona despues
+* en la ejecucion o deberia dar fallo aqui? (Si no pongo tildes es por el teclado en ingles juasjuas)
+*/
 void set_token_type(t_token *t)
 {
 	size_t length;
@@ -36,7 +42,7 @@ void set_token_type(t_token *t)
 	}
 	if (check_builtin(t->str))
 		t->type = BUILTIN;
-	if (length != 0 && t->type == NONE)
+	if (length != 0 && t->type == EMPTY)
 		t->type = ARG;
 }
 
@@ -56,7 +62,7 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 	if (!token) //en vez de if (token == NULL) ?
 		exit_status = 4;
 	token->str = NULL;
-	token->type = NONE;
+	token->type = EMPTY;
 	token->exp = false;
 	token->next = NULL;
 	token->str = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
@@ -64,6 +70,7 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 		exit_status = 4;
 	token->str = ft_strncpy(token->str, str + cmd_start, curr_pos - cmd_start);
 	set_token_type(token);
+	lstadd_back_token(&(*cmd)->head_token, token);
 }
 
 void tokenize_cmd(t_cmd_line **cmd)

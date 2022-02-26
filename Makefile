@@ -6,7 +6,7 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/02/26 13:12:42 by cristianama      ###   ########.fr        #
+#    Updated: 2022/02/26 23:02:45 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME = minishell
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall $(INCLUDES)#-g3 -fsanitize=address
-LDFLAGS = -L$(LIBFTPATH) -lft
+LDFLAGS = -L$(LIBFTPATH) -lft -lreadline
 RM = rm -f
 
 SRCINC = include/

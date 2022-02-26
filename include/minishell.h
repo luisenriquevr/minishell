@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/25 21:24:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/26 11:47:42 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 * ser del tipo de la lista
 */
 typedef struct s_cmd_line t_cmd_line;
-typedef struct s_token s_token;
+typedef struct s_token t_token;
 
 struct s_cmd_line
 {
@@ -47,19 +47,6 @@ typedef enum quote
 	END
 }	t_quote;
 
-
-enum type{
-    NONE, //defaut set
-    ARG, //word
-    FILE_IN, //word == '<'
-    HERE_DOC, // word == '<<'
-    FILE_OUT, //word == '>'
-    FILE_OUT_SUR, //word == '>>'
-    OPEN_FILE, // word following '<'
-    LIMITOR, // word following '<<'
-    EXIT_FILE, // word followinf '>'
-    EXIT_FILE_RET; // word following '>>'
-}
 typedef enum token_type
 {
 	NONE,

@@ -6,7 +6,7 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/02/26 23:02:45 by cristianama      ###   ########.fr        #
+#    Updated: 2022/02/26 23:39:00 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ OBJS = $(SRC:.c=.o)
 NAME = minishell
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall $(INCLUDES)#-g3 -fsanitize=address
-LDFLAGS = -L$(LIBFTPATH) -lft -lreadline
+CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address
+LDFLAGS = -L$(LIBFTPATH) -lft -lreadline -g3 -fsanitize=address
 RM = rm -f
 
 SRCINC = include/

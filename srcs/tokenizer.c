@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 22:26:32 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/27 00:40:21 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,17 @@ void tokenize_cmd(t_cmd_line **cmd)
 
 	curr_pos = 0;
 	cmd_start = 0;
-	while ((*cmd)->str)
+	while ((*cmd)->str[curr_pos])
 	{
 		while ((*cmd)->str[curr_pos] == ' ') //Sustituir por ft_ispace?
 			curr_pos++;
 		cmd_start = curr_pos;
-		if ((*cmd)->str[curr_pos])
-		{
-			if ((*cmd)->str[curr_pos] == '<' || (*cmd)->str[curr_pos] == '>')
-				check_redirection((*cmd)->str, &curr_pos);
-			else
-				check_arg((*cmd)->str, &curr_pos);
-			fill_token_list(cmd, (*cmd)->str, curr_pos, cmd_start);
-		}
+		if ((*cmd)->str[curr_pos] && ((*cmd)->str[curr_pos] == '<' 
+		|| (*cmd)->str[curr_pos] == '>'))
+			check_redirection((*cmd)->str, &curr_pos);
+		else
+			check_arg((*cmd)->str, &curr_pos);
+		fill_token_list(cmd, (*cmd)->str, curr_pos, cmd_start);
 	}
 }
 

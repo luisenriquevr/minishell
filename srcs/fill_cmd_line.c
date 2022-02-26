@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 22:46:40 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/27 00:18:52 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void    fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 	if (new == NULL)
 		exit_status = 4;
 	new->str = NULL;
+	new->head_token = NULL;
 	new->next = NULL;
 	new->str = malloc(sizeof(char) * (end - start + 1));
 	if (new->str == NULL)

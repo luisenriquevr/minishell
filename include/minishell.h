@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/26 11:47:42 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/26 11:50:13 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ typedef enum token_type
 	NONE,
 	ARG,
 	BUILTIN,
-	REDIR_OUT, //<
+	LESS, //<
 	HERE_DOC, //<<
 	LIMITOR,//Palabra después de <<
-	REDIR_IN, //>
-	APPEND, //>>
-
-
-	END
+	GREATER, //>
+	D_GREATER, //>>
+	OUT_FILE_APPEND, //Palabra después de >>
+	OUT_FILE, //Palabra después de >
+	IN_FILE //Palabra después de <
 }	t_type;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/25 21:24:52 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/02/25 22:53:40 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,23 +113,6 @@ void look_for_pipe(char *str, int *current_position)
 			return ;
 		(*current_position)++;
 	}
-}
-
-/*
-* Pues eso, strncpy. Hay que refactorizar todas estas cositas en nuevos archivos ya.
-*/
-char	*ft_strncpy(char *dst, char *src, int n)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
 }
 
 /*
@@ -272,6 +255,31 @@ void check_arg(char *s, int *i)
 	}
 }
 
+void set_token_type(t_token *t)
+{
+	size_t length;
+
+	length = t->str != NULL ? ft_strlen(t->str) : 0;
+	if (len == 1)
+	{
+		if (t->str[0] == '<')
+			t->type = LESS;
+		else if (t->str[0] == '>')
+			t->type = GREATER;
+	}
+	if (len == 2)
+	{
+		if (t->str[0] == '<' && t->str[1] == '<')
+			t->type = HERE_DOC;
+		else if (t->str[0] == '>' && t->str[1] == '>')
+			t->type = D_GREATER;
+	}
+	if (check_builtin(t->str))
+		t->type = BUILTIN;
+	if (length != 0 && t->type == NONE)
+		t->type = ARG;
+}
+
 void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 {
 	/*
@@ -284,13 +292,18 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 
 	t_token *token;
 
-	token = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
+	token = malloc(sizeof(t_token));
 	if (!token) //en vez de if (token == NULL) ?
 		exit_status = 4;
 	token->str = NULL;
 	token->type = NONE;
 	token->exp = false;
 	token->next = NULL;
+	token->str = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
+	if (!token->str) //en vez de if (token == NULL) ?
+		exit_status = 4;
+	token->str = ft_strncpy(token->str, str + cmd_start, curr_pos - cmd_start);
+	set_token_type(token);
 }
 
 void tokenize_cmd(t_cmd_line **cmd)

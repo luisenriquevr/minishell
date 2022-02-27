@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/26 22:39:59 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/02/27 12:27:11 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include <stdbool.h>
 
 /*

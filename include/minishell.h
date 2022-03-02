@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/02/27 12:27:11 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/02 20:42:47 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ void	tokenize_cmd(t_cmd_line **cmd);
 void	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
 void	set_token_type(t_token *t);
 void	lstadd_back_token(t_token **lst, t_token *new);
+bool	set_file_type(t_token **current_token);
+bool	set_limitor(t_token **current_token);
+bool	is_file(t_type type);
+void	set_file(t_type previous_token, t_token *token);
 
 /*EXPANDIR LA LISTA DE COMANDOS*/
 

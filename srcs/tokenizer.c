@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/27 00:40:21 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/02 20:41:23 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,15 @@ void set_token_type(t_token *t)
 		t->type = ARG;
 }
 
+/*
+* Crear una estructura de t_token
+* Inicializar la estructura con todo a null
+* Copiar con ft_strncpy en str del nuevo t_token
+* Chequear el tipo de lo que haya en token->str y poner token->type
+* Añadir el token relleno al final de la lista de token dentro del comando
+*/
 void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 {
-	/*
-	* Crear una estructura de t_token
-	* Inicializar la estructura con todo a null
-	* Copiar con ft_strncpy en str del nuevo t_token
-	* Chequear el tipo de lo que haya en token->str y poner token->type
-	* Añadir el token relleno al final de la lista de token dentro del comando
-	*/
-
 	t_token *token;
 
 	token = malloc(sizeof(t_token));
@@ -82,7 +81,7 @@ void tokenize_cmd(t_cmd_line **cmd)
 	cmd_start = 0;
 	while ((*cmd)->str[curr_pos])
 	{
-		while ((*cmd)->str[curr_pos] == ' ') //Sustituir por ft_ispace?
+		while ((*cmd)->str[curr_pos] == ' ') //Sustituir por ft_isspace?
 			curr_pos++;
 		cmd_start = curr_pos;
 		if ((*cmd)->str[curr_pos] && ((*cmd)->str[curr_pos] == '<' 
@@ -96,12 +95,21 @@ void tokenize_cmd(t_cmd_line **cmd)
 
 void tokenizer(t_cmd_line **cmd_line)
 {
-	t_cmd_line *current_node;
+	t_cmd_line *current_cmd;
 
-	current_node = *cmd_line; /* *cmd_line representa el primer nodo*/
-	while (current_node)
+	current_cmd = *cmd_line; /* *cmd_line representa el primer nodo*/
+	while (current_cmd)
 	{
-		tokenize_cmd(&current_node);
-		current_node = current_node->next;
+		tokenize_cmd(&current_cmd);
+		current_cmd = current_cmd->next;
+	}
+	current_cmd = *cmd_line;
+	while (current_cmd)
+	{
+		if (set_limitor(&current_cmd))
+			exit_status = 42; //Ya no sé qué inventarme
+		if (set_file_type(&current_cmd))
+			exit_status = 42;
+		current_cmd = current_cmd->next;
 	}
 }

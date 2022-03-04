@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/02 20:41:48 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/04 18:48:14 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ void set_file(t_type previous_token, t_token *token)
 }
 bool is_file(t_type type)
 {
-	if (type == OUT_FILE_APPEND || type == OUT_FILE
-		|| type == IN_FILE || type == HERE_DOC)
+	if (type == LESS || type == GREATER
+		|| type == D_GREATER || type == HERE_DOC)
 		return (true);
 	return (false);
 }
 
-bool set_limitor(t_token **current_token)
+bool set_limitor(t_cmd_line *current_token)
 {
 	t_token *t;
 	bool limitor_flag;
 
-	t = *current_token;
+	t = current_token->head_token;
 	limitor_flag = false;
 	while (t)
 	{
@@ -60,13 +60,13 @@ bool set_limitor(t_token **current_token)
 	return (limitor_flag);
 }
 
-bool set_file_type(t_token **current_token)
+bool set_file_type(t_cmd_line *current_token)
 {
 	t_token *t;
 	bool file_flag;
 	t_type prev_type;
 
-	t = *current_token;
+	t = current_token->head_token;
 	file_flag = false;
 	while (t)
 	{
@@ -79,7 +79,7 @@ bool set_file_type(t_token **current_token)
 		}
 		else if (file_flag && t->str && t->str[0])
 		{
-			set_file(prev_type, &t);
+			set_file(prev_type, t);
 			file_flag = false;
 		}
 		t = t->next;

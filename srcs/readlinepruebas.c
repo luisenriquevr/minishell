@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/02 20:44:38 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/04 18:17:16 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int main(void) //int argc, char **argv, char **env
 		*	Ejecución
 		*/
 		tokenizer(&cmd_line);
-		//lstiter_cmd(cmd_line, print_list);
-		expander(&cmd_line);
+		lstiter_cmd(cmd_line, print_list);
+		//expander(&cmd_line);
 		free(str);
 	}
 	return (0);

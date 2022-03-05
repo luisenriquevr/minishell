@@ -6,14 +6,12 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 22:01:29 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 23:34:24 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
-
-extern int exit_status;
 
 bool check_builtin(char *arg)
 {
@@ -30,6 +28,24 @@ bool check_builtin(char *arg)
 
 	}
 	return (false);
+}
+
+void update_quotes(char c, t_quote quote)
+{
+	if (c == '"')
+	{
+		if (quote == NONE)
+			quote = DOUBLE;
+		else if (quote == DOUBLE)
+			quote = NONE;
+	}
+	if (c == '\'')
+	{
+		if (quote == NONE)
+			quote = SINGLE;
+		else if (quote == SINGLE)
+			quote = NONE;
+	}
 }
 /*
 * Esta función recibe por parámetro la línea de comandos y cuando encuentra
@@ -48,24 +64,11 @@ void check_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '"')
-		{
-			if (quote == NONE)
-				quote = DOUBLE;
-			else if (quote == DOUBLE)
-				quote = NONE;
-		}
-		if (str[i] == '\'')
-		{
-			if (quote == NONE)
-				quote = SINGLE;
-			else if (quote == SINGLE)
-				quote = NONE;
-		}
+		update_quotes(str[i], quote);
 		i++;
 	}
 	if (quote != NONE)
-		exit_status = 14;
+		global.exit_status = 14; //Las comillas no están cerradas
 }
 
 /*
@@ -79,7 +82,7 @@ void check_str(char *str)
 	i = 0;
 	after_pipe = false;
 	if (str == NULL)
-		exit_status = 10; //Probablemente esto acabe siendo una función que libere todo lo que hayamos alojado y pase el exit_status como parámetro
+		global.exit_status = 10; //Probablemente esto acabe siendo una función que libere todo lo que hayamos alojado y pase el exit_status como parámetro
 	while (str[i])
 	{
 		// "     cat    |  echo | blah |"
@@ -88,7 +91,7 @@ void check_str(char *str)
 		if (str[i] == '|')
 		{
 			if (!after_pipe)
-				exit_status = 12; //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
+				global.exit_status = 12; //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
 			after_pipe = true;
 		}
 		i++;

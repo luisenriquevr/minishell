@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   printtittle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:43:34 by lvarela           #+#    #+#             */
-/*   Updated: 2022/02/14 17:02:58 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/03/05 20:58:22 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
+#include "libft.h"
 
 void	printtitle()
 {

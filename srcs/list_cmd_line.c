@@ -6,29 +6,13 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 23:46:05 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 20:56:24 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-extern int exit_status;
-
-// void	cmdl_add_back(t_commande_line **first, t_commande_line *add_back)
-// {
-// 	t_commande_line	*cur;
-
-// 	cur = *first;
-// 	if (cur == NULL)
-// 		*first = add_back;
-// 	else
-// 	{
-// 		while (cur->next)
-// 			cur = cur->next;
-// 		cur->next = add_back;
-// 	}
-// }
 /*
 * Función de listas pero adaptada a nuestra estructura.
 */

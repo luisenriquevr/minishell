@@ -6,14 +6,12 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/27 00:18:52 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 20:55:57 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
-
-extern int exit_status;
 
 /*
 * Esta función recorre el string que le llega hasta que encuentra un pipe
@@ -62,13 +60,13 @@ void    fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 
 	new = malloc(sizeof(t_cmd_line));
 	if (new == NULL)
-		exit_status = 4;
+		global.exit_status = 4;
 	new->str = NULL;
 	new->head_token = NULL;
 	new->next = NULL;
 	new->str = malloc(sizeof(char) * (end - start + 1));
 	if (new->str == NULL)
-		exit_status = 4;
+		global.exit_status = 4;
 	new->str = ft_strncpy(new->str, str + start, end - start);
 	lstadd_back_cmd(cmd_line, new);
 }

@@ -6,22 +6,58 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/04 18:17:16 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 21:28:23 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-int exit_status; //Variable global
+char	**copy_env(char **envp)
+{
+	char	**new_envp;
+	int		i;
 
-int main(void) //int argc, char **argv, char **env
+	new_envp = (char **)malloc(sizeof(char *) * global.env_len);
+	i = 0;
+	while (envp[i])
+	{
+		new_envp[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	new_envp[i] = NULL;
+	return (new_envp);
+}
+
+void	init_global(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	global.exit_status = 0;
+	global.env_len = (i + 2);
+	global.env = copy_env(env);
+	global.env_export = NULL; //create_env_export(); Hasta que lo necesitemos
+	global.fd_stdin = dup(STDIN_FILENO);
+	global.fd_stdout = dup(STDOUT_FILENO);
+	global.signal_status = 0;
+}
+
+int main(int argc, char **argv, char **env)
 {
 	char			*str;
 	t_cmd_line	*cmd_line;
 
 	cmd_line = NULL;
-	exit_status = 0;
+	if (argc != 1 || !argv)
+	{
+		print_error("Invalid arguments: try './minishell'");
+		exit(EXIT_FAILURE);
+	}
+	init_global(env);
+	printtitle();
 	while (1)
 	{
 		str = readline("minishell $ ");
@@ -29,16 +65,14 @@ int main(void) //int argc, char **argv, char **env
 		check_str(str);
 		get_cmd_line(str, &cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
+		tokenizer(&cmd_line);
+		lstiter_cmd(cmd_line, print_list);
+		//expander(&cmd_line);
 		/*Aquí iría a continuación:
-		*	Tokenizer
-		*	Expander
 		*	Builtins
 		*	Redirecciones
 		*	Ejecución
 		*/
-		tokenizer(&cmd_line);
-		lstiter_cmd(cmd_line, print_list);
-		//expander(&cmd_line);
 		free(str);
 	}
 	return (0);

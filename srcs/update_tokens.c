@@ -6,14 +6,12 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/04 18:48:14 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 20:58:58 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
-
-extern int exit_status;
 
 void set_file(t_type previous_token, t_token *token)
 {
@@ -71,7 +69,7 @@ bool set_file_type(t_cmd_line *current_token)
 	while (t)
 	{
 		if (file_flag && is_file(t->type))
-			exit_status = 42; //Arreglar aquí
+			global.exit_status = 42; //Arreglar aquí
 		else if (is_file(t->type))
 		{
 			prev_type = t->type;

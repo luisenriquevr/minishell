@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 16:40:47 by lvarela           #+#    #+#             */
-/*   Updated: 2022/02/18 18:51:36 by cmarcu           ###   ########.fr       */
+/*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
+/*   Updated: 2022/03/05 20:37:30 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "minishell.h"
+#include "libft.h"
 
-int main (int argc, char **argv, char **env)
+int	print_error(const char *error)
 {
-	printtitle();
-	return (0);
+	perror(error);
+	return (1);
 }

@@ -6,14 +6,13 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/04 19:43:27 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/05 23:33:04 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-extern int exit_status;
 /*
 * Esta funcion mide la longitud del comando que hay guardado en el token
 * y asigna al token el tipo que corresponda en funcion de la longitud.
@@ -79,7 +78,7 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 
 	token = malloc(sizeof(t_token));
 	if (!token) //en vez de if (token == NULL) ?
-		exit_status = 4;
+		global.exit_status = 4;
 	token->str = NULL;
 	token->type = EMPTY;
 	token->exp = false;
@@ -87,7 +86,7 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 	token->next = NULL;
 	token->str = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
 	if (!token->str) //en vez de if (token == NULL) ?
-		exit_status = 4;
+		global.exit_status = 4;
 	token->str = ft_strncpy(token->str, str + cmd_start, curr_pos - cmd_start);
 	set_token_type(token);
 	set_quote(token);
@@ -129,9 +128,9 @@ void tokenizer(t_cmd_line **cmd_line)
 	while (current_cmd)
 	{
 		if (set_limitor(current_cmd))
-			exit_status = 42; //Ya no sé qué inventarme
+			global.exit_status = 42; //Ya no sé qué inventarme
 		if (set_file_type(current_cmd))
-			exit_status = 42;
+			global.exit_status = 42;
 		current_cmd = current_cmd->next;
 	}
 }

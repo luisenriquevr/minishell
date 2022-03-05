@@ -6,13 +6,14 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/03/04 18:26:33 by cristianama      ###   ########.fr        #
+#    Updated: 2022/03/05 21:00:04 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH	= ./srcs/
 SRCS = readlinepruebas.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
-		checking.c update_tokens.c
+		checking.c update_tokens.c expander.c printitle.c error_functions.c \
+		
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 

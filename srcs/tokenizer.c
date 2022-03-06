@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/05 23:33:04 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/06 14:09:45 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 * Duda: si el str fuera >>> se le asignaria el tipo ARG, eso se gestiona despues
 * en la ejecucion o deberia dar fallo aqui? (Si no pongo tildes es por el teclado en ingles juasjuas)
 */
-void set_token_type(t_token *t)
+void	set_token_type(t_token *t)
 {
-	size_t length;
+	size_t	length;
 
 	length = t->str != NULL ? ft_strlen(t->str) : 0;
 	if (length == 1)
@@ -45,11 +45,11 @@ void set_token_type(t_token *t)
 		t->type = ARG;
 }
 
-void set_quote(t_token *t)
+void	set_quote(t_token *t)
 {
-	t_quote quote;
-	int i;
-	char *str;
+	t_quote	quote;
+	int		i;
+	char	*str;
 
 	quote = NONE;
 	i = 0;
@@ -72,9 +72,9 @@ void set_quote(t_token *t)
 * Chequear el tipo de lo que haya en token->str y poner token->type
 * Añadir el token relleno al final de la lista de token dentro del comando
 */
-void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
+void	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = malloc(sizeof(t_token));
 	if (!token) //en vez de if (token == NULL) ?
@@ -93,10 +93,10 @@ void fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 	lstadd_back_token(&(*cmd)->head_token, token);
 }
 
-void tokenize_cmd(t_cmd_line **cmd)
+void	tokenize_cmd(t_cmd_line **cmd)
 {
-	int curr_pos;
-	int cmd_start;
+	int	curr_pos;
+	int	cmd_start;
 
 	curr_pos = 0;
 	cmd_start = 0;
@@ -114,9 +114,9 @@ void tokenize_cmd(t_cmd_line **cmd)
 	}
 }
 
-void tokenizer(t_cmd_line **cmd_line)
+void	tokenizer(t_cmd_line **cmd_line)
 {
-	t_cmd_line *current_cmd;
+	t_cmd_line	*current_cmd;
 
 	current_cmd = *cmd_line; /* *cmd_line representa el primer nodo*/
 	while (current_cmd)

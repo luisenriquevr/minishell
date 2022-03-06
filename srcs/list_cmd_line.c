@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/05 20:56:24 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/06 14:08:06 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new)
 {
-	t_cmd_line *last;
+	t_cmd_line	*last;
 
 	if (lst)
 	{
@@ -50,7 +50,7 @@ void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *))
 /*
 * Solo la he hecho para imprimir la lista y comprobar que estuviera llenándose bien
 */
-void print_list(char *str)
+void	print_list(char *str)
 {
 	printf("%s\n", str);
 }
@@ -60,7 +60,7 @@ void print_list(char *str)
 */
 void	lstadd_back_token(t_token **lst, t_token *new)
 {
-	t_token *last;
+	t_token	*last;
 
 	if (lst)
 	{

@@ -6,16 +6,16 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/05 20:58:58 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/06 14:10:24 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-void set_file(t_type previous_token, t_token *token)
+void	set_file(t_type previous_token, t_token *token)
 {
-	t_type type;
+	t_type	type;
 
 	type = token->type;
 	if (previous_token == HERE_DOC)
@@ -27,7 +27,7 @@ void set_file(t_type previous_token, t_token *token)
 	else if (previous_token == GREATER)
 		token->type = OUT_FILE;
 }
-bool is_file(t_type type)
+bool	is_file(t_type type)
 {
 	if (type == LESS || type == GREATER
 		|| type == D_GREATER || type == HERE_DOC)
@@ -35,10 +35,10 @@ bool is_file(t_type type)
 	return (false);
 }
 
-bool set_limitor(t_cmd_line *current_token)
+bool	set_limitor(t_cmd_line *current_token)
 {
-	t_token *t;
-	bool limitor_flag;
+	t_token	*t;
+	bool	limitor_flag;
 
 	t = current_token->head_token;
 	limitor_flag = false;
@@ -58,11 +58,11 @@ bool set_limitor(t_cmd_line *current_token)
 	return (limitor_flag);
 }
 
-bool set_file_type(t_cmd_line *current_token)
+bool	set_file_type(t_cmd_line *current_token)
 {
-	t_token *t;
-	bool file_flag;
-	t_type prev_type;
+	t_token	*t;
+	bool	file_flag;
+	t_type	prev_type;
 
 	t = current_token->head_token;
 	file_flag = false;

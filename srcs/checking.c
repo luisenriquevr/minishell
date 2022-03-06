@@ -6,14 +6,14 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/05 23:34:24 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/06 14:50:32 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-bool check_builtin(char *arg)
+bool	check_builtin(char *arg)
 {
 	/*
 	* Los builtins son> echo, cd, pwd, export, unset, env, exit.
@@ -30,7 +30,7 @@ bool check_builtin(char *arg)
 	return (false);
 }
 
-void update_quotes(char c, t_quote quote)
+t_quote	update_quotes(char c, t_quote quote)
 {
 	if (c == '"')
 	{
@@ -46,6 +46,7 @@ void update_quotes(char c, t_quote quote)
 		else if (quote == SINGLE)
 			quote = NONE;
 	}
+	return (quote);
 }
 /*
 * Esta función recibe por parámetro la línea de comandos y cuando encuentra
@@ -55,16 +56,16 @@ void update_quotes(char c, t_quote quote)
 * se ha quedado sin cerrar y tenemos que gestionar el error, liberar lo que
 * sea y salir.
 */
-void check_quotes(char *str)
+void	check_quotes(char *str)
 {
-	t_quote quote;
-	int i;
+	t_quote	quote;
+	int		i;
 
 	quote = NONE;
 	i = 0;
 	while (str[i])
 	{
-		update_quotes(str[i], quote);
+		quote = update_quotes(str[i], quote);
 		i++;
 	}
 	if (quote != NONE)
@@ -74,7 +75,7 @@ void check_quotes(char *str)
 /*
 * Esta función está MAL (líneas 67-69)
 */
-void check_str(char *str)
+void	check_str(char *str)
 {
 	int		i;
 	bool	after_pipe; //No sé si podemos usar esta librería
@@ -101,7 +102,7 @@ void check_str(char *str)
 
 void check_redirection(char *str, int *i)
 {
-	char redirection;
+	char	redirection;
 
 	redirection = str[*i];
 	/*Check for <, >, << or >> and get the index to the end of redirection */
@@ -111,7 +112,7 @@ void check_redirection(char *str, int *i)
 
 void check_arg(char *s, int *i)
 {
-	t_quote quote;
+	t_quote	quote;
 
 	quote = NONE;
 	while (s[*i])

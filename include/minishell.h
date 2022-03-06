@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/05 23:45:19 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/06 14:53:31 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,12 @@ void	set_file(t_type previous_token, t_token *token);
 /*EXPANDIR LA LISTA DE COMANDOS*/
 void	expander(t_cmd_line **cmd_line);
 void	expand_token(t_token *token);
-void	close_quote(t_quote *open, t_quote *close, int *i);
+t_quote	close_quote(t_quote open, t_quote close, int *i);
 void	expand_word(t_token *token, t_quote quote, char *str, int *i);
 void	check_and_expand_env(t_token *t, char *str, char *dest, int *i);
-char	*expand_no_env(char *str, char *dest, int *i);
+void	expand_no_env(char *str, char *dest, int *i);
 void	expand_word_single_quote(char *str, char *dest, int *i);
+void	expand_env(t_token *t, char *str, char *dest, int *i);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
 
@@ -122,5 +123,5 @@ int		print_error(const char *error);
 
 /* ------------------------------VARIOS-------------------------------- */
 void	printtitle();
-void	update_quotes(char c, t_quote quote);
+t_quote	update_quotes(char c, t_quote quote);
 #endif

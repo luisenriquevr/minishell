@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:15:15 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:15:16 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/25 11:55:18 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/01/27 13:43:47 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*p1;
-	unsigned char	*p2;
+	size_t			a;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	p1 = (unsigned char *)s1;
-	p2 = (unsigned char *)s2;
-	if (p1 == 0 && p2 == 0)
-		return (0);
-	while (n--)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	a = 0;
+	while (n > 0)
 	{
-		if (*p1 != *p2)
-			return (*p1 - *p2);
-		p1++;
-		p2++;
+		if (str1[a] != str2[a])
+			return (str1[a] - str2[a]);
+		n--;
+		a++;
 	}
 	return (0);
 }

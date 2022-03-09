@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:17:22 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:17:23 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/22 12:39:34 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/05 11:57:47 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*ptr;
-	unsigned int	i;
+	char	*p;
+	size_t	a;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	ptr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!(ptr))
+	if (!(p = (char*)malloc(sizeof(*s) * (len + 1))))
 		return (NULL);
-	ft_bzero(ptr, len + 1);
-	i = -1;
-	while (++i < len && start <= ft_strlen(s))
-		ptr[i] = s[start + i];
-	ptr[i] = '\0';
-	return (ptr);
+	if ((size_t)start >= ft_strlen(s))
+		start = ft_strlen(s);
+	a = 0;
+	while (a < len && s[start])
+	{
+		p[a] = s[start + a];
+		a++;
+	}
+	p[a] = '\0';
+	return (p);
 }

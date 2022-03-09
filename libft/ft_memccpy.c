@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:15:03 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:15:04 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/25 10:46:43 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/01/29 12:43:17 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+void
+	*ft_memccpy(void *restrict dst, const void *restrict src, int c, size_t n)
 {
-	unsigned char	*p1;
-	unsigned char	*p2;
+	char	*srcchar;
+	char	*dstchar;
+	size_t	a;
 
-	p1 = (unsigned char *)src;
-	p2 = (unsigned char *)dst;
-	while (n-- > 0)
+	a = 0;
+	srcchar = (char *)src;
+	dstchar = (char *)dst;
+	while (a < n)
 	{
-		*p2++ = *p1++;
-		if (*(p1 - 1) == (unsigned char)c)
-			return (p2);
+		dstchar[a] = srcchar[a];
+		if (srcchar[a] == (char)c)
+			return (dstchar + a + 1);
+		a++;
 	}
 	return (NULL);
 }

@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   t_exec_maker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 16:43:47 by lvarela           #+#    #+#             */
-/*   Updated: 2022/02/24 12:47:26 by lvarela          ###   ########.fr       */
+/*   Created: 2022/03/07 16:19:02 by lvarela           #+#    #+#             */
+/*   Updated: 2022/03/07 16:20:02 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
-int	ft_pwd(char **arg)
+void	to_exec_maker(t_cmd_line *cmd_line)
 {
-	char	*str;
 	
-	if (*arg == NULL)
-		return (0);
-	str = getcwd(NULL, 0); // Devuelve el string con malloc hecho o NULL si ha habido error
-	if (str == NULL)
-		return (1); // Tenemos que ver lo de devolver errores
-	printf("%s\n", str);
-	free(str);
-	return (0);
 }

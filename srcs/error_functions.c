@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   error_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:14:39 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:14:40 by lvarela          ###   ########.fr       */
+/*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
+/*   Updated: 2022/03/06 14:07:33 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	print_error(const char *error)
 {
-	t_list	*now;
-	t_list	*after;
-
-	now = lst;
-	while (now)
-	{
-		after = now->next;
-		f(now->content);
-		now = after;
-	}
+	perror(error);
+	return (1);
 }

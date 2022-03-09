@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/02/24 13:14:33 by lvarela          ###   ########.fr       */
+/*   Created: 2021/02/01 09:40:58 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/01 09:42:24 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "libft.h"
 
-int	ft_cd(char **arg)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	if (arg[1] == NULL || strcmp(arg[1], "~"))
-	{
-		
-	}
+	if (!del || !lst)
+		return ;
+	(*del)(lst->content);
+	free(lst);
 }

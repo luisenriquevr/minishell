@@ -3,99 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:16:06 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:16:07 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/22 16:43:13 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/05 09:48:55 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(char const *s, char c)
+static char	**ft_mountarray(char const *s, char c)
 {
-	int	i;
-	int	n_words;
+	size_t	result;
+	char	*aux;
+	char	**array;
 
-	i = 0;
-	n_words = 0;
-	while (s[i])
+	result = 0;
+	aux = (char*)s;
+	while (*aux)
 	{
-		if (s[i] == c)
-		{
-			i++;
-			continue ;
-		}
-		n_words++;
-		while (s[i] && s[i] != c)
-			i++;
+		while (*aux == c)
+			aux++;
+		if (*aux != '\0')
+			result++;
+		while (*aux && *aux != c)
+			aux++;
 	}
-	return (n_words);
-}
-
-static int	ft_size_next_word(char const *s, char c, int i)
-{
-	int	size;
-
-	while (s[i] == c && s[i])
-		i++;
-	size = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return (size);
-		size++;
-		i++;
-	}
-	return (size);
-}
-
-static int	ft_save_word(char *word, char const *s, char c, int i)
-{
-	int	j;
-
-	j = 0;
-	while (s[i] == c)
-		i++;
-	while (s[i])
-	{
-		if (s[i] == c)
-		{
-			word[j] = '\0';
-			return (i);
-		}
-		word[j] = s[i];
-		i++;
-		j++;
-	}
-	word[j] = '\0';
-	return (i);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**tab;
-	int		i;
-	int		j;
-	int		total;
-
-	if (s == NULL)
+	if (!(array = (char **)malloc((result + 1) * sizeof(char *))))
 		return (NULL);
-	total = ft_count_words(s, c);
-	tab = (char **)malloc(sizeof(char *) * (total + 1));
-	if (!(tab))
+	return (array);
+}
+
+char		**ft_split(char const *s, char c)
+{
+	char	**array;
+	size_t	i;
+	size_t	j;
+
+	if (!s)
 		return (NULL);
-	tab[total] = NULL;
+	if (!(array = ft_mountarray(s, c)))
+		return (NULL);
 	i = 0;
 	j = 0;
-	while (j < total)
+	while (*s)
 	{
-		tab[j] = (char *)malloc(sizeof(char)
-				* ft_size_next_word(s, c, i) + 1);
-		if (!(tab))
-			return (NULL);
-		i = ft_save_word(tab[j], s, c, i);
-		j++;
+		while (*s == c)
+			s++;
+		if (*s != '\0')
+		{
+			while (s[j] && s[j] != c)
+				j++;
+			array[i++] = ft_substr(s, 0, j);
+			s = s + j;
+		}
+		j = 0;
 	}
-	return (tab);
+	array[i] = NULL;
+	return (array);
 }

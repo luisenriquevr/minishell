@@ -3,73 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:14:04 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:14:05 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/26 09:46:43 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/05 09:47:35 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_getlen(int n)
+static int	itoa_length(int n)
 {
-	int	i;
+	int length;
 
-	i = 0;
-	if (n == 0)
-		i++;
+	length = 0;
 	if (n < 0)
-		i++;
+		length++;
+	if (n == 0)
+		length = 1;
 	while (n != 0)
 	{
+		length++;
 		n = n / 10;
-		++i;
 	}
-	return (i);
+	return (length);
 }
 
-static char	*ft_fulfill(int n, int i)
+char		*ft_itoa(int n)
 {
 	char	*str;
-	long	nbr;
+	int		length;
 
-	nbr = n;
-	str = (char *)malloc(sizeof(char) * (i + 1));
-	if (!(str))
+	length = itoa_length(n);
+	if (!(str = (char *)malloc(sizeof(*str) * (length + 1))))
 		return (NULL);
-	str[i] = '\0';
-	i--;
+	str[length] = '\0';
 	if (n < 0)
-		nbr = -n;
-	else
-		nbr = n;
-	while (nbr > 9)
 	{
-		str[i--] = (nbr % 10) + '0';
-		nbr = nbr / 10;
+		str[0] = '-';
+		if (n == -2147483648)
+		{
+			str[length-- - 1] = '8';
+			n = n / 10;
+		}
+		n = -n;
 	}
-	if (nbr < 10)
-		str[i--] = (nbr % 10) + '0';
-	if (n < 0)
-		str[i--] = '-';
+	if (n == 0)
+		str[0] = '0';
+	while (length >= 0 && n != 0)
+	{
+		str[length-- - 1] = (n % 10) + '0';
+		n = n / 10;
+	}
 	return (str);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*ptr;
-	int		i;
-
-	if (n == -2147483648)
-	{
-		ptr = (char *)malloc(sizeof(char) * 12);
-		if (!(ptr))
-			return (NULL);
-		ft_strlcpy(ptr, "-2147483648", 12);
-		return (ptr);
-	}
-	i = ft_getlen(n);
-	ptr = ft_fulfill(n, i);
-	return (ptr);
 }

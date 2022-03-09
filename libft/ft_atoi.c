@@ -3,34 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 11:09:47 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/15 11:43:12 by lvarela          ###   ########.fr       */
+/*   Created: 2020/12/08 18:09:38 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/01/28 10:55:27 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long int	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	long	num;
-	int		neg;
+	int a;
+	int number;
+	int is_neg;
 
-	num = 0;
-	neg = 1;
-	while (ft_isspace(*str))
-		str++;
-	str--;
-	if (*str == '-')
-		neg = -1;
-	str++;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str != '\0' && *str >= '0' && *str <= '9')
+	a = 0;
+	is_neg = 0;
+	number = 0;
+	while (str[a] == '\t' || str[a] == '\n' || str[a] == '\v' ||
+	str[a] == '\f' || str[a] == '\r' || str[a] == ' ')
+		a++;
+	if (str[a] == '-')
 	{
-		num = num * 10 + (*str - 48);
-		str++;
+		is_neg = 1;
+		a++;
 	}
-	return (num * neg);
+	else if (str[a] == '+')
+		a++;
+	while (ft_isdigit(str[a]))
+	{
+		number = number * 10 + (str[a] - '0');
+		a++;
+	}
+	return (is_neg == 0 ? number : -number);
 }

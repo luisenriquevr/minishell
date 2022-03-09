@@ -3,94 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:17:15 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:17:16 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/22 16:05:31 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/05 09:49:37 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_start(char const *str, char const *to_find)
+static int	is_char_in_set(char c, char const *set)
 {
-	int	i;
-	int	j;
-	int	k;
+	int a;
 
-	i = 0;
-	j = 0;
-	while (str[j])
+	a = 0;
+	while (set[a])
 	{
-		k = 0;
-		while (to_find[k])
-		{
-			if (str[i] == to_find[k])
-				i++;
-			if (str[i] != to_find[k])
-				k++;
-		}
-		j++;
+		if (set[a] == c)
+			return (1);
+		a++;
 	}
-	return (i);
+	return (0);
 }
 
-static int	ft_end(char const *str, char const *to_find)
+char		*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	o;
+	char	*p;
+	int		a;
+	int		start;
+	int		end;
 
-	i = (int)ft_strlen(str) - 1;
-	j = 0;
-	k = 0;
-	o = 0;
-	while (str[o])
+	if (!s1)
+		return (NULL);
+	start = 0;
+	while (s1[start] != '\0' && is_char_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1) - 1;
+	while (start < end && is_char_in_set(s1[end], set))
+		end--;
+	p = (char*)malloc(sizeof(*s1) * (end - start + 2));
+	if (!p)
+		return (NULL);
+	a = 0;
+	while (a <= end - start)
 	{
-		while (to_find[k])
-		{
-			if (str[i - j] == to_find[k])
-			{
-				j++;
-				k = 0;
-			}
-			if (str[i - j] != to_find[k])
-				k++;
-		}
-		o++;
+		p[a] = s1[start + a];
+		a++;
 	}
-	return (j);
-}
-
-static char	*ft_tobetrim(char const *s1, int start, int end)
-{
-	int		x;
-	char	*ptr;
-
-	x = 0;
-	ptr = (char *)malloc(sizeof(char)
-			* (int)ft_strlen(s1) + 1 - (start + end));
-	if (!(ptr))
-		return (NULL);
-	while (start <= ((int)ft_strlen(s1) - end - 1))
-		ptr[x++] = s1[start++];
-	ptr[x] = '\0';
-	return (ptr);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	int	start;
-	int	end;
-
-	if (s1 == NULL)
-		return (NULL);
-	if (s1[0] == '\0' || set == NULL)
-		return (ft_strdup(s1));
-	start = ft_start(s1, set);
-	if (start == (int)ft_strlen(s1))
-		return (ft_strdup(""));
-	end = ft_end(s1, set);
-	return (ft_tobetrim(s1, start, end));
+	p[a] = '\0';
+	return (p);
 }

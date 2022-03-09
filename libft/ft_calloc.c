@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 11:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:08:49 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/25 14:27:07 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/01/29 11:22:36 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*ptr;
+	char	*a;
+	size_t	i;
 
-	ptr = malloc(count * size);
-	if (ptr == 0)
-		return (0);
-	ft_bzero(ptr, (count * size));
-	return (ptr);
+	if (!(a = (char *)malloc(count * size)))
+		return (NULL);
+	i = 0;
+	while (i < count * size)
+	{
+		a[i] = 0;
+		i++;
+	}
+	return ((void *)a);
 }

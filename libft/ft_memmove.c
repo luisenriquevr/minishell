@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:15:25 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:15:26 by lvarela          ###   ########.fr       */
+/*   Created: 2021/01/25 11:06:05 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/01/28 12:55:56 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*p1;
-	unsigned char	*p2;
+	char	*dstchar;
+	char	*srcchar;
+	size_t	a;
 
-	p1 = (unsigned char *)src;
-	p2 = (unsigned char *)dst;
-	if (p1 == 0 && p2 == 0)
-		return (NULL);
-	if (p1 > p2)
+	dstchar = (char *)dst;
+	srcchar = (char *)src;
+	if (dst > src)
 	{
-		while (len-- > 0)
-			*p2++ = *p1++;
+		a = len;
+		while (a--)
+			dstchar[a] = srcchar[a];
 	}
 	else
 	{
-		while (len-- > 0)
-			p2[len] = p1[len];
+		ft_memcpy(dstchar, srcchar, len);
 	}
 	return (dst);
 }

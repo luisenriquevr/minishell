@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfree_all.c                                   :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 14:14:32 by lvarela           #+#    #+#             */
-/*   Updated: 2021/11/12 14:18:37 by lvarela          ###   ########.fr       */
+/*   Created: 2021/02/05 12:00:22 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/05 12:11:49 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstfree_all(t_list **lst)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*ptr;
+	t_list *copy;
+	t_list *new;
 
-	ptr = *lst;
-	if (lst)
+	copy = NULL;
+	while (lst)
 	{
-		while (*lst)
+		if (!(new = ft_lstnew(f(lst->content))))
 		{
-			ptr = (*lst)->next;
-			free((*lst));
-			(*lst) = ptr;
+			(*del)(new->content);
+			new = copy->next;
 		}
+		ft_lstadd_back(&copy, new);
+		lst = lst->next;
 	}
+	return (copy);
 }

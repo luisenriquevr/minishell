@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 16:40:47 by lvarela           #+#    #+#             */
-/*   Updated: 2022/02/14 16:44:52 by lvarela          ###   ########.fr       */
+/*   Created: 2021/02/01 09:44:28 by cmarcu            #+#    #+#             */
+/*   Updated: 2021/02/01 09:46:16 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "libft.h"
 
-int main ()
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	printtitle();
-	return (0);
+	if (!lst || !f)
+		return ;
+	while (lst)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }

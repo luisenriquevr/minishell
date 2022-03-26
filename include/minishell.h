@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/06 14:53:31 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/26 15:55:06 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ enum type
 struct s_cmd_line
 {
 	char 		*str;
+	char		**argv;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };

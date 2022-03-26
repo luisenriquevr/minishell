@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/06 14:08:50 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/03/26 13:33:30 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,9 @@ int	main(int argc, char **argv, char **env)
 		get_cmd_line(str, &cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
 		tokenizer(&cmd_line);
-		lstiter_cmd(cmd_line, print_list);
-		//expander(&cmd_line);
-		/*Aquí iría a continuación:
-		*	Builtins
-		*	Redirecciones
-		*	Ejecución
-		*/
+		//lstiter_cmd(cmd_line, print_list);
+		expander(&cmd_line);
+		prepare_exec(&cmd_line);
 		free(str);
 	}
 	return (0);

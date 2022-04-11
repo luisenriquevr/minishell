@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:44:23 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 18:30:32 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 21:13:31 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	nq_exp_no_env(char *str, char *dest, int *i)
 	}
 }
 
-void	nq_exp_env(t_token *t, char *str, char *dest, int *i)
+void	nq_exp_env(void) //t_token *t, char *str, char *dest, int *i
 {
-	
+	return ;
 }
 
 void	expand_no_quotes(t_token *t, char *str, char *dest, int *i)
@@ -77,10 +77,12 @@ void	expand_no_quotes(t_token *t, char *str, char *dest, int *i)
 	while (str[*i] && str[*i] != '"' && str[*i] != '\'')
 	{
 		if (str[*i] == '$')
-			nq_exp_env(t, str, dest, i); /* no quotes expand environment */
+			nq_exp_env(); /* no quotes expand environment */ //t, str, dest, i
 		else
 			nq_exp_no_env(str, dest, i); /* no quotes expand no environment */
 	}
+	//DeleteThis
+	t = NULL;
 }
 
 

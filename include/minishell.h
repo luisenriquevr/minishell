@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/26 15:55:06 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 21:08:24 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,24 @@ struct s_global
 /* -------------------------------PARSEO------------------------------- */
 
 /*FUNCIONES DE CHEQUEOS VARIOS*/
-void	check_str(char *str);
-void	check_quotes(char *str);
+int		check_str(char *str);
+int		check_quotes(char *str);
 void	check_redirection(char *str, int *i);
 void	check_arg(char *s, int *i);
 bool	check_builtin(char *arg);
 
 /*RELLENAR LA LISTA DE COMANDOS*/
-void	get_cmd_line(char *str, t_cmd_line **cmd_line);
-void	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start);
+int		get_cmd_line(char *str, t_cmd_line **cmd_line);
+int		fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start);
 void	look_for_pipe(char *str, int *current_position);
 void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new);
 void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *));
 void	print_list(char *str);
 
 /*TOKENIZAR LA LISTA DE COMANDOS*/
-void	tokenizer(t_cmd_line **cmd_line);
-void	tokenize_cmd(t_cmd_line **cmd);
-void	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
+int		tokenizer(t_cmd_line **cmd_line);
+int		tokenize_cmd(t_cmd_line **cmd);
+int		fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
 void	set_token_type(t_token *t);
 void	lstadd_back_token(t_token **lst, t_token *new);
 bool	set_file_type(t_cmd_line *current_token);
@@ -117,10 +117,16 @@ void	expand_no_env(char *str, char *dest, int *i);
 void	expand_word_single_quote(char *str, char *dest, int *i);
 void	expand_env(t_token *t, char *str, char *dest, int *i);
 
+/*PREPARAR EJECUCION*/
+int		prepare_exec(t_cmd_line **cmd_line);
+
 /* -----------------------------EJECUCIÓN------------------------------ */
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int		print_error(const char *error);
+int		errcode_print_return(int code, char *msg);
+int		exit_free_cmdline(t_cmd_line **cmd);
+void	free_token(t_cmd_line **cmd_line);
 
 /* ------------------------------VARIOS-------------------------------- */
 void	printtitle();

@@ -6,19 +6,21 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/26 13:33:30 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 21:09:05 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-char	**copy_env(char **envp)
+int copy_env(char **envp)
 {
 	char	**new_envp;
 	int		i;
 
-	new_envp = (char **)malloc(sizeof(char *) * global.env_len);
+	new_envp = (char **)malloc(sizeof(char *) * global.env_len); //TODO: liberar en gestión de errores
+	if (!new_envp)
+		return (errcode_print_return(50, "Malloc error"));
 	i = 0;
 	while (envp[i])
 	{
@@ -26,10 +28,12 @@ char	**copy_env(char **envp)
 		i++;
 	}
 	new_envp[i] = NULL;
-	return (new_envp);
+	global.env = new_envp;
+	free(new_envp);
+	return (0);
 }
 
-void	init_global(char **env)
+int	init_global(char **env)
 {
 	int	i;
 
@@ -38,11 +42,13 @@ void	init_global(char **env)
 		i++;
 	global.exit_status = 0;
 	global.env_len = (i + 2);
-	global.env = copy_env(env);
+	if (copy_env(env))
+		return (50);
 	global.env_export = NULL; //create_env_export(); Hasta que lo necesitemos
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
 	global.signal_status = 0;
+	return (0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -56,20 +62,24 @@ int	main(int argc, char **argv, char **env)
 		print_error("Invalid arguments: try './minishell'");
 		exit(EXIT_FAILURE);
 	}
-	init_global(env);
+	if (init_global(env))
+		exit(EXIT_FAILURE);
 	printtitle();
 	while (1)
 	{
 		str = readline("minishell $ ");
 		add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
-		check_str(str);
-		get_cmd_line(str, &cmd_line);
+		if (check_str(str))
+			exit(EXIT_FAILURE);
+		if (get_cmd_line(str, &cmd_line))
+			exit_free_cmdline(&cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
-		tokenizer(&cmd_line);
+		if (tokenizer(&cmd_line))
+			exit_free_cmdline(&cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
-		free(str);
+		free(str); //TODO: gestionar la liberación final
 	}
 	return (0);
 }

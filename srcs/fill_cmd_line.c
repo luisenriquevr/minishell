@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 14:07:31 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 20:49:13 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,22 @@ void	look_for_pipe(char *str, int *current_position)
 * entre inicio y final. Si algo aquí dentro fallara tenemos que controlar el
 * error, liberar y salir.
 */
-void	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
+int	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 {
 	t_cmd_line	*new;
 
-	new = malloc(sizeof(t_cmd_line));
+	new = malloc(sizeof(t_cmd_line)); //TODO: liberar en gestión de errores
 	if (new == NULL)
-		global.exit_status = 4;
+		return (errcode_print_return(50, "Malloc error")); //TODO: gestionar error
 	new->str = NULL;
 	new->head_token = NULL;
 	new->next = NULL;
-	new->str = malloc(sizeof(char) * (end - start + 1));
+	new->str = malloc(sizeof(char) * (end - start + 1)); //TODO: liberar en gestión de errores
 	if (new->str == NULL)
-		global.exit_status = 4;
+		return (errcode_print_return(50, "Malloc error")); //TODO: gestionar error
 	new->str = ft_strncpy(new->str, str + start, end - start);
 	lstadd_back_cmd(cmd_line, new);
+	return (0);
 }
 
 /*
@@ -76,7 +77,7 @@ void	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 * un pipe válido (que no esté entre comillas) y llama a la función que rellena
 * la lista con los índices de comienzo y final del comando bien calculados.
 */
-void	get_cmd_line(char *str, t_cmd_line **cmd_line)
+int	get_cmd_line(char *str, t_cmd_line **cmd_line)
 {
 	int	curr_pos;
 	int	cmd_start;
@@ -89,10 +90,12 @@ void	get_cmd_line(char *str, t_cmd_line **cmd_line)
 		{
 			// hola | adios
 			look_for_pipe(str, &curr_pos);
-			fill_cmd_list(cmd_line, str, curr_pos, cmd_start);
+			if (fill_cmd_list(cmd_line, str, curr_pos, cmd_start))
+				return (1);
 			cmd_start = curr_pos;
 			cmd_start++;
 			curr_pos++;
 		}
 	}
+	return (0);
 }

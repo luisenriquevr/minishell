@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 13:32:14 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/26 16:31:57 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 19:40:10 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ int count_args(t_cmd_line *cmd)
 	return (arg_length);
 }
 
-int set_error_code_and_return(int code)
-{
-	global.exit_status = code;
-	//anadir aqui la imrpesion del mesnaje de error?
-	return code;
-}
-
 int	prepare_exec(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*cmd;
@@ -45,9 +38,9 @@ int	prepare_exec(t_cmd_line **cmd_line)
 	cmd = *cmd_line;
 	while (cmd)
 	{
-		to_exec = malloc(sizeof(char *) * (count_args(cmd) + 1));
+		to_exec = malloc(sizeof(char *) * (count_args(cmd) + 1)); //TODO: liberar en gestión de errores
 		if (to_exec == NULL)
-			return (set_error_code_and_return(6));
+			return (errcode_print_return(50, "Malloc error"));
 		cmd->argv = to_exec;
 		t = cmd->head_token;
 		i = -1;

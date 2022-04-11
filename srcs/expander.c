@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:44:23 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 22:46:32 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 18:30:32 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	expand_token(t_token *token)
 			expand_word(token, quote_open, copy, &i);
 	}
 	if (!copy)
-		global.exit_status = 70;
+		global.exit_status = 70; //TODO: gestionar error
 	free(token->str);
 }
 

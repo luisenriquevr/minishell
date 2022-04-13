@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/03/07 20:55:56 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:02:05 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int	throw_error(const char *error)
-{
-	perror(error);
-	return (1);
-}
 
 void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, char **envp)
 {
@@ -44,7 +39,7 @@ void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, ch
 
 void	parent_process(pid_t pid, int fd[2], int *fd_in)
 {
-	waitpid(pid, NULL, 0); // en vez del null podemos pasar un exit_status
+	waitpid(pid, NULL, 0); // en vez del null debemos pasar el exit_status
 	close(fd[WRITE_END]);
 	*fd_in = fd[READ_END];
 }
@@ -56,6 +51,7 @@ int		exec_pipes(t_cmd_line *cmd, char **envp)
 	int		fd_in;
 	t_cmd_line	*cmd;
 
+	// recoger señales y no hacer nada (funcion signal)
 	fd_in = 0;
 	while (cmd)
 	{
@@ -79,6 +75,7 @@ int		exec_simple(char **cmd_to_exec, char **envp)
 {
 	pid_t	pid;
 
+	// aqui deberiamos de recoger señales y no hacer nada (func signal)
 	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
 		return (0); // lo hacemos directamente en la comprobacion
 	if (!access_checker(&cmd_to_exec[0], envp)) // comprobamos acceso con y sin path
@@ -91,7 +88,7 @@ int		exec_simple(char **cmd_to_exec, char **envp)
 		exit(1); // gestion de errores
 	}
 	else if (pid)
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, 0); // en vez de NULL deberiamos de pasar &global.exit_status
 	else
 		perror("Error: fork\n"); // gestion de errores
 	return (0);

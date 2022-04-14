@@ -94,6 +94,7 @@ int	check_str(char *str)
 		{
 			if (!after_pipe) //TODO: gestionar error
 				return (errcode_print_return(12, "Syntax error")); //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
+
 			after_pipe = true;
 		}
 		i++;

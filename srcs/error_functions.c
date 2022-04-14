@@ -17,15 +17,6 @@ int	print_error(const char *error)
 {
 	perror(error);
 	return (1);
-}
-
-int errcode_print_return(int code, char *msg)
-{
-	global.exit_status = code; //TODO: gestionar error
-	//anadir aqui la imrpesion del mesnaje de error?
-	printf("%s", msg);
-	return code;
-}
 
 int	exit_free_cmdline(t_cmd_line **cmd)
 {

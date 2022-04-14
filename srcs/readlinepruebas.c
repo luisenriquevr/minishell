@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readlinepruebas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/11 21:09:05 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 12:21:36 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

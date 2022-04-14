@@ -15,9 +15,13 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+
+# define READ_END	0
+# define WRITE_END	1
 
 /*
 * Hay que declarar todas las listas antes de definirlas para que el *next pueda
@@ -54,7 +58,7 @@ enum type
 struct s_cmd_line
 {
 	char 		*str;
-	char		**argv;
+	char		**to_exec;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };
@@ -121,6 +125,9 @@ void	expand_env(t_token *t, char *str, char *dest, int *i);
 int		prepare_exec(t_cmd_line **cmd_line);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
+int		exec(t_cmd_line *cmd, char **envp);
+int		builtin_checker(char *cmd);
+int		access_checker(char **cmd_to_exec, char **envp);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int		print_error(const char *error);

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/14 19:12:55 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 19:31:55 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	print_error(const char *error)
 {
 	perror(error);
 	return (1);
+}
 
 int	exit_free_cmdline(t_cmd_line **cmd_line)
 {

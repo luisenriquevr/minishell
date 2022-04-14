@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 20:56:00 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/14 19:20:02 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void	set_file(t_type previous_token, t_token *token)
 {
-	t_type	type;
-
-	type = token->type;
 	if (previous_token == HERE_DOC)
 		token->type = LIMITOR;
 	else if (previous_token == D_GREATER)

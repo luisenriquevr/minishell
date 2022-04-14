@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/14 19:12:10 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:47:21 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,18 +127,18 @@ int		prepare_exec(t_cmd_line **cmd_line);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
 
-int			exec(t_cmd_line *cmd, char **envp);
-int			builtin_checker(char *cmd);
+int			exec(t_cmd_line **cmd_line, char **envp);
 int			access_checker(char **cmd_to_exec, char **envp);
 
 /*BUILTINS*/
-int			builtin_checker(char *cmd);
+int			builtin_checker(char **cmd);
 int			builtin_cd(char **arg);
 int			builtin_echo(char **arg);
 int			builtin_env(char **cmd);
 int			builtin_pwd(char **cmd);
 int			builtin_unset(char **cmd);
 int			builtin_exit(char **cmd);
+int			builtin_export(char **cmd);
 
 /*UTILS*/
 int			array_length(char **array);
@@ -146,8 +146,9 @@ void		array_free(char **array);
 void		change_var(char *name, char *arg);
 char		*get_var(char *var);
 bool		var_valid_name(char *name);
-char		**copy_env(char **envp);
+int			copy_env(char **envp);
 void		add_new_var(char *new_var);
+char		*get_var_name(char *envp);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int		print_error(const char *error);

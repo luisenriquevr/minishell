@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:21:51 by lvarela           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/14 18:19:46 by lvarela          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/14 19:11:49 by lvarela          ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2022/04/14 20:28:05 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +27,4 @@ int			builtin_exit(char **cmd)
 	else
 		exit(ft_atoi(cmd[1]));
 	return (1);
-<<<<<<< HEAD
-<<<<<<< Updated upstream
 }
-=======
-	//"No seras la massshhhh guaaaay"
-}
->>>>>>> Stashed changes
-=======
-}
->>>>>>> main

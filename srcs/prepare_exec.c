@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 13:32:14 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/14 19:13:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 21:00:09 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	prepare_exec(t_cmd_line **cmd_line)
 		while (t)
 		{
 			if (t->type == BUILTIN || t->type == ARG)
-				cmd->to_exec[i++] = t->str;
+				cmd->to_exec[++i] = t->str;
 			t = t->next;
 		}
-		cmd->to_exec[i] = NULL;
+		cmd->to_exec[++i] = NULL;
 		cmd = cmd->next;
 	}
 	return (0);

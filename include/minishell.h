@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/14 14:23:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 19:12:10 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ enum type
 struct s_cmd_line
 {
 	char 		*str;
-	char		**argv;
+	char		**to_exec;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };

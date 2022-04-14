@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 14:10:24 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 20:56:00 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	set_file_type(t_cmd_line *current_token)
 	while (t)
 	{
 		if (file_flag && is_file(t->type))
-			global.exit_status = 42; //Arreglar aquí
+			return (true);
 		else if (is_file(t->type))
 		{
 			prev_type = t->type;
@@ -82,5 +82,5 @@ bool	set_file_type(t_cmd_line *current_token)
 		}
 		t = t->next;
 	}
-	return (file_flag); //Arreglar aquí
+	return (file_flag);
 }

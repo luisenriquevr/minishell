@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
+#    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/03/07 21:23:43 by lvarela          ###   ########.fr        #
+#    Updated: 2022/04/11 21:14:46 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH	= ./srcs/
 SRCS = readlinepruebas.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
-		checking.c update_tokens.c printtitle.c error_functions.c \
-		
+		checking.c update_tokens.c expander.c printitle.c error_functions.c \
+		prepare_exec.c free_functions.c printtittle.c
 
 SRC = $(addprefix $(SRCSPATH), $(SRCS))
 

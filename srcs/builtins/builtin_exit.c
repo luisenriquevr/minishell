@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:21:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/14 12:50:50 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 18:19:46 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,9 @@ int			builtin_exit(char **cmd)
 	else
 		exit(ft_atoi(cmd[1]));
 	return (1);
+<<<<<<< Updated upstream
 }
+=======
+	//"No seras la massshhhh guaaaay"
+}
+>>>>>>> Stashed changes

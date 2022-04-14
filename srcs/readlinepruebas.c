@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readlinepruebas.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/11 12:21:36 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:50:33 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int	main(int argc, char **argv, char **env)
 		prepare_exec(&cmd_line);
 		free(str); //TODO: gestionar la liberación final
 	}
+	printf("Yiiiiihaaaaa");
 	return (0);
 }

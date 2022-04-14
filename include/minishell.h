@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/14 14:23:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 19:23:52 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ enum type
 struct s_cmd_line
 {
 	char 		*str;
-	char		**argv;
+	char		**to_exec;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };
@@ -146,7 +146,7 @@ void		array_free(char **array);
 void		change_var(char *name, char *arg);
 char		*get_var(char *var);
 bool		var_valid_name(char *name);
-char		**copy_env(char **envp);
+int			copy_env(char **envp);
 void		add_new_var(char *new_var);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */

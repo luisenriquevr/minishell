@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:23:05 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/03/07 16:42:47 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 13:33:09 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 
 # define READ_END	0
 # define WRITE_END	1
@@ -58,18 +59,18 @@ enum type
 struct s_cmd_line
 {
 	char 		*str;
-	char		**to_exec;
+	char		**argv;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };
 
 struct s_token
 {
-	char *str;
-	t_type type;
-	bool exp;
-	t_quote quote;
-	t_token *next;
+	char		*str;
+	t_type		type;
+	bool		exp;
+	t_quote		quote;
+	t_token		*next;
 };
 
 struct s_global
@@ -86,50 +87,71 @@ struct s_global
 /* -------------------------------PARSEO------------------------------- */
 
 /*FUNCIONES DE CHEQUEOS VARIOS*/
-void	check_str(char *str);
-void	check_quotes(char *str);
-void	check_redirection(char *str, int *i);
-void	check_arg(char *s, int *i);
-bool	check_builtin(char *arg);
+void		check_str(char *str);
+void		check_quotes(char *str);
+void		check_redirection(char *str, int *i);
+void		check_arg(char *s, int *i);
+bool		check_builtin(char *arg);
 
 /*RELLENAR LA LISTA DE COMANDOS*/
-void	get_cmd_line(char *str, t_cmd_line **cmd_line);
-void	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start);
-void	look_for_pipe(char *str, int *current_position);
-void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new);
-void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *));
-void	print_list(char *str);
+void		get_cmd_line(char *str, t_cmd_line **cmd_line);
+void		fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start);
+void		look_for_pipe(char *str, int *current_position);
+void		lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new);
+void		lstiter_cmd(t_cmd_line *lst, void (*f)(char *));
+void		print_list(char *str);
 
 /*TOKENIZAR LA LISTA DE COMANDOS*/
-void	tokenizer(t_cmd_line **cmd_line);
-void	tokenize_cmd(t_cmd_line **cmd);
-void	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
-void	set_token_type(t_token *t);
-void	lstadd_back_token(t_token **lst, t_token *new);
-bool	set_file_type(t_cmd_line *current_token);
-bool	set_limitor(t_cmd_line *current_token);
-bool	is_file(t_type type);
-void	set_file(t_type previous_token, t_token *token);
+void		tokenizer(t_cmd_line **cmd_line);
+void		tokenize_cmd(t_cmd_line **cmd);
+void		fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
+void		set_token_type(t_token *t);
+void		lstadd_back_token(t_token **lst, t_token *new);
+bool		set_file_type(t_cmd_line *current_token);
+bool		set_limitor(t_cmd_line *current_token);
+bool		is_file(t_type type);
+void		set_file(t_type previous_token, t_token *token);
 
 /*EXPANDIR LA LISTA DE COMANDOS*/
-void	expander(t_cmd_line **cmd_line);
-void	expand_token(t_token *token);
-t_quote	close_quote(t_quote open, t_quote close, int *i);
-void	expand_word(t_token *token, t_quote quote, char *str, int *i);
-void	check_and_expand_env(t_token *t, char *str, char *dest, int *i);
-void	expand_no_env(char *str, char *dest, int *i);
-void	expand_word_single_quote(char *str, char *dest, int *i);
-void	expand_env(t_token *t, char *str, char *dest, int *i);
+void		expander(t_cmd_line **cmd_line);
+void		expand_token(t_token *token);
+t_quote		close_quote(t_quote open, t_quote close, int *i);
+void		expand_word(t_token *token, t_quote quote, char *str, int *i);
+void		check_and_expand_env(t_token *t, char *str, char *dest, int *i);
+void		expand_no_env(char *str, char *dest, int *i);
+void		expand_word_single_quote(char *str, char *dest, int *i);
+void		expand_env(t_token *t, char *str, char *dest, int *i);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
-int		exec(t_cmd_line *cmd, char **envp);
-int		builtin_checker(char *cmd);
-int		access_checker(char **cmd_to_exec, char **envp);
+
+int			exec(t_cmd_line *cmd, char **envp);
+int			builtin_checker(char *cmd);
+int			access_checker(char **cmd_to_exec, char **envp);
+
+/*BUILTINS*/
+int			builtin_checker(char *cmd);
+int			builtin_cd(char **arg);
+int			builtin_echo(char **arg);
+int			builtin_env(char **cmd);
+int			builtin_pwd(char **cmd);
+int			builtin_unset(char **cmd);
+int			builtin_exit(char **cmd);
+
+/*UTILS*/
+int			array_length(char **array);
+void		array_free(char **array);
+void		change_var(char *name, char *arg);
+char		*get_var(char *var);
+bool		var_valid_name(char *name);
+char		**copy_env(char **envp);
+void		add_new_var(char *new_var);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
-int		print_error(const char *error);
+int			print_error(const char *error);
 
 /* ------------------------------VARIOS-------------------------------- */
-void	printtitle();
-t_quote	update_quotes(char c, t_quote quote);
+void		printtitle();
+t_quote		update_quotes(char c, t_quote quote);
+int			throw_error(const char *error);
+int			throw_error_exit_status(const char *error, int error_code, int ret);
 #endif

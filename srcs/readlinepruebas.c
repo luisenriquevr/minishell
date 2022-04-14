@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/14 15:11:12 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/14 17:09:14 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ int	main(int argc, char **argv, char **env)
 		prepare_exec(&cmd_line);
 		free(str); //TODO: gestionar la liberación final
 	}
-	printhola;
 	return (0);
 }

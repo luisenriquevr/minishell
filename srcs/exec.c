@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 15:02:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:47:05 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-#define READ_END	0
-#define WRITE_END	1
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
+#include "minishell.h"
 
 void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, char **envp)
 {
@@ -28,9 +18,9 @@ void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, ch
 	if (cmd->next != NULL)
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 	close(fd[READ_END]);
-	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
+	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
 		exit (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(&cmd_to_exec[0], envp)) // comprobamos acceso con y sin path
+	if (!access_checker(cmd_to_exec, envp)) // comprobamos acceso con y sin path
 		exit (1); // error
 	execve(cmd_to_exec[0], cmd_to_exec, envp);
 	throw_error("Error: execution\n");
@@ -49,7 +39,6 @@ int		exec_pipes(t_cmd_line *cmd, char **envp)
 	int		fd[2];
 	pid_t	pid;
 	int		fd_in;
-	t_cmd_line	*cmd;
 
 	// recoger señales y no hacer nada (funcion signal)
 	fd_in = 0;
@@ -76,7 +65,7 @@ int		exec_simple(char **cmd_to_exec, char **envp)
 	pid_t	pid;
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
-	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
+	if (builtin_checker(&cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
 		return (0); // lo hacemos directamente en la comprobacion
 	if (!access_checker(&cmd_to_exec[0], envp)) // comprobamos acceso con y sin path
 		return (1); // error
@@ -99,8 +88,11 @@ int		exec_simple(char **cmd_to_exec, char **envp)
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
 
-int		exec(t_cmd_line *cmd, char **envp)
+int		exec(t_cmd_line **cmd_line, char **envp)
 {
+	t_cmd_line *cmd;
+
+	cmd = *cmd_line;
 	if (!cmd)
 		return (1); // gestion de errores
 	if (!cmd->next)

@@ -6,16 +6,22 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/04/11 21:14:46 by cristianama      ###   ########.fr        #
+#    Updated: 2022/04/14 20:27:39 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH	= ./srcs/
-SRCS = readlinepruebas.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
-		checking.c update_tokens.c expander.c printitle.c error_functions.c \
-		prepare_exec.c free_functions.c printtittle.c
+SRCS = minishell.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
+		checking.c update_tokens.c printtitle.c error_functions.c \
+		prepare_exec.c free_functions.c expander.c access_checker.c \
+		errors.c exec.c
 
-SRC = $(addprefix $(SRCSPATH), $(SRCS))
+BUILTINPATH	= ./srcs/builtins/
+BSRCS = builtin_checker.c builtin_cd.c builtin_echo.c builtin_env.c \
+	builtin_export.c builtin_pwd.c builtin_unset.c array_utils.c var_utils.c \
+	builtin_exit.c
+
+SRC = $(addprefix $(SRCSPATH), $(SRCS)) $(addprefix $(BUILTINPATH), $(BSRCS))
 
 OBJS = $(SRC:.c=.o)
 

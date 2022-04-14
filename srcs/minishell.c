@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readlinepruebas.c                                  :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/14 17:09:14 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/14 20:47:39 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ int	main(int argc, char **argv, char **env)
 		if (tokenizer(&cmd_line))
 			exit_free_cmdline(&cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
-		expander(&cmd_line);
+		//expander(&cmd_line);
 		prepare_exec(&cmd_line);
+		exec(&cmd_line, global.env);
 		free(str); //TODO: gestionar la liberación final
 	}
 	return (0);

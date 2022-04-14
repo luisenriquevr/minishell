@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_functions.c                                  :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 21:06:46 by cristianama      ###   ########.fr       */
+/*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
+/*   Updated: 2022/04/11 21:04:16 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-int	print_error(const char *error)
+void	free_token(t_cmd_line **cmd_line)
 {
-	perror(error);
-	return (1);
+	t_token	*temp;
 
-int	exit_free_cmdline(t_cmd_line **cmd)
-{
-	t_cmd_line	*tmp;
-
-	printf("exit\n");
-	if (cmd_line)
+	while ((*cmd_line)->head_token)
 	{
-		while (*cmd_line)
-		{
-			tmp = (*cmd_line)->next;
-			if ((*cmd_line)->str)
-				free((*cmd_line)->str);
-			if ((*cmd_line)->argv)
-				free((*cmd_line)->argv);
-			if ((*cmd_line)->head_token)
-				free_token(cmd_line);
-			free((*cmd_line));
-			*cmd_line = tmp;
-		}
+		temp = (*cmd_line)->head_token->next;
+		if ((*cmd_line)->head_token->str)
+			free((*cmd_line)->head_token->str);
+		free((*cmd_line)->head_token);
+		(*cmd_line)->head_token = temp;
 	}
-	return (1);
 }

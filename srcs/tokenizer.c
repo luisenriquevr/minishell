@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 14:09:45 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 21:00:05 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,29 @@ void	set_quote(t_token *t)
 * Chequear el tipo de lo que haya en token->str y poner token->type
 * Añadir el token relleno al final de la lista de token dentro del comando
 */
-void	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
+int	fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start)
 {
 	t_token	*token;
 
-	token = malloc(sizeof(t_token));
+	token = malloc(sizeof(t_token)); //TODO: liberar en gestión de errores
 	if (!token) //en vez de if (token == NULL) ?
-		global.exit_status = 4;
+		return (errcode_print_return(50, "Malloc error"));
 	token->str = NULL;
 	token->type = EMPTY;
 	token->exp = false;
 	token->quote = NONE;
 	token->next = NULL;
-	token->str = malloc(sizeof(char *) * (curr_pos - cmd_start + 1));
+	token->str = malloc(sizeof(char *) * (curr_pos - cmd_start + 1)); //TODO: liberar en gestión de errores
 	if (!token->str) //en vez de if (token == NULL) ?
-		global.exit_status = 4;
+		return (errcode_print_return(50, "Malloc error"));
 	token->str = ft_strncpy(token->str, str + cmd_start, curr_pos - cmd_start);
 	set_token_type(token);
 	set_quote(token);
 	lstadd_back_token(&(*cmd)->head_token, token);
+	return (0);
 }
 
-void	tokenize_cmd(t_cmd_line **cmd)
+int	tokenize_cmd(t_cmd_line **cmd)
 {
 	int	curr_pos;
 	int	cmd_start;
@@ -110,27 +111,31 @@ void	tokenize_cmd(t_cmd_line **cmd)
 			check_redirection((*cmd)->str, &curr_pos);
 		else
 			check_arg((*cmd)->str, &curr_pos);
-		fill_token_list(cmd, (*cmd)->str, curr_pos, cmd_start);
+		if (fill_token_list(cmd, (*cmd)->str, curr_pos, cmd_start))
+			return (1);
 	}
+	return (0);
 }
 
-void	tokenizer(t_cmd_line **cmd_line)
+int	tokenizer(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*current_cmd;
 
 	current_cmd = *cmd_line; /* *cmd_line representa el primer nodo*/
 	while (current_cmd)
 	{
-		tokenize_cmd(&current_cmd);
+		if (tokenize_cmd(&current_cmd))
+			return (1);
 		current_cmd = current_cmd->next;
 	}
 	current_cmd = *cmd_line;
 	while (current_cmd)
 	{
 		if (set_limitor(current_cmd))
-			global.exit_status = 42; //Ya no sé qué inventarme
+			return (errcode_print_return(12, "Syntax error"));
 		if (set_file_type(current_cmd))
-			global.exit_status = 42;
+			return (errcode_print_return(12, "Syntax error"));
 		current_cmd = current_cmd->next;
 	}
+	return (0);
 }

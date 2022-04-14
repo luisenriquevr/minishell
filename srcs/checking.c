@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 14:50:32 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/11 20:47:30 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_quote	update_quotes(char c, t_quote quote)
 * se ha quedado sin cerrar y tenemos que gestionar el error, liberar lo que
 * sea y salir.
 */
-void	check_quotes(char *str)
+int	check_quotes(char *str)
 {
 	t_quote	quote;
 	int		i;
@@ -68,22 +68,23 @@ void	check_quotes(char *str)
 		quote = update_quotes(str[i], quote);
 		i++;
 	}
-	if (quote != NONE)
-		global.exit_status = 14; //Las comillas no están cerradas
+	if (quote != NONE) //TODO: gestionar error
+		return (errcode_print_return(14, "Unclosed quotes")); //Las comillas no están cerradas
+	return (0);
 }
 
 /*
 * Esta función está MAL (líneas 67-69)
 */
-void	check_str(char *str)
+int	check_str(char *str)
 {
 	int		i;
-	bool	after_pipe; //No sé si podemos usar esta librería
+	bool	after_pipe;
 
 	i = 0;
 	after_pipe = false;
-	if (str == NULL)
-		global.exit_status = 10; //Probablemente esto acabe siendo una función que libere todo lo que hayamos alojado y pase el exit_status como parámetro
+	if (str == NULL) //TODO: gestionar error
+		return (errcode_print_return(10, "No arguments")); //Probablemente esto acabe siendo una función que libere todo lo que hayamos alojado y pase el exit_status como parámetro
 	while (str[i])
 	{
 		// "     cat    |  echo | blah |"
@@ -91,13 +92,16 @@ void	check_str(char *str)
 			i++;
 		if (str[i] == '|')
 		{
-			if (!after_pipe)
-				global.exit_status = 12; //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
+			if (!after_pipe) //TODO: gestionar error
+				return (errcode_print_return(12, "Syntax error")); //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
+
 			after_pipe = true;
 		}
 		i++;
 	}
-	check_quotes(str);
+	if (check_quotes(str))
+		return (1);
+	return (0);
 }
 
 void check_redirection(char *str, int *i)

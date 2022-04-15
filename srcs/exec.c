@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 15:02:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:06:09 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_list
 }					t_list;
 
 
-void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, char **envp)
+void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
 	dup2(fd_in, STDIN_FILENO);
 	if (cmd->next != NULL)
@@ -30,9 +30,9 @@ void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec, ch
 	close(fd[READ_END]);
 	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
 		exit (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(&cmd_to_exec[0], envp)) // comprobamos acceso con y sin path
+	if (!access_checker(&cmd_to_exec[0])) // comprobamos acceso con y sin path
 		exit (1); // error
-	execve(cmd_to_exec[0], cmd_to_exec, envp);
+	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	throw_error("Error: execution\n");
 	exit(1); // gestion de errores 
 }
@@ -44,12 +44,11 @@ void	parent_process(pid_t pid, int fd[2], int *fd_in)
 	*fd_in = fd[READ_END];
 }
 
-int		exec_pipes(t_cmd_line *cmd, char **envp)
+int		exec_pipes(t_cmd_line *cmd)
 {
 	int		fd[2];
 	pid_t	pid;
 	int		fd_in;
-	t_cmd_line	*cmd;
 
 	// recoger señales y no hacer nada (funcion signal)
 	fd_in = 0;
@@ -59,7 +58,7 @@ int		exec_pipes(t_cmd_line *cmd, char **envp)
 			return (throw_error("Error: pipe error\n")); // gestion de errores
 		pid = fork();
 		if (!pid)
-			child_process(fd_in, fd, cmd, cmd->to_exec, envp);
+			child_process(fd_in, fd, cmd, cmd->to_exec);
 		else if (pid)
 		{
 			parent_process(pid, fd, &fd_in);
@@ -71,19 +70,19 @@ int		exec_pipes(t_cmd_line *cmd, char **envp)
 	return (0);
 }
 
-int		exec_simple(char **cmd_to_exec, char **envp)
+int		exec_simple(char **cmd_to_exec)
 {
 	pid_t	pid;
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
 	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
 		return (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(&cmd_to_exec[0], envp)) // comprobamos acceso con y sin path
+	if (!access_checker(&cmd_to_exec[0])) // comprobamos acceso con y sin path
 		return (1); // error
 	pid = fork();
 	if (!pid)
 	{
-		execve(cmd_to_exec[0], cmd_to_exec, envp); // tiene un exit dentro, si se hace sale
+		execve(cmd_to_exec[0], cmd_to_exec, global.env); // tiene un exit dentro, si se hace sale
 		perror("Error: execution error\n"); // gestion de errores
 		exit(1); // gestion de errores
 	}
@@ -99,13 +98,13 @@ int		exec_simple(char **cmd_to_exec, char **envp)
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
 
-int		exec(t_cmd_line *cmd, char **envp)
+int		exec(t_cmd_line *cmd)
 {
 	if (!cmd)
-		return (1); // gestion de errores
+		return (global.exit_status); // gestion de errores
 	if (!cmd->next)
-		return (exec_simple(cmd->to_exec, envp));
+		return (exec_simple(cmd->to_exec));
 	else
-		return (exec_pipes(cmd, envp));
+		return (exec_pipes(cmd));
 	return (0);
 }

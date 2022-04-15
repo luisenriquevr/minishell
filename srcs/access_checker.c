@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/03/07 15:53:46 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 19:39:56 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	slashjoin(char **paths)
 	}
 }
 
-char	*get_path(char **envp)
+char	*get_path()
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (envp[i][j])
+	while (global.env[i][j])
 	{
-		if (!ft_strncmp(&envp[i][j], "PATH", 4))
-			return (&envp[i][j]);
+		if (!ft_strncmp(&global.env[i][j], "PATH", 4))
+			return (&global.env[i][j]);
 		else
 			i++;
 	}
@@ -45,13 +45,13 @@ char	*get_path(char **envp)
 	return (NULL);
 }
 
-char	**paths_pull(char **envp)
+char	**paths_pull()
 {
 	char	*path;
 	int	i;
 	char	**all_paths;
 	
-	path = get_path(envp);
+	path = get_path();
 	i = 0;
 	while (path && path[i++] != '=');
 	all_paths = ft_split(&path[++i], ':');
@@ -76,12 +76,12 @@ void	checker(char **cmd_to_exec, char **path)
 	}
 }
 
-int		access_checker(char **cmd_to_exec, char **envp)
+int		access_checker(char **cmd_to_exec)
 {
 	char	**path;
 	char	*tmp_cmd;
 	
-	path = paths_pull(envp);
+	path = paths_pull();
 	tmp_cmd = NULL;
 	if (!path || !*cmd_to_exec)
 	{

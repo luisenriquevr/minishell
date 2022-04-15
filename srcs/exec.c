@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 13:38:29 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:11:31 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parent_process(pid_t pid, int fd[2], int *fd_in)
 	*fd_in = fd[READ_END];
 }
 
-int		exec_pipes(t_cmd_line *cmd)
+int	exec_pipes(t_cmd_line *cmd)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -88,7 +88,7 @@ int		exec_simple(char **cmd_to_exec)
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
 
-int		exec(t_cmd_line *cmd_line)
+int	exec(t_cmd_line *cmd_line)
 {
 	if (!cmd_line)
 		return (global.exit_status); // gestion de errores

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printtittle.c                                      :+:      :+:    :+:   */
+/*   printtitle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:43:34 by lvarela           #+#    #+#             */
-/*   Updated: 2022/03/06 14:08:23 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:13:03 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-void	printtitle()
+void	printtitle(void)
 {
 	printf("                 _       _     _          _ _ 	\n");
 	printf("                (_)     (_)   | |        | | |	\n");

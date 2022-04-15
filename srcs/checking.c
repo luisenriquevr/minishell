@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 20:47:30 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:07:32 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ bool	check_builtin(char *arg)
 	*/
 	if (arg != NULL)
 	{
-		if (ft_strcmp(arg, "echo") || ft_strcmp(arg, "export") 
-		|| ft_strcmp(arg, "unset") || ft_strcmp(arg, "exit")
-		|| ft_strcmp(arg, "env") || ft_strcmp(arg, "cd")
-		|| ft_strcmp(arg, "pwd"))
+		if (ft_strcmp(arg, "echo") || ft_strcmp(arg, "export")
+			|| ft_strcmp(arg, "unset") || ft_strcmp(arg, "exit")
+			|| ft_strcmp(arg, "env") || ft_strcmp(arg, "cd")
+			|| ft_strcmp(arg, "pwd"))
 			return (true);
-
 	}
 	return (false);
 }
@@ -56,6 +55,7 @@ t_quote	update_quotes(char c, t_quote quote)
 * se ha quedado sin cerrar y tenemos que gestionar el error, liberar lo que
 * sea y salir.
 */
+
 int	check_quotes(char *str)
 {
 	t_quote	quote;
@@ -79,23 +79,23 @@ int	check_quotes(char *str)
 int	check_str(char *str)
 {
 	int		i;
-	bool	after_pipe;
+	bool	pipe_allowed;
 
 	i = 0;
-	after_pipe = false;
-	if (str == NULL) //TODO: gestionar error
-		return (errcode_print_return(10, "No arguments")); //Probablemente esto acabe siendo una función que libere todo lo que hayamos alojado y pase el exit_status como parámetro
+	pipe_allowed = false;
+	if (str == NULL)
+		return (errcode_print_return(10, "No arguments"));
 	while (str[i])
 	{
-		// "     cat    |  echo | blah |"
 		while (str[i] == ' ')
 			i++;
+		if (str[i] != '|')
+			pipe_allowed = true;
 		if (str[i] == '|')
 		{
-			if (!after_pipe) //TODO: gestionar error
-				return (errcode_print_return(12, "Syntax error")); //tendremos que ponernos de acuerdo para un conjunto de estados de error :)
-
-			after_pipe = true;
+			if (!pipe_allowed)
+				return (errcode_print_return(12, "Syntax error"));
+			pipe_allowed = true;
 		}
 		i++;
 	}
@@ -104,7 +104,7 @@ int	check_str(char *str)
 	return (0);
 }
 
-void check_redirection(char *str, int *i)
+void	check_redirection(char *str, int *i)
 {
 	char	redirection;
 
@@ -114,7 +114,7 @@ void check_redirection(char *str, int *i)
 		(*i)++;
 }
 
-void check_arg(char *s, int *i)
+void	check_arg(char *s, int *i)
 {
 	t_quote	quote;
 

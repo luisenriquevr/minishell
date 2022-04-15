@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 20:49:13 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:10:49 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	look_for_pipe(char *str, int *current_position)
 		(*current_position)++;
 	}
 }
-
 
 /*
 * Esta función recibe la línea de comandos y un índice de comienzo y final

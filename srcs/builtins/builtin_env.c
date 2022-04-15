@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:39:27 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 14:31:50 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 14:13:37 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			builtin_env(char **cmd)
 	int		i;
 
 	i = 0;
-	if (array_length(cmd))
+	if (array_length(cmd) > 1)
 		throw_error("Error: Too many arguments");
 	while(global.env[i])
 		printf("%s\n", global.env[i++]);

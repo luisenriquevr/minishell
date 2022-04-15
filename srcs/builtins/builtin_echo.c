@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:28:39 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 14:11:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 18:35:22 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,15 @@ int			builtin_echo(char **cmd)
 	n = n_checker(++cmd);
 	if (n > 0)
 		i++;
-	while (cmd[n])
+	while (cmd[i])
 	{
-		printf("%s", cmd[n]);
-		if (cmd[n + 1])
+		printf("%s", cmd[i]);
+		if (cmd[i + 1])
 			printf(" ");
-		n++;
+		i++;
 	}
 	if (n == 0)
 		printf("\n");
+	global.exit_status = 0;
 	return (1);
 }

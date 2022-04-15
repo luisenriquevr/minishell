@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 13:38:29 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:08:28 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,25 @@ void	parent_process(pid_t pid, int fd[2], int *fd_in)
 
 int		exec_pipes(t_cmd_line *cmd)
 {
-	int		fd[2];
-	pid_t	pid;
-	int		fd_in;
+	int			fd[2];
+	pid_t		pid;
+	int			fd_in;
+	t_cmd_line	*tmp_cmd;
 
 	// recoger señales y no hacer nada (funcion signal)
+	tmp_cmd = cmd;
 	fd_in = 0;
-	while (cmd)
+	while (tmp_cmd)
 	{
 		if (pipe(fd) < 0)
 			return (throw_error("Error: pipe error\n")); // gestion de errores
 		pid = fork();
 		if (!pid)
-			child_process(fd_in, fd, cmd, cmd->to_exec);
+			child_process(fd_in, fd, tmp_cmd, tmp_cmd->to_exec);
 		else if (pid)
 		{
 			parent_process(pid, fd, &fd_in);
-			cmd = cmd->next;
+			tmp_cmd = tmp_cmd->next;
 		}
 		else
 			return (throw_error("Error: fork error\n")); // gestion de errores

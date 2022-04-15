@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/14 19:31:55 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 21:12:46 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ int	print_error(const char *error)
 {
 	perror(error);
 	return (1);
+}
+
+int errcode_print_return(int code, char *msg)
+{
+	global.exit_status = code;
+	printf("%s", msg);
+	return code;
 }
 
 int	exit_free_cmdline(t_cmd_line **cmd_line)

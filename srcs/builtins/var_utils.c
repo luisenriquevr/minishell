@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 17:02:53 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:27:04 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void		add_new_var(char *new_var)
 
 	i = 0;
 	tmp = global.env;
-	global.env = copy_env(tmp);
+	if (copy_env(tmp))
+		return ; //TODO devolver error
 	array_free(tmp);
 	while (global.env[i])
 		i++;
@@ -74,7 +75,7 @@ char		*get_var_name(char *envp)
 		var_name[i] = envp[i]; // comprobar si funciona bien con el i++ asi
 		i++;
 	}
-	var_name[i] = NULL;
+	var_name[i] = '\0';
 	return (var_name);
 }
 
@@ -86,7 +87,7 @@ char		*get_var(char *var)
 
 	i = 0;
 	str = NULL;
-	var_name = get_name(global.env[i]);
+	var_name = get_var_name(global.env[i]);
 	while (global.env[i] && ft_strcmp(var_name, var))
 	{
 		free(var_name);
@@ -99,7 +100,7 @@ char		*get_var(char *var)
 	else if (!ft_strncmp(var, "?", ft_strlen(var)))
 	{
 		if (global.exit_status > 255)
-			global.exit_status >> 8;
+			global.exit_status = global.exit_status >> 8;
 		return (ft_itoa(global.exit_status));
 	}
 	else

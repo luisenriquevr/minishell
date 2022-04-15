@@ -6,21 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/14 20:06:09 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:09:43 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-#define READ_END	0
-#define WRITE_END	1
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
+#include "minishell.h"
 
 void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
@@ -28,9 +18,9 @@ void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 	if (cmd->next != NULL)
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 	close(fd[READ_END]);
-	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
+	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
 		exit (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(&cmd_to_exec[0])) // comprobamos acceso con y sin path
+	if (!access_checker(cmd_to_exec)) // comprobamos acceso con y sin path
 		exit (1); // error
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	throw_error("Error: execution\n");
@@ -75,7 +65,7 @@ int		exec_simple(char **cmd_to_exec)
 	pid_t	pid;
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
-	if (builtin_checker(cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
+	if (builtin_checker(&cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
 		return (0); // lo hacemos directamente en la comprobacion
 	if (!access_checker(&cmd_to_exec[0])) // comprobamos acceso con y sin path
 		return (1); // error
@@ -98,8 +88,11 @@ int		exec_simple(char **cmd_to_exec)
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
 
-int		exec(t_cmd_line *cmd)
+int		exec(t_cmd_line **cmd_line)
 {
+	t_cmd_line *cmd;
+
+	cmd = *cmd_line;
 	if (!cmd)
 		return (global.exit_status); // gestion de errores
 	if (!cmd->next)

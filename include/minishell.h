@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/14 19:51:26 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:10:11 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,18 +127,18 @@ int			prepare_exec(t_cmd_line **cmd_line);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
 
-int			exec(t_cmd_line *cmd);
-int			builtin_checker(char *cmd);
+int			exec(t_cmd_line **cmd);
 int			access_checker(char **cmd_to_exec);
 
 /*BUILTINS*/
-int			builtin_checker(char *cmd);
+int			builtin_checker(char **cmd);
 int			builtin_cd(char **arg);
 int			builtin_echo(char **arg);
 int			builtin_env(char **cmd);
 int			builtin_pwd(char **cmd);
 int			builtin_unset(char **cmd);
 int			builtin_exit(char **cmd);
+int			builtin_export(char **cmd);
 
 /*UTILS*/
 int			array_length(char **array);
@@ -148,6 +148,7 @@ char		*get_var(char *var);
 bool		var_valid_name(char *name);
 int			copy_env(char **envp);
 void		add_new_var(char *new_var);
+char		*get_var_name(char *envp);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int			print_error(const char *error);

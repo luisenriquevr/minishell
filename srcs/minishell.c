@@ -1,12 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readlinepruebas.c                                  :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
+<<<<<<< HEAD:srcs/readlinepruebas.c
 /*   Updated: 2022/04/14 20:48:26 by lvarela          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/14 20:47:39 by cristianama      ###   ########.fr       */
+>>>>>>> 3885fcfa73415267c786887cf5fc03992d92f761:srcs/minishell.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +81,13 @@ int	main(int argc, char **argv, char **env)
 		if (tokenizer(&cmd_line))
 			exit_free_cmdline(&cmd_line);
 		//lstiter_cmd(cmd_line, print_list);
-		expander(&cmd_line);
+		//expander(&cmd_line);
 		prepare_exec(&cmd_line);
+<<<<<<< HEAD:srcs/readlinepruebas.c
 		exec(cmd_line);
+=======
+		exec(&cmd_line, global.env);
+>>>>>>> 3885fcfa73415267c786887cf5fc03992d92f761:srcs/minishell.c
 		free(str); //TODO: gestionar la liberación final
 	}
 	return (0);

@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:21:51 by lvarela           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/14 19:44:59 by lvarela          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/14 21:15:51 by cristianama      ###   ########.fr       */
+>>>>>>> 3885fcfa73415267c786887cf5fc03992d92f761
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:21:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 13:02:31 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:24:52 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			builtin_exit(char **cmd)
 		throw_error("Error: Bad expression");
 		exit(255);
 	}
-	if (!cmd[1])
+	if (array_length(cmd) < 2)
 		exit(EXIT_SUCCESS);
 	else
 		exit(ft_atoi(cmd[1]));

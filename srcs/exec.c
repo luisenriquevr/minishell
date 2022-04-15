@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 12:09:43 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:38:29 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,13 @@ int		exec_simple(char **cmd_to_exec)
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
 
-int		exec(t_cmd_line **cmd_line)
+int		exec(t_cmd_line *cmd_line)
 {
-	t_cmd_line *cmd;
-
-	cmd = *cmd_line;
-	if (!cmd)
+	if (!cmd_line)
 		return (global.exit_status); // gestion de errores
-	if (!cmd->next)
-		return (exec_simple(cmd->to_exec));
+	if (!cmd_line->next)
+		return (exec_simple(cmd_line->to_exec));
 	else
-		return (exec_pipes(cmd));
+		return (exec_pipes(cmd_line));
 	return (0);
 }

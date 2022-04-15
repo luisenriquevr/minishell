@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/15 13:04:06 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:23:14 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int				main(int argc, char **argv, char **env)
 		//lstiter_cmd(cmd_line, print_list);
 		//expander(&cmd_line);
 		prepare_exec(&cmd_line);
-		exec(&cmd_line);
+		exec(cmd_line);
 		free(str); //TODO: gestionar la liberación final
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 12:10:11 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:23:51 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 
 /* -----------------------------EJECUCIÓN------------------------------ */
 
-int			exec(t_cmd_line **cmd);
+int			exec(t_cmd_line *cmd_line);
 int			access_checker(char **cmd_to_exec);
 
 /*BUILTINS*/

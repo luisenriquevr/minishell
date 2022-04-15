@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:45:38 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 12:07:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:27:23 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			builtin_checker(char **cmd)
 	else if (ft_strcmp("echo", cmd[0]))
 		return (builtin_echo(cmd));
 	else if (ft_strcmp("env", cmd[0]))
-		return (builtin_export(cmd));
+		return (builtin_env(cmd));
 	else if (ft_strcmp("export", cmd[0]))
 		return (builtin_export(cmd));
 	else if (ft_strcmp("unset", cmd[0]))

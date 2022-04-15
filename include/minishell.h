@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 13:23:51 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 13:48:45 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ char		*get_var_name(char *envp);
 int			print_error(const char *error);
 int			errcode_print_return(int code, char *msg);
 int			exit_free_cmdline(t_cmd_line **cmd);
+int			free_all(t_cmd_line **cmd_line);
 void		free_token(t_cmd_line **cmd_line);
 
 /* ------------------------------VARIOS-------------------------------- */

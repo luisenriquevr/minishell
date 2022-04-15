@@ -6,11 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-<<<<<<< HEAD:srcs/readlinepruebas.c
-/*   Updated: 2022/04/14 20:48:26 by lvarela          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/14 20:47:39 by cristianama      ###   ########.fr       */
->>>>>>> 3885fcfa73415267c786887cf5fc03992d92f761:srcs/minishell.c
+/*   Updated: 2022/04/15 13:04:06 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +29,6 @@ int copy_env(char **envp)
 	}
 	new_envp[i] = NULL;
 	global.env = new_envp;
-	free(new_envp);
 	return (0);
 }
 
@@ -55,9 +50,9 @@ int	init_global(char **env)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **env)
+int				main(int argc, char **argv, char **env)
 {
-	char			*str;
+	char		*str;
 	t_cmd_line	*cmd_line;
 
 	cmd_line = NULL;
@@ -83,11 +78,7 @@ int	main(int argc, char **argv, char **env)
 		//lstiter_cmd(cmd_line, print_list);
 		//expander(&cmd_line);
 		prepare_exec(&cmd_line);
-<<<<<<< HEAD:srcs/readlinepruebas.c
-		exec(cmd_line);
-=======
-		exec(&cmd_line, global.env);
->>>>>>> 3885fcfa73415267c786887cf5fc03992d92f761:srcs/minishell.c
+		exec(&cmd_line);
 		free(str); //TODO: gestionar la liberación final
 	}
 	return (0);

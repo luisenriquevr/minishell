@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/14 19:39:56 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:14:19 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,8 @@ void	checker(char **cmd_to_exec, char **path)
 int		access_checker(char **cmd_to_exec)
 {
 	char	**path;
-	char	*tmp_cmd;
 	
 	path = paths_pull();
-	tmp_cmd = NULL;
 	if (!path || !*cmd_to_exec)
 	{
 		free(path);

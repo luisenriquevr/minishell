@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 13:51:24 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 12:46:56 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			builtin_cd(char **arg)
 {
 	char	*path;
 
-	if (arg[2] && arg[1])
+	if (array_length(arg) > 2)
 	{
 		printf("cd: too many arguments\n");
 		return (1);

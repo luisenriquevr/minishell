@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 19:08:28 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:23:11 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	parent_process(pid_t pid, int fd[2], int *fd_in)
 
 int		exec_pipes(t_cmd_line *cmd)
 {
+	t_cmd_line	*tmp_cmd;
 	int			fd[2];
 	pid_t		pid;
 	int			fd_in;
-	t_cmd_line	*tmp_cmd;
 
 	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;

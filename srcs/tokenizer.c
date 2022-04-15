@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/11 21:00:05 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:14:28 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int	tokenize_cmd(t_cmd_line **cmd)
 		while ((*cmd)->str[curr_pos] == ' ') //Sustituir por ft_isspace?
 			curr_pos++;
 		cmd_start = curr_pos;
-		if ((*cmd)->str[curr_pos] && ((*cmd)->str[curr_pos] == '<' 
-		|| (*cmd)->str[curr_pos] == '>'))
+		if ((*cmd)->str[curr_pos] && ((*cmd)->str[curr_pos] == '<'
+			|| (*cmd)->str[curr_pos] == '>'))
 			check_redirection((*cmd)->str, &curr_pos);
 		else
 			check_arg((*cmd)->str, &curr_pos);

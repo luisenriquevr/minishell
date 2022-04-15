@@ -6,13 +6,13 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 13:32:14 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/14 21:14:50 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:12:48 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int count_args(t_cmd_line *cmd)
+int	count_args(t_cmd_line *cmd)
 {
 	t_token		*t;
 	int			arg_length;

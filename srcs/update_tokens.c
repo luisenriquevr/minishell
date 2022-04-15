@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/14 19:20:02 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/15 19:15:08 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	set_file(t_type previous_token, t_token *token)
 	else if (previous_token == GREATER)
 		token->type = OUT_FILE;
 }
+
 bool	is_file(t_type type)
 {
 	if (type == LESS || type == GREATER
@@ -46,7 +47,7 @@ bool	set_limitor(t_cmd_line *current_token)
 		else if (limitor_flag && t->str && t->str[0])
 		{
 			if (is_file(t->type))
-				break;
+				break ;
 			t->type = LIMITOR;
 			limitor_flag = false;
 		}

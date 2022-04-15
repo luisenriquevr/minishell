@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:36:08 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 13:50:47 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:07:58 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	print_error(const char *error)
 	return (1);
 }
 
-int errcode_print_return(int code, char *msg)
+int	errcode_print_return(int code, char *msg)
 {
 	global.exit_status = code;
 	printf("%s", msg);
-	return code;
+	return (code);
 }

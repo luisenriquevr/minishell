@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/03/06 14:08:06 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:11:30 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 * Función de listas pero adaptada a nuestra estructura.
 */
+
 void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new)
 {
 	t_cmd_line	*last;
@@ -36,6 +37,7 @@ void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new)
 /*
 * Función de listas pero adaptada a nuestra estructura.
 */
+
 void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *))
 {
 	if (!lst || !f)
@@ -50,6 +52,7 @@ void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *))
 /*
 * Solo la he hecho para imprimir la lista y comprobar que estuviera llenándose bien
 */
+
 void	print_list(char *str)
 {
 	printf("%s\n", str);
@@ -58,6 +61,7 @@ void	print_list(char *str)
 /*
 * Función de listas pero adaptada a nuestra estructura.
 */
+
 void	lstadd_back_token(t_token **lst, t_token *new)
 {
 	t_token	*last;

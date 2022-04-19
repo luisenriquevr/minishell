@@ -6,14 +6,14 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/15 13:51:53 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 19:12:18 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-int copy_env(char **envp)
+int	copy_env(char **envp)
 {
 	char	**new_envp;
 	int		i;
@@ -50,7 +50,7 @@ int	init_global(char **env)
 	return (0);
 }
 
-int				main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char		*str;
 	t_cmd_line	*cmd_line;

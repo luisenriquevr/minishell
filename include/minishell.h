@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 13:48:45 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/15 20:59:26 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 * Hay que declarar todas las listas antes de definirlas para que el *next pueda
 * ser del tipo de la lista
 */
-typedef struct s_cmd_line t_cmd_line;
-typedef struct s_token t_token;
-typedef enum quote t_quote;
-typedef enum type t_type;
+typedef struct s_cmd_line	t_cmd_line;
+typedef struct s_token		t_token;
+typedef enum e_quote		t_quote;
+typedef enum e_type			t_type;
 
-enum quote
+enum	e_quote
 {
 	NONE,
 	SINGLE,
@@ -41,7 +41,7 @@ enum quote
 	END
 };
 
-enum type
+enum	e_type
 {
 	EMPTY,
 	ARG,
@@ -56,21 +56,21 @@ enum type
 	IN_FILE //Palabra después de <
 };
 
-struct s_cmd_line
+struct	s_cmd_line
 {
-	char 		*str;
+	char		*str;
 	char		**to_exec;
 	t_token		*head_token;
 	t_cmd_line	*next;
 };
 
-struct s_token
+struct	s_token
 {
-	char		*str;
-	t_type		type;
-	bool		exp;
-	t_quote		quote;
-	t_token		*next;
+	char	*str;
+	t_type	type;
+	bool	exp;
+	t_quote	quote;
+	t_token	*next;
 };
 
 struct s_global
@@ -158,7 +158,7 @@ int			free_all(t_cmd_line **cmd_line);
 void		free_token(t_cmd_line **cmd_line);
 
 /* ------------------------------VARIOS-------------------------------- */
-void		printtitle();
+void		printtitle(void);
 t_quote		update_quotes(char c, t_quote quote);
 int			throw_error(const char *error);
 int			throw_error_exit_status(const char *error, int error_code, int ret);

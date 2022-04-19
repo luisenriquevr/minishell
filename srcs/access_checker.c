@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/19 16:51:32 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/19 17:12:48 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	slashjoin(char **paths)
 	}
 }
 
-char	*get_path()
+char	*get_path(void)
 {
 	int	i;
 	int	j;
@@ -45,12 +45,12 @@ char	*get_path()
 	return (NULL);
 }
 
-char	**paths_pull()
+char	**paths_pull(void)
 {
 	char	*path;
-	int	i;
+	int		i;
 	char	**all_paths;
-	
+
 	path = get_path();
 	i = 0;
 	while (path && path[i++] != '=');
@@ -63,7 +63,7 @@ void	checker(char **cmd_to_exec, char **path)
 {
 	int		i;
 	char	*tmp_cmd;
-	
+
 	i = -1;
 	while (path[++i])
 	{
@@ -76,10 +76,10 @@ void	checker(char **cmd_to_exec, char **path)
 	}
 }
 
-int		access_checker(char **cmd_to_exec)
+int	access_checker(char **cmd_to_exec)
 {
 	char	**path;
-	
+
 	path = paths_pull();
 	if (!path || !*cmd_to_exec)
 	{

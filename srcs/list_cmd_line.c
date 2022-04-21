@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_cmd_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/21 20:23:48 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 21:36:02 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	lstiter_cmd(t_cmd_line *lst, void (*f)(void *))
 		return ;
 	while (lst)
 	{
-		f(lst->str);
+		(*f)(lst->str);
 		lst = lst->next;
 	}
 }

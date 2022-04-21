@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 20:06:21 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 22:08:25 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,20 @@ int				redirection(t_token *token)
 	return (0);
 }
 
-void			redirector(void *content)
+void			redirector(t_cmd_line **cmd_line)
 {
-	t_cmd_line	*cmd_line;
+	t_cmd_line	*cmd;
 	t_token		*token;
 
-	cmd_line = (t_cmd_line *)content;
-	token = cmd_line->head_token;
-	while (token)
+	cmd = *cmd_line;
+	while (cmd)
 	{
-		//global.redir_error = redirection(token);
-		token = token->next;
+		token = cmd->head_token;
+		while (token)
+		{
+			global.redir_error = redirection(token);
+			token = token->next;
+		}
+		cmd = cmd->next;
 	}
 }

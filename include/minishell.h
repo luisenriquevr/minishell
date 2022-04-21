@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 20:24:19 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 22:03:41 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 
 int			exec(t_cmd_line *cmd_line);
 int			access_checker(char **cmd_to_exec);
-void		redirector(void *content);
+void		redirector(t_cmd_line **cmd_line);
 
 /*BUILTINS*/
 int			builtin_checker(char **cmd);

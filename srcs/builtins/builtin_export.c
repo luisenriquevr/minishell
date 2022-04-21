@@ -6,11 +6,17 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 17:24:03 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/20 15:00:31 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+/*
+**	Mirando como generar el export, creemos que se puede hacer mediante la ejecucion
+**	de env | sort. El unico problema es que aun asi debemos guardar una copia de env
+**	en global.export para cuando se declaren variables globales... o no?
+*/
 
 int			var_export(char *var)
 {

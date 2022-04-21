@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:08:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/13 17:20:35 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/20 14:48:12 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void		unset(char *cmd, char **env)
 	char	*var_name;
 
 	i = 0;
-	if (env[i])
-		var_name = get_var(env[i]);
+	var_name = get_var(env[i]); // no se si tiene que estar protegido, creo que no
 	while (env[i] && ft_strcmp(var_name, cmd))
 	{
 		free(var_name);

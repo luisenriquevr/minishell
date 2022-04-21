@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 20:59:26 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/21 17:27:25 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 # define READ_END	0
@@ -82,6 +83,7 @@ struct s_global
 	int		fd_stdin;
 	int		fd_stdout;
 	int		signal_status;
+	int		redir_error;
 } global;
 
 /* -------------------------------PARSEO------------------------------- */
@@ -129,6 +131,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 
 int			exec(t_cmd_line *cmd_line);
 int			access_checker(char **cmd_to_exec);
+void		redirector(void *content);
 
 /*BUILTINS*/
 int			builtin_checker(char **cmd);

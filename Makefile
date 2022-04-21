@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
+#    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/04/14 20:27:39 by cristianama      ###   ########.fr        #
+#    Updated: 2022/04/21 14:53:17 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCSPATH	= ./srcs/
 SRCS = minishell.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
 		checking.c update_tokens.c printtitle.c error_functions.c \
 		prepare_exec.c free_functions.c expander.c access_checker.c \
-		errors.c exec.c
+		errors.c exec.c ./redirection/redirector.c
 
 BUILTINPATH	= ./srcs/builtins/
 BSRCS = builtin_checker.c builtin_cd.c builtin_echo.c builtin_env.c \

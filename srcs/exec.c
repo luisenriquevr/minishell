@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/19 17:12:58 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 14:42:19 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
+	// hay que recoger señales
 	dup2(fd_in, STDIN_FILENO);
 	if (cmd->next != NULL)
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 	close(fd[READ_END]);
 	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
-		exit (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(cmd_to_exec)) // comprobamos acceso con y sin path
-		exit (1); // error
+		exit (global.exit_status); // lo hacemos directamente en la comprobacion
+	access_checker(cmd_to_exec);
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	throw_error("Error: execution\n");
-	exit(1); // gestion de errores 
+	exit(global.exit_status); // gestion de errores 
 }
 
 void	parent_process(pid_t pid, int fd[2], int *fd_in)
 {
-	waitpid(pid, NULL, 0); // en vez del null debemos pasar el exit_status
+	waitpid(pid, &global.exit_status, 0); // en vez del null debemos pasar el exit_status
 	close(fd[WRITE_END]);
 	*fd_in = fd[READ_END];
 }
@@ -43,7 +43,7 @@ int	exec_pipes(t_cmd_line *cmd)
 
 	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;
-	fd_in = 0;
+	fd_in = STDIN_FILENO;
 	while (tmp_cmd)
 	{
 		if (pipe(fd) < 0)
@@ -67,9 +67,9 @@ int	exec_simple(char **cmd_to_exec)
 	pid_t	pid;
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
-	if (builtin_checker(&cmd_to_exec[0])) // aqui no comprobamos un builtin con path ?
+	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
 		return (0); // lo hacemos directamente en la comprobacion
-	if (!access_checker(&cmd_to_exec[0])) // comprobamos acceso con y sin path
+	if (!access_checker(cmd_to_exec)) // comprobamos acceso con y sin path
 		return (1); // error
 	pid = fork();
 	if (!pid)
@@ -79,7 +79,7 @@ int	exec_simple(char **cmd_to_exec)
 		exit(1); // gestion de errores
 	}
 	else if (pid)
-		waitpid(pid, NULL, 0); // en vez de NULL deberiamos de pasar &global.exit_status
+		waitpid(pid, &global.exit_status, 0); // en vez de NULL deberiamos de pasar &global.exit_status
 	else
 		perror("Error: fork\n"); // gestion de errores
 	return (0);

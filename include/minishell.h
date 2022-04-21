@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 17:27:25 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 20:24:19 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			get_cmd_line(char *str, t_cmd_line **cmd_line);
 int			fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start);
 void		look_for_pipe(char *str, int *current_position);
 void		lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new);
-void		lstiter_cmd(t_cmd_line *lst, void (*f)(char *));
+void		lstiter_cmd(t_cmd_line *lst, void (*f)(void *));
 void		print_list(char *str);
 
 /*TOKENIZAR LA LISTA DE COMANDOS*/

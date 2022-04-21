@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 18:10:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/21 20:06:21 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int				redir_out_file(t_token *token, int *fd)
 		return (throw_error("Error: redirection"));
 	if (dup2(*fd, STDOUT_FILENO) < 0)
 		return (throw_error("Error: redirection"));
+	return (0);
 }
 
 int				redir_in_file(t_token *token, int *fd)
@@ -43,8 +44,8 @@ int				redirection(t_token *token)
 		return (redir_in_file(token, &fd));
 	if (token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
 		return (redir_out_file(token, &fd));
-	if (token->type == LIMITOR)
-		return (redir_heredoc(token, &fd));
+	//if (token->type == LIMITOR)
+	//	return (redir_heredoc(token, &fd));
 	if (fd)
 		close(fd);
 	return (0);
@@ -59,7 +60,7 @@ void			redirector(void *content)
 	token = cmd_line->head_token;
 	while (token)
 	{
-		global.redir_error = redirection(token);
+		//global.redir_error = redirection(token);
 		token = token->next;
 	}
 }

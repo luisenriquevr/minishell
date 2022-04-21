@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_cmd_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:27:21 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 19:11:30 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/21 20:23:48 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	lstadd_back_cmd(t_cmd_line **lst, t_cmd_line *new)
 * Función de listas pero adaptada a nuestra estructura.
 */
 
-void	lstiter_cmd(t_cmd_line *lst, void (*f)(char *))
+void	lstiter_cmd(t_cmd_line *lst, void (*f)(void *))
 {
 	if (!lst || !f)
 		return ;
 	while (lst)
 	{
-		(*f)(lst->str);
+		f(lst->str);
 		lst = lst->next;
 	}
 }

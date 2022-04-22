@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 19:10:59 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/22 19:13:02 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	free_all(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*aux;
 
+	dup2(global.fd_stdin, 0);
+	dup2(global.fd_stdout, 1);
 	if (cmd_line)
 	{
 		while (*cmd_line)

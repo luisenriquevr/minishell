@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 22:08:25 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/22 19:15:09 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int				redirection(t_token *token)
 	int			fd;
 
 	fd = 0;
+	global.fd_stdin = dup(1);
+	global.fd_stdout = dup(0);
 	if (token->type == IN_FILE)
 		return (redir_in_file(token, &fd));
 	if (token->type == OUT_FILE || token->type == OUT_FILE_APPEND)

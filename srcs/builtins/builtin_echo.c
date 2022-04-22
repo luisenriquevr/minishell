@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:28:39 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 18:35:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/22 18:31:54 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/21 22:01:28 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/22 19:14:59 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,11 @@ int	main(int argc, char **argv, char **env)
 			exit(EXIT_FAILURE);
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
-		//lstiter_cmd(cmd_line, print_list);
 		if (tokenizer(&cmd_line))
 			exit_free_cmdline(&cmd_line);
-		//lstiter_cmd(cmd_line, print_list);
 		//expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
-		//lstiter_cmd(cmd_line, redirector);
 		if (!global.redir_error)
 			exec(cmd_line);
 		free(str); //TODO: gestionar la liberación final

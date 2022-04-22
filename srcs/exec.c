@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 14:42:19 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/22 19:59:57 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	exec_simple(char **cmd_to_exec)
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
 	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
-		return (0); // lo hacemos directamente en la comprobacion
+		return (0);
 	if (!access_checker(cmd_to_exec)) // comprobamos acceso con y sin path
 		return (1); // error
 	pid = fork();
@@ -92,7 +92,7 @@ int	exec_simple(char **cmd_to_exec)
 
 int	exec(t_cmd_line *cmd_line)
 {
-	if (!cmd_line)
+	if (*cmd_line->to_exec == NULL)
 		return (global.exit_status); // gestion de errores
 	if (!cmd_line->next)
 		return (exec_simple(cmd_line->to_exec));

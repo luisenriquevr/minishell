@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:39:27 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 19:24:10 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/23 16:36:35 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			builtin_env(char **cmd)
 }
 
 /*
-int			print_env_export(char **cmd, int var)
+int			print_export(char **cmd, int var)
 {
 	int		i;
 	
@@ -36,7 +36,7 @@ int			print_env_export(char **cmd, int var)
 	if (var == 1)
 		printf("%s\n", global.env[i++]);
 	else if (var == 2)
-		printf("%s\n", global.env_export[i++]);
+		printf("%s\n", global.export[i++]);
 	return (1);
 
 	*/

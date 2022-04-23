@@ -3,22 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/22 19:14:59 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/23 17:31:15 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft.h"
+#include "../../include/minishell.h"
 
-int	copy_env(char **envp)
+void	init_export(void)
+{
+	int		i;
+	int		j;
+	char	abc;
+	
+	i = 0;
+	j = 0;
+	abc = 'A';
+	global.export = (char **)calloc(global.env_len, sizeof(char *));
+	while (i < global.env_len)
+	{
+		j = 0;
+		while (global.env[j])
+		{
+			if (global.env[j][0] == abc)
+				global.export[i++] = ft_strjoin("declare -x ", global.env[j]);
+			j++; // esto quizás se puede sumar en el while y ya no nos pasariamos de lineas
+		}
+		if (++abc == '`')
+			break ;
+		else if (abc == '[')
+			abc = 'a';
+		else if (abc == '{')
+			abc = '_';
+	}
+}
+
+int	init_env(char **envp)
 {
 	char	**new_envp;
 	int		i;
 
-	new_envp = (char **)malloc(sizeof(char *) * global.env_len); //TODO: liberar en gestión de errores
+	new_envp = (char **)calloc(global.env_len, sizeof(char *)); //TODO: liberar en gestión de errores
 	if (!new_envp)
 		return (errcode_print_return(50, "Malloc error"));
 	i = 0;
@@ -41,9 +68,9 @@ int	init_global(char **env)
 		i++;
 	global.exit_status = 0;
 	global.env_len = (i + 2);
-	if (copy_env(env))
+	if (init_env(env))
 		return (50);
-	global.env_export = NULL; //create_env_export(); Hasta que lo necesitemos
+	init_export(); //create_export(); Hasta que lo necesitemos
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
 	global.signal_status = 0;

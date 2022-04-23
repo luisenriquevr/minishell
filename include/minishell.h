@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/21 22:03:41 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/23 17:42:47 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,13 @@ struct s_global
 {
 	int		exit_status;
 	char	**env;
-	char	**env_export; //Para qué
+	char	**export; //Para qué
 	int		env_len;
 	int		fd_stdin;
 	int		fd_stdout;
 	int		signal_status;
 	int		redir_error;
+	int		shlvl;
 } global;
 
 /* -------------------------------PARSEO------------------------------- */
@@ -149,7 +150,8 @@ void		array_free(char **array);
 void		change_var(char *name, char *arg);
 char		*get_var(char *var);
 bool		var_valid_name(char *name);
-int			copy_env(char **envp);
+int			init_env(char **envp);
+void		init_export(void);
 void		add_new_var(char *new_var);
 char		*get_var_name(char *envp);
 

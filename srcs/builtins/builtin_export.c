@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/20 15:00:31 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/23 17:56:27 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,20 @@ int			var_export(char *var)
 	char	*var_new;
 	char	*var_name;
 
+	printf("%s\n", var);
 	var_name = get_var_name(var);
 	if (!var_valid_name(var_name))
 	{
 		if (var_name)
 			free(var_name);
-		return (throw_error_exit_status("Export not a valid identifier", 1, -1));
+		return (throw_error_exit_status("Export not a valid identifier", 1, -1)); // se me sale aqui al exportar
 	}
 	var_new = get_var_name(var_name);
 	if (ft_strchr(var, '=') && !var_new)
 		add_new_var(var);
 	else if (ft_strchr(var, '=') && var_new)
 		change_var(var_name, var);
+	// Aqui si no hay igual tiene que meterla solo en export
 	if (var_name)
 		free (var_name);
 	if (var_new)
@@ -47,8 +49,8 @@ void		print_export(void)
 	int		i;
 	
 	i = 0;
-	while (global.env_export[i])
-		printf("%s\n", global.env_export[i++]);
+	while (global.export[i])
+		printf("%s\n", global.export[i++]);
 }
 
 int			builtin_export(char **cmd)
@@ -67,10 +69,10 @@ int			builtin_export(char **cmd)
 		}
 		i++;
 	}
-	if (global.env_export)
+	if (global.export)
 	{
-		array_free(global.env_export);
-		//global.env_export = create_export();
+		array_free(global.export);
+		init_export();
 		// hay que crear una funcion que cree export
 	}
 	return (1);

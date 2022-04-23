@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 19:24:40 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/04/23 17:49:00 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void		add_new_var(char *new_var)
 
 	i = 0;
 	tmp = global.env;
-	if (copy_env(tmp))
-		return ; //TODO devolver error
+	init_env(tmp); // TODO : hay que liberar pero hay que mandar error
 	array_free(tmp);
 	while (global.env[i])
 		i++;
@@ -37,8 +36,8 @@ bool		var_valid_name(char *name)
 		return (false);
 	while(name[i])
 	{
-		if ((!ft_isalnum(name[i]) && name[0] != '_')
-			|| (!ft_isalnum(name[i]) && name[i] != '-'))
+		if ((!ft_isalnum(name[i]) && name[i] != '_') || (name[0] != '_'
+				&& !ft_isalpha(name[0])))
 			return (false);
 		i++;
 	}

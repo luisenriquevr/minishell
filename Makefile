@@ -6,12 +6,12 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/04/21 14:53:17 by lvarela          ###   ########.fr        #
+#    Updated: 2022/04/23 15:55:25 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH	= ./srcs/
-SRCS = minishell.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
+SRCS = ./main/minishell.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
 		checking.c update_tokens.c printtitle.c error_functions.c \
 		prepare_exec.c free_functions.c expander.c access_checker.c \
 		errors.c exec.c ./redirection/redirector.c

@@ -3,18 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
+#    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/04/23 15:55:25 by lvarela          ###   ########.fr        #
+#    Updated: 2022/05/01 15:20:13 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCSPATH	= ./srcs/
-SRCS = ./main/minishell.c fill_cmd_line.c list_cmd_line.c tokenizer.c \
-		checking.c update_tokens.c printtitle.c error_functions.c \
-		prepare_exec.c free_functions.c expander.c access_checker.c \
-		errors.c exec.c ./redirection/redirector.c
+SRCSPATH = srcs/
+SRCS =	main/minishell.c \
+		parser/checking.c \
+		parser/fill_cmd_line.c \
+		parser/list_cmd_line.c \
+		parser/tokenizer.c \
+		parser/update_tokens.c \
+		parser/expander.c \
+		parser/prepare_exec.c \
+		printtitle.c \
+		error_functions.c \
+		free_functions.c \
+		access_checker.c \
+		errors.c \
+		exec.c \
+		redirection/redirector.c
 
 BUILTINPATH	= ./srcs/builtins/
 BSRCS = builtin_checker.c builtin_cd.c builtin_echo.c builtin_env.c \

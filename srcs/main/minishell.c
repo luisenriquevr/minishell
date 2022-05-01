@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/04/23 17:31:15 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/01 15:10:37 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char **argv, char **env)
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))
 			exit_free_cmdline(&cmd_line);
-		//expander(&cmd_line);
+		expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
 		if (!global.redir_error)

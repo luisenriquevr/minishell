@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/23 17:42:47 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/02 10:12:57 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void		expander(t_cmd_line **cmd_line);
 void		expand_token(t_token *token);
 t_quote		close_quote(t_quote open, t_quote close, int *i);
 void		expand_word(t_token *token, t_quote quote, char *str, int *i);
-void		check_and_expand_env(t_token *t, char *str, char *dest, int *i);
+void		check_and_expand_env(char *str, char *dest, int *i);
 void		expand_no_env(char *str, char *dest, int *i);
 void		expand_word_single_quote(char *str, char *dest, int *i);
 void		expand_env(t_token *t, char *str, char *dest, int *i);

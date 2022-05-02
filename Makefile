@@ -6,7 +6,7 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/01 15:20:13 by cristianama      ###   ########.fr        #
+#    Updated: 2022/05/02 16:34:09 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS =	main/minishell.c \
 		access_checker.c \
 		errors.c \
 		exec.c \
-		redirection/redirector.c
+		redirection/redirector.c \
+		redirection/heredoc.c
 
 BUILTINPATH	= ./srcs/builtins/
 BSRCS = builtin_checker.c builtin_cd.c builtin_echo.c builtin_env.c \

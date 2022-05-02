@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/02 15:54:05 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/02 19:47:11 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*go_to_var_end(char *str)
 		str++;
 	return (str - 1);
 }
-char	*expand_var(char *str, char *dest) //t_token *t, char *str, char *dest, int *i
+char	*expand_var(char *str, char *dest)
 {
 	int		var_length;
 	char	*var_name;
@@ -140,10 +140,9 @@ void    expander(t_cmd_line **cmd_line)
 	{
 		t = cmd->head_token;
 		while (t)
-		{ //Falta aquí comprobar que el token no esté vacío?
+		{
 			if (t->type == LIMITOR)
-				//expand_limitor(t);
-				continue;
+				trim_quotes(t);
 			else
 			{
 				expand_token(t);

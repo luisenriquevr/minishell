@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/02 10:12:57 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/02 19:34:24 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 int			exec(t_cmd_line *cmd_line);
 int			access_checker(char **cmd_to_exec);
 void		redirector(t_cmd_line **cmd_line);
+int			redir_heredoc(t_token *token, int *fd);
 
 /*BUILTINS*/
 int			builtin_checker(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/22 19:15:09 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/02 19:35:34 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int				redirection(t_token *token)
 		return (redir_in_file(token, &fd));
 	if (token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
 		return (redir_out_file(token, &fd));
-	//if (token->type == LIMITOR)
-	//	return (redir_heredoc(token, &fd));
+	if (token->type == LIMITOR)
+		return (redir_heredoc(token, &fd));
 	if (fd)
 		close(fd);
 	return (0);

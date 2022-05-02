@@ -6,26 +6,12 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/02 13:49:19 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/02 15:54:05 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
-
-bool	may_expand(char c, bool expand)
-{
-	if (c == '$')
-		return (!expand);
-	return (false);
-}
-
-bool	update_may_expand(char c, bool expand)
-{
-	if (c == '\'')
-		return (!expand);
-	return (expand);
-}
 
 char	*go_to_var_end(char *str)
 {
@@ -81,6 +67,20 @@ char	*push_char(char *str, char c)
 	return (result);
 }
 
+bool	may_expand(char c, bool expand)
+{
+	if (c == '$')
+		return (!expand);
+	return (false);
+}
+
+bool	update_may_expand(char c, bool expand)
+{
+	if (c == '\'')
+		return (!expand);
+	return (expand);
+}
+
 void	expand_token(t_token *token)
 {
 	char	*copy;
@@ -106,6 +106,30 @@ void	expand_token(t_token *token)
 	token->str = result;
 }
 
+void	trim_quotes(t_token *t)
+{
+	char	*str;
+	char	*copy;
+	t_quote	quote;
+	
+	quote = NONE;
+	str = t->str;
+	copy = ft_strdup("");
+	while (*str)
+	{
+		quote = update_quotes(*str, quote);
+		if (quote != NONE)
+			str++;
+		while (*str && update_quotes(*str, quote) == quote)
+		{
+			copy = push_char(copy, *str);
+			str++;
+		}
+	}
+	free(t->str);
+	t->str = copy;
+}
+
 void    expander(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*cmd;
@@ -121,7 +145,10 @@ void    expander(t_cmd_line **cmd_line)
 				//expand_limitor(t);
 				continue;
 			else
+			{
 				expand_token(t);
+				trim_quotes(t);
+			}
 			t = t->next;
 		}
 		cmd = cmd->next;

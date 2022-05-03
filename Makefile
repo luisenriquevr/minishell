@@ -6,7 +6,7 @@
 #    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/02 16:34:09 by cristianama      ###   ########.fr        #
+#    Updated: 2022/05/02 21:33:22 by cristianama      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,9 @@ SRC = $(addprefix $(SRCSPATH), $(SRCS)) $(addprefix $(BUILTINPATH), $(BSRCS))
 OBJS = $(SRC:.c=.o)
 
 NAME = minishell
+
+RL_INC			= /usr/local/opt/readline/include
+RL_LIB			= /usr/local/opt/readline/lib
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address

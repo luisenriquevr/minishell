@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/02 19:34:24 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/03 20:42:19 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,11 @@ void		set_file(t_type previous_token, t_token *token);
 /*EXPANDIR LA LISTA DE COMANDOS*/
 void		expander(t_cmd_line **cmd_line);
 void		expand_token(t_token *token);
-t_quote		close_quote(t_quote open, t_quote close, int *i);
-void		expand_word(t_token *token, t_quote quote, char *str, int *i);
-void		check_and_expand_env(char *str, char *dest, int *i);
-void		expand_no_env(char *str, char *dest, int *i);
-void		expand_word_single_quote(char *str, char *dest, int *i);
-void		expand_env(t_token *t, char *str, char *dest, int *i);
+void		trim_quotes(t_token *t);
+bool		update_may_expand(char c, bool expand);
+bool		may_expand(char c, bool expand);
+char		*expand_var(char *str, char *dest);
+char		*go_to_var_end(char *str);
 
 /*PREPARAR EJECUCION*/
 int			prepare_exec(t_cmd_line **cmd_line);
@@ -166,6 +165,7 @@ void		free_token(t_cmd_line **cmd_line);
 /* ------------------------------VARIOS-------------------------------- */
 void		printtitle(void);
 t_quote		update_quotes(char c, t_quote quote);
+char		*push_char(char *str, char c);
 int			throw_error(const char *error);
 int			throw_error_exit_status(const char *error, int error_code, int ret);
 #endif

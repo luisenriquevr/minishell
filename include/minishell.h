@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/03 20:42:19 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/04 19:29:21 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ int			errcode_print_return(int code, char *msg);
 int			exit_free_cmdline(t_cmd_line **cmd);
 int			free_all(t_cmd_line **cmd_line);
 void		free_token(t_cmd_line **cmd_line);
+
+/* -------------------------GESTIÓN DE SENALES------------------------- */
+void		handle_signal(int sig);
 
 /* ------------------------------VARIOS-------------------------------- */
 void		printtitle(void);

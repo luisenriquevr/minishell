@@ -6,11 +6,11 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/02 21:34:57 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/04 19:26:13 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	init_export(void)
 {
@@ -78,24 +78,6 @@ int	init_global(char **env)
 	return (0);
 }
 
-// void	handle_signal(int sig)
-// {
-// 	global.exit_status += sig;
-// 	if (sig == 2)
-// 	{
-// 		global.exit_status = 130;
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// 	if (sig == SIGQUIT)
-// 	{
-// 		write(2, "Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
-// 		exit (1);
-// 	}
-// }
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*str;
@@ -110,8 +92,8 @@ int	main(int argc, char **argv, char **env)
 	if (init_global(env))
 		exit(EXIT_FAILURE);
 	printtitle();
-	//signal(SIGINT, handle_signal);
-	//signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		str = readline("minishell $ ");

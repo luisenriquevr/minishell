@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/23 17:49:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:22:14 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ bool		var_valid_name(char *name)
 		return (false);
 	while(name[i])
 	{
-		if ((!ft_isalnum(name[i]) && name[i] != '_') || (name[0] != '_'
-				&& !ft_isalpha(name[0])))
+		if ((!ft_isalnum(name[i]) && name[i] != '_')
+				|| (name[0] != '_' && !ft_isalpha(name[0])))
 			return (false);
 		i++;
 	}
@@ -54,6 +54,7 @@ void		change_var(char *name, char *arg)
 	while (!ft_strnstr(aux[i], name, ft_strlen(name)) && aux[i])
 		i++;
 	aux = 0;
+	printf("%s\n", global.env[0]); // IMPORTANTE => llega global.env vacio
 	free(global.env[i]);
 	global.env[i] = ft_strdup(arg);
 }
@@ -69,6 +70,7 @@ char		*get_var_name(char *envp)
 	while (envp[i] && envp[i] != '=')
 		i++;
 	var_name = (char *)malloc(sizeof(char) * (i + 1));
+	i = 0;
 	while (envp[i] && envp[i] != '=')
 	{
 		var_name[i] = envp[i]; // comprobar si funciona bien con el i++ asi
@@ -85,7 +87,7 @@ char		*get_var(char *var)
 	char	*var_name;
 
 	i = 0;
-	str = NULL;
+	str = 0;
 	var_name = get_var_name(global.env[i]);
 	while (global.env[i] && ft_strcmp(var_name, var))
 	{
@@ -106,4 +108,3 @@ char		*get_var(char *var)
 		return (NULL);
 	return (ft_strdup(str));
 }
-

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/23 17:56:27 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:22:56 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int			var_export(char *var)
 	char	*var_new;
 	char	*var_name;
 
-	printf("%s\n", var);
 	var_name = get_var_name(var);
 	if (!var_valid_name(var_name))
 	{
@@ -31,9 +30,10 @@ int			var_export(char *var)
 			free(var_name);
 		return (throw_error_exit_status("Export not a valid identifier", 1, -1)); // se me sale aqui al exportar
 	}
-	var_new = get_var_name(var_name);
+	var_new = get_var(var_name);
+	printf("%s\n", var_new);
 	if (ft_strchr(var, '=') && !var_new)
-		add_new_var(var);
+		add_new_var(var); // IMPORTANTE ==> con export a=2 deberia de entrar aqui al no existir pero entra en el else
 	else if (ft_strchr(var, '=') && var_new)
 		change_var(var_name, var);
 	// Aqui si no hay igual tiene que meterla solo en export
@@ -73,7 +73,6 @@ int			builtin_export(char **cmd)
 	{
 		array_free(global.export);
 		init_export();
-		// hay que crear una funcion que cree export
 	}
 	return (1);
 }

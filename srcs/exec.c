@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/22 19:59:57 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/04 18:45:07 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	child_process(int fd_in, int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 
 void	parent_process(pid_t pid, int fd[2], int *fd_in)
 {
-	waitpid(pid, &global.exit_status, 0); // en vez del null debemos pasar el exit_status
+	waitpid(pid, &global.exit_status, 0);
 	close(fd[WRITE_END]);
 	*fd_in = fd[READ_END];
 }
@@ -53,12 +53,14 @@ int	exec_pipes(t_cmd_line *cmd)
 			child_process(fd_in, fd, tmp_cmd, tmp_cmd->to_exec);
 		else if (pid)
 		{
+			// contar subprocesos
 			parent_process(pid, fd, &fd_in);
 			tmp_cmd = tmp_cmd->next;
 		}
 		else
 			return (throw_error("Error: fork error\n")); // gestion de errores
 	}
+	// aqui conn un while poner el pid = -1 para que espere a cualquier proceso hijo hasta que se cierren todos
 	return (0);
 }
 
@@ -75,7 +77,7 @@ int	exec_simple(char **cmd_to_exec)
 	if (!pid)
 	{
 		execve(cmd_to_exec[0], cmd_to_exec, global.env); // tiene un exit dentro, si se hace sale
-		perror("Error: execution error\n"); // gestion de errores
+		perror("Error: execution\n"); // gestion de errores
 		exit(1); // gestion de errores
 	}
 	else if (pid)
@@ -89,6 +91,10 @@ int	exec_simple(char **cmd_to_exec)
 ** La variable enviroment la podiamos meter en la global pero luego
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
+
+// TODO => cat | ls no funciona se queda en bucle infinito
+
+// Por lo que he probado la parte de exec_simple la podemos eliminar =) ==> A falta de probarlo bien
 
 int	exec(t_cmd_line *cmd_line)
 {

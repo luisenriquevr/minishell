@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/28 12:22:14 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/04 17:30:36 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		change_var(char *name, char *arg)
 	while (!ft_strnstr(aux[i], name, ft_strlen(name)) && aux[i])
 		i++;
 	aux = 0;
-	printf("%s\n", global.env[0]); // IMPORTANTE => llega global.env vacio
+	//printf("%s\n", global.env[0]); // IMPORTANTE => llega global.env vacio
 	free(global.env[i]);
 	global.env[i] = ft_strdup(arg);
 }

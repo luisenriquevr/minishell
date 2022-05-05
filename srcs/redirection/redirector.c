@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/02 19:35:34 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/05 17:49:18 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ void			redirector(t_cmd_line **cmd_line)
 		token = cmd->head_token;
 		while (token)
 		{
-			global.redir_error = redirection(token);
+			if(redirection(token))
+			{
+				cmd->exec = false;
+				break ;
+			}
 			token = token->next;
 		}
 		cmd = cmd->next;

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/04 17:30:36 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:36:20 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool		var_valid_name(char *name)
 	return (true);
 }
 
-void		change_var(char *name, char *arg)
+void		change_var(char *name, char *arg) // esta caca no va
 {
 	int		i;
 	char	**aux;
@@ -89,7 +89,7 @@ char		*get_var(char *var)
 	i = 0;
 	str = 0;
 	var_name = get_var_name(global.env[i]);
-	while (global.env[i] && ft_strcmp(var_name, var))
+	while (global.env[i] && !ft_strcmp(var_name, var))
 	{
 		free(var_name);
 		var_name = get_var_name(global.env[++i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/02 21:34:57 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/05 17:49:08 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	init_global(char **env)
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
 	global.signal_status = 0;
-	global.redir_error = 0;
+	global.contador = 0;
 	return (0);
 }
 
@@ -125,8 +125,7 @@ int	main(int argc, char **argv, char **env)
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
-		if (!global.redir_error)
-			exec(cmd_line);
+		exec(cmd_line);
 		free(str); //TODO: gestionar la liberación final
 		free_all(&cmd_line);
 	}

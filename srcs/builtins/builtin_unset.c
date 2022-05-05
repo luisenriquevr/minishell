@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:08:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/23 16:36:35 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/04 20:18:16 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int			builtin_unset(char **cmd)
 	if (global.export)
 	{
 		array_free(global.export);
-		//global.export = create_export();
+		init_export();
 		// necesitamos una funcion que nos cree export
 	}
 	return (1);

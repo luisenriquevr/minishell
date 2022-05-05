@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/04 18:55:03 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:26:05 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int			var_export(char *var)
 		return (throw_error_exit_status("Export not a valid identifier", 1, -1)); // se me sale aqui al exportar
 	}
 	var_new = get_var(var_name);
-	//if (ft_strchr(var, '=') && !var_new)
+	if (ft_strchr(var, '=') && !var_new)
 		add_new_var(var); // IMPORTANTE ==> con export a=2 deberia de entrar aqui al no existir pero entra en el else
-	//else if (ft_strchr(var, '=') && var_new)
-		//change_var(var_name, var);
+	else if (ft_strchr(var, '=') && var_new)
+		change_var(var_name, var);
 	// Aqui si no hay igual tiene que meterla solo en export
 	if (var_name)
 		free (var_name);

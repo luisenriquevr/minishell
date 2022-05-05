@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/03 20:42:19 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/05 17:49:32 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct	s_cmd_line
 	char		*str;
 	char		**to_exec;
 	t_token		*head_token;
+	bool		exec;
 	t_cmd_line	*next;
 };
 
@@ -83,8 +84,8 @@ struct s_global
 	int		fd_stdin;
 	int		fd_stdout;
 	int		signal_status;
-	int		redir_error;
 	int		shlvl;
+	int		contador;
 } global;
 
 /* -------------------------------PARSEO------------------------------- */

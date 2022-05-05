@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cmd_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 19:10:49 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/05 17:52:00 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 	new->str = NULL;
 	new->head_token = NULL;
 	new->next = NULL;
+	new->exec = true;
 	new->str = malloc(sizeof(char) * (end - start + 1)); //TODO: liberar en gestión de errores
 	if (new->str == NULL)
 		return (errcode_print_return(50, "Malloc error")); //TODO: gestionar error

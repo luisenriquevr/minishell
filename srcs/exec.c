@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 16:59:36 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 22:21:41 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 	access_checker(cmd_to_exec);
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	throw_error("Error: execution\n");
-	exit(global.exit_status); // gestion de errores 
+	exit(global.exit_status); // gestion de errores
 }
-
 void	parent_process(int fd[2], t_cmd_line *cmd)
 {
 	if (cmd->fd_in > 0)
@@ -54,14 +53,12 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 			close(fd[READ_END]);
 	}
 }
-
-int	exec_pipes(t_cmd_line *cmd)
+int		exec_pipes(t_cmd_line *cmd)
 {
 	t_cmd_line	*tmp_cmd;
 	int			fd[2];
 	pid_t		pid;
-	//int			fd_in;
-
+	//int		fd_in;
 	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;
 	//fd_in = STDIN_FILENO;
@@ -69,7 +66,7 @@ int	exec_pipes(t_cmd_line *cmd)
 	while (tmp_cmd)
 	{
 		// if (tmp_cmd->exec == false)
-		// 	tmp_cmd = tmp_cmd->next;
+		//  tmp_cmd = tmp_cmd->next;
 		if (tmp_cmd->next && pipe(fd) < 0)
 			return (throw_error("Error: pipe error\n")); // gestion de errores
 		printf("fd[WR] is %d and fd[RD] is %d\n", fd[WRITE_END], fd[READ_END]);
@@ -83,7 +80,7 @@ int	exec_pipes(t_cmd_line *cmd)
 				// contar subprocesos
 			else
 				return (throw_error("Error: fork error\n")); // gestion de errores
-		}		
+		}
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
@@ -93,11 +90,9 @@ int	exec_pipes(t_cmd_line *cmd)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
 }
-
 int	exec_simple(t_cmd_line *cmd)
 {
-	pid_t	pid;
-
+	pid_t   pid;
 	if (cmd->fd_in)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
@@ -137,16 +132,12 @@ int	exec_simple(t_cmd_line *cmd)
 		dup2(global.fd_stdout, STDOUT_FILENO);
 	return (0);
 }
-
 /*
 ** La variable enviroment la podiamos meter en la global pero luego
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
-
 // TODO => cat | ls no funciona se queda en bucle infinito
-
 // Por lo que he probado la parte de exec_simple la podemos eliminar =) ==> A falta de probarlo bien
-
 int	exec(t_cmd_line *cmd_line)
 {
 	if (!cmd_line) // con esto se rompe si despues de hacer export a=2 hacemos export

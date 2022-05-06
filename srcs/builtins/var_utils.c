@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 17:54:55 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 21:31:07 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char		*get_var(char *var)
 	i = 0;
 	str = 0;
 	var_name = get_var_name(global.env[i]);
-	while (global.env[i] && !ft_strcmp(var_name, var))
+	while (global.env[i] && ft_strcmp(var_name, var))
 	{
 		free(var_name);
 		var_name = get_var_name(global.env[++i]);

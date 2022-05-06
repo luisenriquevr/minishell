@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 12:59:25 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 17:55:10 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,9 @@ int			errcode_print_return(int code, char *msg);
 int			exit_free_cmdline(t_cmd_line **cmd);
 int			free_all(t_cmd_line **cmd_line);
 void		free_token(t_cmd_line **cmd_line);
+
+/* -------------------------GESTIÓN DE SENALES------------------------- */
+void		handle_signal(int sig);
 
 /* ------------------------------VARIOS-------------------------------- */
 void		printtitle(void);

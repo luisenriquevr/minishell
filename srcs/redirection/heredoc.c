@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/03 21:57:16 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 16:20:00 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ char	*expand_heredoc_line(char *line)
 	return (line);
 }
 
+void	exit_here(int sig)
+{
+	sig = 0;
+	ft_putstr_fd("\n", 2);
+	return ;
+}
+
 int	redir_heredoc(t_token *token, int *fd)
 {
 	char	*line;
@@ -48,6 +55,7 @@ int	redir_heredoc(t_token *token, int *fd)
 		return (throw_error("Error: redirection"));
 	while (line && !ft_strcmp(line, limitor))
 	{
+		signal(SIGINT, exit_here);
 		line = expand_heredoc_line(line);
 		write(*fd, line, ft_strlen(line));
 		write(*fd, "\n", 1);

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/05 17:49:08 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 12:45:45 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,9 @@ int	main(int argc, char **argv, char **env)
 	//signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+		//ft_putstr_fd("Mi STDOUT es ", STDOUT_FILENO);
+		//ft_putnbr_fd( STDOUT_FILENO, STDERR_FILENO);
+		//ft_putchar_fd('\n', STDERR_FILENO);
 		str = readline("minishell $ ");
 		add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
 		if (check_str(str))

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/05 12:52:43 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 12:53:10 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	free_all(t_cmd_line **cmd_line)
 	t_cmd_line	*aux;
 
 	dup2(global.fd_stdin, STDIN_FILENO);
-	dup2(global.fd_stdout, STDOUT_FILENO);
+	dup2(STDOUT_FILENO, global.fd_stdout);
 	if (cmd_line)
 	{
 		while (*cmd_line)

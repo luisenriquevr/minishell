@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:45:38 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/22 19:42:25 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 17:07:53 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,4 @@ int			builtin_checker(char **cmd)
 		return (builtin_unset(cmd));
 	return (0);
 }
-
 // si returnea que lo es, tiene que hacerlo

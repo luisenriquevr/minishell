@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/05 17:52:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 15:50:39 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int	fill_cmd_list(t_cmd_line **cmd_line, char *str, int end, int start)
 	new->head_token = NULL;
 	new->next = NULL;
 	new->exec = true;
+	new->to_exec = NULL;
+	new->fd_in = 0;
+	new->fd_out = 0;
 	new->str = malloc(sizeof(char) * (end - start + 1)); //TODO: liberar en gestión de errores
 	if (new->str == NULL)
 		return (errcode_print_return(50, "Malloc error")); //TODO: gestionar error

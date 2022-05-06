@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/05 17:49:32 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 12:59:25 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ struct	s_cmd_line
 	t_token		*head_token;
 	bool		exec;
 	t_cmd_line	*next;
+	int			fd_in;
+	int			fd_out;
 };
 
 struct	s_token

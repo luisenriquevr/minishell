@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   expandermalo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:44:23 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/02 10:56:33 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 16:47:13 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	expand_var(char *str, char *dest, int *i) //t_token *t, char *str, char *de
 	var_length = (int)(go_to_var_end(str) - str);
 	var_name = ft_substr(str, *i, var_length);
 	(*i) += var_length;
-	var_content = getenv(var_name);
+	var_content = get_var(var_name);
 	if (!var_content)
 	{
 		free(var_content);

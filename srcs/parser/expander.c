@@ -6,7 +6,7 @@
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/02 19:47:11 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 16:46:49 by cristianama      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*expand_var(char *str, char *dest)
 
 	var_length = (int)(go_to_var_end(str) - str);
 	var_name = ft_substr(str, 1, var_length);
-	var_content = getenv(var_name);
+	var_content = get_var(var_name);
 	if (!var_content)
 	{
 		free(var_content);

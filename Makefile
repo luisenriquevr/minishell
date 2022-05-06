@@ -3,17 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-<<<<<<< Updated upstream
-#    By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/06 17:52:16 by cristianama      ###   ########.fr        #
-=======
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/06 19:42:32 by cmarcu           ###   ########.fr        #
->>>>>>> Stashed changes
+#    Updated: 2022/05/06 19:52:25 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

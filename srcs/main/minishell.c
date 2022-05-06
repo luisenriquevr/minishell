@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< Updated upstream
 /*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
 /*   Updated: 2022/05/06 17:52:50 by cristianama      ###   ########.fr       */
+=======
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
+/*   Updated: 2022/05/06 19:45:42 by cmarcu           ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +24,7 @@ void	init_export(void)
 	int		i;
 	int		j;
 	char	abc;
-	
+
 	i = 0;
 	j = 0;
 	abc = 'A';
@@ -84,6 +91,7 @@ int	main(int argc, char **argv, char **env)
 	t_cmd_line	*cmd_line;
 
 	cmd_line = NULL;
+	printf("%s\n", rl_library_version);
 	if (argc != 1 || !argv)
 	{
 		print_error("Invalid arguments: try './minishell'");

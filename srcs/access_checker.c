@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/05 20:06:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/07 16:40:26 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**paths_pull(void)
 	return (all_paths);
 }
 
-void	checker(char **cmd_to_exec, char **path)
+int	checker(char **cmd_to_exec, char **path)
 {
 	int		i;
 	char	*tmp_cmd;
@@ -70,10 +70,13 @@ void	checker(char **cmd_to_exec, char **path)
 		tmp_cmd = ft_strjoin(path[i], cmd_to_exec[0]);
 		if (!access(tmp_cmd, X_OK))
 		{
-			//free(cmd_to_exec[0]); // da error pero hay que liberar
+			free(cmd_to_exec[0]); // da error pero hay que liberar
 			cmd_to_exec[0] = ft_strdup(tmp_cmd);
 		}
 	}
+	if (!access(tmp_cmd, X_OK))
+		return (0);
+	return (1);
 }
 
 int	access_checker(char **cmd_to_exec)
@@ -87,6 +90,6 @@ int	access_checker(char **cmd_to_exec)
 		return (0);
 	}
 	if (access(cmd_to_exec[0], X_OK) != 0)
-		checker(cmd_to_exec, path); // quizas haya que dar error si no hay acceso de ninguna manera
+		return (checker(cmd_to_exec, path)); // quizas haya que dar error si no hay acceso de ninguna manera
 	return (1);
 }

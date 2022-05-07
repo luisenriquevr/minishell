@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 21:31:07 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/07 16:27:00 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		change_var(char *name, char *arg) // esta caca no va
 
 	i = 0;
 	aux = global.env;
-	while (!ft_strnstr(aux[i], name, ft_strlen(name)) && aux[i])
+	while (aux[i] && !ft_strnstr(aux[i], name, ft_strlen(name)))
 		i++;
 	aux = 0;
 	//printf("%s\n", global.env[0]); // IMPORTANTE => llega global.env vacio

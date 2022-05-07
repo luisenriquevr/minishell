@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/06 19:53:12 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/07 13:34:44 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	main(int argc, char **argv, char **env)
 		//ft_putnbr_fd( STDOUT_FILENO, STDERR_FILENO);
 		//ft_putchar_fd('\n', STDERR_FILENO);
 		str = readline("minishell $ ");
-		add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
+		if (*str)
+			add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
 		if (check_str(str))
 			exit(EXIT_FAILURE);
 		if (get_cmd_line(str, &cmd_line))

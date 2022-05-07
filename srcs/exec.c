@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 16:59:36 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/06 18:27:42 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 		close(cmd->fd_out);
 	}
 	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
-		exit (global.exit_status); // lo hacemos directamente en la comprobacion
+		exit (global.exit_status);
 	access_checker(cmd_to_exec);
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	throw_error("Error: execution\n");
-	exit(global.exit_status); // gestion de errores 
+	exit(global.exit_status);
 }
 
 void	parent_process(int fd[2], t_cmd_line *cmd)
@@ -60,19 +60,14 @@ int	exec_pipes(t_cmd_line *cmd)
 	t_cmd_line	*tmp_cmd;
 	int			fd[2];
 	pid_t		pid;
-	//int			fd_in;
 
 	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;
-	//fd_in = STDIN_FILENO;
 	global.contador = 0;
 	while (tmp_cmd)
 	{
-		// if (tmp_cmd->exec == false)
-		// 	tmp_cmd = tmp_cmd->next;
 		if (tmp_cmd->next && pipe(fd) < 0)
-			return (throw_error("Error: pipe error\n")); // gestion de errores
-		printf("fd[WR] is %d and fd[RD] is %d\n", fd[WRITE_END], fd[READ_END]);
+			return (throw_error("Error: pipe error\n"));
 		if (tmp_cmd->exec)
 		{
 			pid = fork();
@@ -80,15 +75,13 @@ int	exec_pipes(t_cmd_line *cmd)
 				child_process(fd, tmp_cmd, tmp_cmd->to_exec);
 			else if (pid)
 				global.contador++;
-				// contar subprocesos
 			else
-				return (throw_error("Error: fork error\n")); // gestion de errores
+				return (throw_error("Error: fork error\n"));
 		}		
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
 	// aqui conn un while poner el pid = -1 para que espere a cualquier proceso hijo hasta que se cierren todos
-	printf("Voy a esperar a %d subprocesses\n", global.contador);
 	while (global.contador-- > 0)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
@@ -124,13 +117,13 @@ int	exec_simple(t_cmd_line *cmd)
 	if (!pid)
 	{
 		execve(cmd->to_exec[0], cmd->to_exec, global.env); // tiene un exit dentro, si se hace sale
-		perror("Error: execution\n"); // gestion de errores
+		perror("Error: execution\n");
 		exit(1); // gestion de errores
 	}
 	else if (pid)
 		waitpid(pid, &global.exit_status, 0); // en vez de NULL deberiamos de pasar &global.exit_status
 	else
-		perror("Error: fork\n"); // gestion de errores
+		perror("Error: fork\n");
 	if (cmd->fd_in)
 		dup2(global.fd_stdin, STDIN_FILENO);
 	if (cmd->fd_out)

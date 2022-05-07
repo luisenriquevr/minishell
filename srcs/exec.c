@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/07 14:17:07 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/07 19:53:29 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	exec_simple(t_cmd_line *cmd)
 	pid = fork();
 	if (!pid)
 	{
+		//printf("cmd to exec es: %s\n", cmd->to_exec[0]);
 		execve(cmd->to_exec[0], cmd->to_exec, global.env); // tiene un exit dentro, si se hace sale
 		perror("Error: execution\n");
 		exit(1); // gestion de errores

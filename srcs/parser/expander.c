@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/06 16:46:49 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/07 17:59:57 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,39 +67,39 @@ char	*push_char(char *str, char c)
 	return (result);
 }
 
-bool	may_expand(char c, bool expand)
+bool	not_expand(char c, t_quote quote)
 {
-	if (c == '$')
-		return (!expand);
+	if (c == '$' && quote == SINGLE)
+		return (true);
 	return (false);
 }
 
-bool	update_may_expand(char c, bool expand)
-{
-	if (c == '\'')
-		return (!expand);
-	return (expand);
-}
+// t_quote	update_may_expand(char c, t_quote quote)
+// {
+// 	if (c == '\'')
+// 		return (!expand);
+// 	return (expand);
+// }
 
 void	expand_token(t_token *token)
 {
 	char	*copy;
 	char	*result;
-	bool	expand;
+	t_quote	quote;
 
 	copy = token->str;
 	result = ft_strdup("");
-	expand = true;
+	quote = NONE;
 	while (*copy)
 	{
-		if (may_expand(*copy, expand) || go_to_var_end(copy) == copy)
+		if (not_expand(*copy, quote) || go_to_var_end(copy) == copy)
 			result = push_char(result, *copy);
 		else
 		{
 			result = expand_var(copy, result);
 			copy = go_to_var_end(copy);
 		}
-		expand = update_may_expand(*copy, expand);
+		quote = update_quotes(*copy, quote);
 		copy++;
 	}
 	free(token->str);
@@ -111,7 +111,7 @@ void	trim_quotes(t_token *t)
 	char	*str;
 	char	*copy;
 	t_quote	quote;
-	
+
 	quote = NONE;
 	str = t->str;
 	copy = ft_strdup("");

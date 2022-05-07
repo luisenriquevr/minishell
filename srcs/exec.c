@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 18:27:42 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/07 14:17:07 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 	}
 }
 
-int	exec_pipes(t_cmd_line *cmd)
+int		exec_pipes(t_cmd_line *cmd)
 {
 	t_cmd_line	*tmp_cmd;
 	int			fd[2];
@@ -77,7 +77,7 @@ int	exec_pipes(t_cmd_line *cmd)
 				global.contador++;
 			else
 				return (throw_error("Error: fork error\n"));
-		}		
+		}
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
@@ -86,11 +86,9 @@ int	exec_pipes(t_cmd_line *cmd)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
 }
-
 int	exec_simple(t_cmd_line *cmd)
 {
 	pid_t	pid;
-
 	if (cmd->fd_in)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
@@ -130,16 +128,12 @@ int	exec_simple(t_cmd_line *cmd)
 		dup2(global.fd_stdout, STDOUT_FILENO);
 	return (0);
 }
-
 /*
 ** La variable enviroment la podiamos meter en la global pero luego
 ** quizás tendremos problemas para el tema del shell level (SHLVL)
 */
-
 // TODO => cat | ls no funciona se queda en bucle infinito
-
 // Por lo que he probado la parte de exec_simple la podemos eliminar =) ==> A falta de probarlo bien
-
 int	exec(t_cmd_line *cmd_line)
 {
 	if (!cmd_line) // con esto se rompe si despues de hacer export a=2 hacemos export

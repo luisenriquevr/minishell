@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 19:07:32 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/06 20:09:37 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ bool	check_builtin(char *arg)
 	*/
 	if (arg != NULL)
 	{
-		if (ft_strcmp(arg, "echo") || ft_strcmp(arg, "export")
-			|| ft_strcmp(arg, "unset") || ft_strcmp(arg, "exit")
-			|| ft_strcmp(arg, "env") || ft_strcmp(arg, "cd")
-			|| ft_strcmp(arg, "pwd"))
+		if (!ft_strcmp(arg, "echo") || !ft_strcmp(arg, "export")
+			|| !ft_strcmp(arg, "unset") || !ft_strcmp(arg, "exit")
+			|| !ft_strcmp(arg, "env") || !ft_strcmp(arg, "cd")
+			|| !ft_strcmp(arg, "pwd"))
 			return (true);
 	}
 	return (false);

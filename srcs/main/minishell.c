@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/07 13:34:44 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/08 14:01:39 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 	cmd_line = NULL;
 	if (argc != 1 || !argv)
 	{
-		print_error("Invalid arguments: try './minishell'");
+		throw_error("Invalid arguments: try './minishell'");
 		exit(EXIT_FAILURE);
 	}
 	if (init_global(env))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:59:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/15 19:08:24 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/08 14:02:18 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ int		throw_error(const char *error)
 {
 	perror(error);
 	return (1);
+}
+
+int	errcode_print_return(int code, char *msg)
+{
+	global.exit_status = code;
+	printf("%s", msg);
+	return (code);
 }
 
 int		throw_error_exit_status(const char *error, int error_code, int ret)

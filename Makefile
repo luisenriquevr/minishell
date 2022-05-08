@@ -6,12 +6,13 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/07 18:10:38 by lvarela          ###   ########.fr        #
+#    Updated: 2022/05/08 14:02:31 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH = srcs/
 SRCS =	main/minishell.c \
+		main/printtitle.c \
 		parser/checking.c \
 		parser/fill_cmd_line.c \
 		parser/list_cmd_line.c \
@@ -19,8 +20,6 @@ SRCS =	main/minishell.c \
 		parser/update_tokens.c \
 		parser/expander.c \
 		parser/prepare_exec.c \
-		printtitle.c \
-		error_functions.c \
 		free_functions.c \
 		access_checker.c \
 		errors.c \

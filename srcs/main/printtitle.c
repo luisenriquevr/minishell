@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:43:34 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 14:00:04 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:49:01 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 #include "libft.h"
 
 void	printtitle(void)

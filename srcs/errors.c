@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:59:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 14:02:18 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:55:34 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 int		throw_error(const char *error)
 {

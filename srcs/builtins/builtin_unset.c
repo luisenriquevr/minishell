@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:08:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/04 20:18:16 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:54:44 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void		unset(char *cmd, char **env)
 {

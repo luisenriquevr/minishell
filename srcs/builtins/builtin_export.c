@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/04 19:26:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:54:32 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 /*
 **	Mirando como generar el export, creemos que se puede hacer mediante la ejecucion

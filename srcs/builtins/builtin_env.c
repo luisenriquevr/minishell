@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:39:27 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/23 16:36:35 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:53:17 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int			builtin_env(char **cmd)
 {

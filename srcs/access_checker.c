@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   access_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/07 16:40:26 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/08 17:55:29 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	slashjoin(char **paths)
 {

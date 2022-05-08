@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 15:57:11 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:54:54 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
@@ -23,8 +23,6 @@ int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 	if (cmd->fd_out)
 		close(cmd->fd_out);
 	cmd->fd_out = *fd;
-	//if (dup2(*fd, STDOUT_FILENO) < 0)
-	//	return (throw_error("Error: redirection"));
 	return (0);
 }
 
@@ -36,13 +34,6 @@ int				redir_in_file(t_token *token,t_cmd_line *cmd, int *fd)
 	if (cmd->fd_in != 0)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;
-	//if (dup2(*fd, STDIN_FILENO) < 0)
-	// 	return (throw_error("Error: redirection"));
-	/*
-	If (cmd->fd_in != valor a lo que lo inicialicemos)
-		close(cmd->fd_in);
-	cmd->fd_in = *fd;
-	*/
 	return (0);
 }
 

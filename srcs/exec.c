@@ -6,11 +6,19 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/07 19:53:29 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:39:10 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* Esta funcion nos viene bien para ahorrar lineas, a falta de probar.
+void	dup_and_close(int old, int new)
+{
+	dup2(old, new);
+	close(old);
+}
+*/
 
 void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {

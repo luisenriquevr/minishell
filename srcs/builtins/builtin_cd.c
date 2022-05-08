@@ -6,11 +6,11 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/04/22 13:52:10 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 17:52:50 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void		new_pwd(void)
 {

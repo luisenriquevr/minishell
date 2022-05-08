@@ -6,13 +6,14 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:39:10 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:44:16 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Esta funcion nos viene bien para ahorrar lineas, a falta de probar.
+/* Esta funcion nos viene bien para ahorrar lineas, a falta de probar. */
+/*
 void	dup_and_close(int old, int new)
 {
 	dup2(old, new);
@@ -122,7 +123,6 @@ int	exec_simple(t_cmd_line *cmd)
 	pid = fork();
 	if (!pid)
 	{
-		//printf("cmd to exec es: %s\n", cmd->to_exec[0]);
 		execve(cmd->to_exec[0], cmd->to_exec, global.env); // tiene un exit dentro, si se hace sale
 		perror("Error: execution\n");
 		exit(1); // gestion de errores

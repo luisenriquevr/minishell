@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/08 14:01:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:37:51 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,17 @@ int	init_global(char **env)
 	global.signal_status = 0;
 	global.contador = 0;
 	return (0);
+}
+
+void	printtitle(void)
+{
+	printf("                 _       _     _          _ _ 	\n");
+	printf("                (_)     (_)   | |        | | |	\n");
+	printf("       _ __ ___  _ _ __  _ ___| |__   ___| | |	\n");
+	printf("      | '_ ` _ \\| | '_ \\| / __| '_ \\ / _ \\ | |	\n");
+	printf("      | | | | | | | | | | \\__ \\ | | |  __/ | |	\n");
+	printf("      |_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|	\n");
+	printf("----------------------------------------------------\n");
 }
 
 int	main(int argc, char **argv, char **env)

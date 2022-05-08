@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:26:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/07 18:30:53 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/08 18:38:53 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	get_cmd_line(char *str, t_cmd_line **cmd_line)
 			cmd_start++;
 			if (str[curr_pos])
 				curr_pos++;
-			printf("%d\n", curr_pos);
-
 		}
 	}
 	return (0);

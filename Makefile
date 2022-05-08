@@ -6,7 +6,7 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/08 14:02:31 by lvarela          ###   ########.fr        #
+#    Updated: 2022/05/08 14:11:41 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	
 
 re: fclean all
 

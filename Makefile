@@ -6,7 +6,11 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/05/09 21:05:28 by lvarela          ###   ########.fr        #
+=======
+#    Updated: 2022/05/09 11:57:14 by lvarela          ###   ########.fr        #
+>>>>>>> 853cdd72f47aed6693d273cfcb1d34ff623fd772
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +42,11 @@ OBJS = $(SRC:.c=.o)
 
 NAME = minishell
 
-#RL_INC			= $(HOME)/.brew/opt/readline/include
-#RL_LIB			= $(HOME)/.brew/opt/readline/lib
+RL_INC			= $(HOME)/.brew/opt/readline/include
+RL_LIB			= $(HOME)/.brew/opt/readline/lib
 
-RL_INC			= /usr/local/opt/readline/include
-RL_LIB 			= /usr/local/opt/readline/lib
+#RL_INC			= /usr/local/opt/readline/include
+#RL_LIB 			= /usr/local/opt/readline/lib
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address

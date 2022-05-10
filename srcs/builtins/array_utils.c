@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:45:40 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:49:12 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/09 12:20:46 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void		array_free(char **array)
 		return ;
 	while (array[i])
 		free(array[i++]);
+	free(array);
 }

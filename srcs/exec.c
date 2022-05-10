@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 18:44:16 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/09 12:13:13 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	exec_simple(t_cmd_line *cmd)
 			dup2(global.fd_stdout, STDOUT_FILENO);
 		return (0);
 	}
-	if (!access_checker(cmd->to_exec)) // comprobamos acceso con y sin path
+	if (access_checker(cmd->to_exec)) // comprobamos acceso con y sin path
 		return (1); // error
 	pid = fork();
 	if (!pid)

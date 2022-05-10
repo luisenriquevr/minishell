@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/08 18:37:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/09 21:27:52 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	check_str(char *str)
 				return (errcode_print_return(12, "Syntax error"));
 			pipe_allowed = true;
 		}
-		i++;
+		if (str[i])
+			i++;
 	}
 	if (check_quotes(str))
 		return (1);

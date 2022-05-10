@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/06 22:16:19 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/09 21:23:32 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 int			exec(t_cmd_line *cmd_line);
 int			access_checker(char **cmd_to_exec);
 void		redirector(t_cmd_line **cmd_line);
-int			redir_heredoc(t_token *token, int *fd);
+int			redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd);
 
 /*BUILTINS*/
 int			builtin_checker(char **cmd);

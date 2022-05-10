@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:54:54 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/09 21:21:31 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				redirection(t_token *token, t_cmd_line *cmd)
 	if (token->type == OUT_FILE || token->type == OUT_FILE_APPEND)
 		return (redir_out_file(token, cmd, &fd));
 	if (token->type == LIMITOR)
-		return (redir_heredoc(token, &fd));
+		return (redir_heredoc(token, cmd, &fd));
 	if (fd)
 		close(fd);
 	return (0);

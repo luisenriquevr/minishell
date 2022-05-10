@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 18:54:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/09 21:26:05 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ char	*expand_heredoc_line(char *line)
 
 void	exit_here(int sig)
 {
-	sig = 0;
-	ft_putstr_fd("\n", 2);
+	sig = 2; // OJO => mirar si se puede hacer sin cambiar sig
+	ft_putstr_fd("\n", sig);
 	return ;
 }
 
-int	redir_heredoc(t_token *token, int *fd)
+int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	char	*line;
 	char	*limitor;
@@ -53,7 +53,7 @@ int	redir_heredoc(t_token *token, int *fd)
 	line = readline(">");
 	if (*fd < 0)
 		return (throw_error("Error: redirection"));
-	while (line && !ft_strcmp(line, limitor))
+	while (line && ft_strcmp(line, limitor))
 	{
 		signal(SIGINT, exit_here);
 		line = expand_heredoc_line(line);
@@ -65,7 +65,8 @@ int	redir_heredoc(t_token *token, int *fd)
 	free(line);
 	close(*fd);
 	*fd = open("/tmp/_tmp", O_RDONLY | O_CREAT | O_SYMLINK, 0644);
-	dup2(*fd, STDIN_FILENO);
-	close(*fd);
+	if (cmd->fd_in)
+		close(cmd->fd_in);
+	cmd->fd_in = *fd;
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/08 18:41:03 by lvarela          ###   ########.fr        #
+#    Updated: 2022/05/09 21:05:28 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,8 @@ RL_INC			= /usr/local/opt/readline/include
 RL_LIB 			= /usr/local/opt/readline/lib
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 #-fsanitize=address
-LDFLAGS = -L$(LIBFTPATH) -lft -lreadline -L$(RL_LIB) -g3 #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address
+LDFLAGS = -L$(LIBFTPATH) -lft -lreadline -L$(RL_LIB) -g3 -fsanitize=address
 RM = rm -f
 
 SRCINC = include/

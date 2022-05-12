@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/09 21:23:32 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/12 13:07:15 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_cmd_line	t_cmd_line;
 typedef struct s_token		t_token;
 typedef enum e_quote		t_quote;
 typedef enum e_type			t_type;
+extern struct s_global		global; // hay que mirar bien la definicion y uso de la estructura
 
 enum	e_quote
 {

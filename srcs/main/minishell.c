@@ -6,11 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/12 11:01:17 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/12 18:05:02 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern struct s_global		global;
 
 void	init_export(void)
 {
@@ -100,13 +102,15 @@ int	main(int argc, char **argv, char **env)
 	}
 	if (init_global(env))
 		exit(EXIT_FAILURE);
-	printtitle();
+	global.fd_stdin = dup(STDIN_FILENO); // -> 1
+	global.fd_stdout = dup(STDOUT_FILENO); // -> 0
+	//printtitle();
 	signal(SIGINT, handle_signal);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		str = readline("minishell $ ");
-		if (*str)
+		if (str && *str)
 			add_history(str);
 		if (check_str(str))
 			exit(EXIT_FAILURE);
@@ -116,10 +120,13 @@ int	main(int argc, char **argv, char **env)
 			exit_free_cmdline(&cmd_line);
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
+		//system("lsof -c minishell");
 		redirector(&cmd_line);
 		exec(cmd_line);
 		free(str); //TODO: gestionar en la liberación final
 		free_all(&cmd_line);
 	}
+	close(global.fd_stdin);
+	close(global.fd_stdout);
 	return (0);
 }

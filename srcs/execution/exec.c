@@ -6,29 +6,37 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/11 20:43:55 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/12 17:52:32 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Esta funcion nos viene bien para ahorrar lineas, a falta de probar. */
+
 /*
 void	dup_and_close(int old, int new)
 {
-	dup2(old, new);
-	close(old);
+	if (old)
+	{
+		dup2(old, new);
+		close(old);
+	}
 }
 */
+
 
 void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
 	// hay que recoger señales
+	//dup_and_close(cmd->fd_in, STDIN_FILENO);
+	
 	if (cmd->fd_in)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
 		close(cmd->fd_in);
 	}
+	
 	if (cmd->next != NULL)
 	{
 		if (cmd->fd_out)
@@ -37,11 +45,14 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 			cmd->fd_out = fd[WRITE_END];
 		close(fd[READ_END]);
 	}
+	//dup_and_close(cmd->fd_out, STDOUT_FILENO);
+	
 	if (cmd->fd_out)
 	{
 		dup2(cmd->fd_out, STDOUT_FILENO);
 		close(cmd->fd_out);
 	}
+	
 	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
 		exit (global.exit_status);
 	access_checker(cmd_to_exec);
@@ -98,16 +109,23 @@ int		exec_pipes(t_cmd_line *cmd)
 int	exec_simple(t_cmd_line *cmd)
 {
 	pid_t	pid;
+
+	//dup_and_close(cmd->fd_in, STDIN_FILENO);
+	
 	if (cmd->fd_in)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
 		close(cmd->fd_in);
 	}
+	
+	//dup_and_close(cmd->fd_out, STDOUT_FILENO);
+	
 	if (cmd->fd_out)
 	{
 		dup2(cmd->fd_out, STDOUT_FILENO);
 		close(cmd->fd_out);
 	}
+	
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
 	if (cmd->head_token->type == BUILTIN)
 	{
@@ -135,6 +153,10 @@ int	exec_simple(t_cmd_line *cmd)
 		dup2(global.fd_stdin, STDIN_FILENO);
 	if (cmd->fd_out)
 		dup2(global.fd_stdout, STDOUT_FILENO);
+	//if (cmd->fd_in)
+	//	close(cmd->fd_in);
+	//if (cmd->fd_out)
+	//	close(cmd->fd_out);
 	return (0);
 }
 /*

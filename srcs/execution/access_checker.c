@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/11 14:19:03 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/11 20:43:24 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	checker(char **cmd_to_exec, char **path)
 		if (!access(tmp_cmd, X_OK))
 		{
 			cmd_to_exec[0] = tmp_cmd;
-			free(tmp_cmd);
 			array_free(path);
 			return (0);
 		}
@@ -91,7 +90,7 @@ int	access_checker(char **cmd_to_exec)
 		array_free(path);
 		return (0);
 	}
-	if (access(cmd_to_exec[0], X_OK) != 0)
+	if (access(cmd_to_exec[0], X_OK))
 		return (checker(cmd_to_exec, path)); // quizas haya que dar error si no hay acceso de ninguna manera
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/09 19:46:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:01:17 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ int	init_global(char **env)
 	global.env_len = (i + 2);
 	if (init_env(env))
 		return (50);
-	init_export(); //create_export(); Hasta que lo necesitemos
-	global.fd_stdin = dup(STDIN_FILENO);
-	global.fd_stdout = dup(STDOUT_FILENO);
+	init_export();
 	global.signal_status = 0;
 	global.contador = 0;
 	return (0);
@@ -107,12 +105,9 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		//ft_putstr_fd("Mi STDOUT es ", STDOUT_FILENO);
-		//ft_putnbr_fd( STDOUT_FILENO, STDERR_FILENO);
-		//ft_putchar_fd('\n', STDERR_FILENO);
 		str = readline("minishell $ ");
 		if (*str)
-			add_history(str); //Esto añade la historia de comandos, hace que funcione la flecha para arriba
+			add_history(str);
 		if (check_str(str))
 			exit(EXIT_FAILURE);
 		if (get_cmd_line(str, &cmd_line))
@@ -123,7 +118,7 @@ int	main(int argc, char **argv, char **env)
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
 		exec(cmd_line);
-		free(str); //TODO: gestionar la liberación final
+		free(str); //TODO: gestionar en la liberación final
 		free_all(&cmd_line);
 	}
 	return (0);

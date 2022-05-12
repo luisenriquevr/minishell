@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/09 21:21:31 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/12 10:50:44 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int				redirection(t_token *token, t_cmd_line *cmd)
 	int			fd;
 
 	fd = 0;
-	global.fd_stdin = dup(1);
-	global.fd_stdout = dup(0);
+	global.fd_stdin = dup(STDIN_FILENO); // -> 1
+	global.fd_stdout = dup(STDOUT_FILENO); // -> 0
 	if (token->type == IN_FILE)
 		return (redir_in_file(token, cmd, &fd));
 	if (token->type == OUT_FILE || token->type == OUT_FILE_APPEND)

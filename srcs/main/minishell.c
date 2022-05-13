@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/13 12:33:40 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 19:49:36 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	main(int argc, char **argv, char **env)
 			exit_free_cmdline(&cmd_line);
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
+		//system("lsof -c minishell");
 		redirector(&cmd_line);
 		exec(cmd_line);
 		free(str); //TODO: gestionar en la liberación final

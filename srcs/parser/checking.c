@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/09 21:27:52 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 19:27:24 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	check_str(char *str)
 
 	i = 0;
 	pipe_allowed = false;
-	if (str == NULL)
-		return (errcode_print_return(10, "No arguments"));
+	if (!str)
+		return (global.exit_status = 10);
 	while (str[i])
 	{
 		while (str[i] == ' ')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 15:37:18 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 20:02:52 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	dup_and_close(int old, int new)
 
 void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
+	t_token	*token;
 	// hay que recoger señales
 	dup_and_close(cmd->fd_in, STDIN_FILENO);
 	if (cmd->next != NULL)
@@ -34,9 +35,20 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 		close(fd[READ_END]);
 	}
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
+	printf("%s\n", cmd_to_exec[0]);
 	if (builtin_checker(cmd_to_exec))
 		exit (global.exit_status);
 	access_checker(cmd_to_exec);
+	token = cmd->head_token;
+	while (token)
+	{
+		if (token->type == LIMITOR)
+		{
+			redir_heredoc(token, cmd, &cmd->fd_in);
+			break ;
+		}
+		token = token->next;
+	}
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd->to_exec[0], 2);
@@ -69,6 +81,7 @@ int		exec_pipes(t_cmd_line *cmd)
 	global.contador = 0;
 	while (tmp_cmd)
 	{
+
 		if (tmp_cmd->next && pipe(fd) < 0)
 			return (throw_error("Error: pipe"));
 		if (tmp_cmd->exec)
@@ -91,6 +104,7 @@ int		exec_pipes(t_cmd_line *cmd)
 int	exec_simple(t_cmd_line *cmd)
 {
 	pid_t	pid;
+	t_token	*token;
 
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
 	dup_and_close(cmd->fd_in, STDIN_FILENO);
@@ -108,6 +122,13 @@ int	exec_simple(t_cmd_line *cmd)
 	pid = fork();
 	if (!pid)
 	{
+		token = cmd->head_token;
+		while (token)
+		{
+			if (token->type == LIMITOR)
+	 			return (redir_heredoc(token, cmd, &cmd->fd_in));
+			token = token->next;
+		}
 		execve(cmd->to_exec[0], cmd->to_exec, global.env);
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(cmd->to_exec[0], 2);

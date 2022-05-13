@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/09 21:26:05 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 19:51:53 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ char	*expand_heredoc_line(char *line)
 	return (line);
 }
 
-void	exit_here(int sig)
+void	exit_heredoc(int sig)
 {
-	sig = 2; // OJO => mirar si se puede hacer sin cambiar sig
-	ft_putstr_fd("\n", sig);
-	return ;
+	global.exit_status += sig;
+	if (sig == 2)
+	{
+		global.exit_status = 130;
+		//ft_putstr_fd("\n", sig);
+		exit (1);
+	}
 }
 
 int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
@@ -48,23 +52,23 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	char	*line;
 	char	*limitor;
 
-	*fd = open("/tmp/_tmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
+	*fd = open("/tmp/a", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	limitor = token->str;
-	line = readline(">");
+	line = readline("> ");
 	if (*fd < 0)
 		return (throw_error("Error: redirection"));
 	while (line && ft_strcmp(line, limitor))
 	{
-		signal(SIGINT, exit_here);
+		signal(SIGINT, exit_heredoc);
 		line = expand_heredoc_line(line);
 		write(*fd, line, ft_strlen(line));
 		write(*fd, "\n", 1);
 		free(line);
-		line = readline(">");
+		line = readline("> ");
 	}
 	free(line);
 	close(*fd);
-	*fd = open("/tmp/_tmp", O_RDONLY | O_CREAT | O_SYMLINK, 0644);
+	*fd = open("/tmp/_tmp", O_RDONLY | O_CREAT, 0644);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;

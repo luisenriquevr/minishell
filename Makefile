@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
+#    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/11 18:36:47 by lvarela          ###   ########.fr        #
+#    Updated: 2022/05/13 17:46:12 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ OBJS = $(SRC:.c=.o)
 
 NAME = minishell
 
-#RL_INC			= $(HOME)/.brew/opt/readline/include
-#RL_LIB			= $(HOME)/.brew/opt/readline/lib
+RL_INC			= $(HOME)/.brew/opt/readline/include
+RL_LIB			= $(HOME)/.brew/opt/readline/lib
 
-RL_INC			= /usr/local/opt/readline/include
-RL_LIB 			= /usr/local/opt/readline/lib
+#RL_INC			= /usr/local/opt/readline/include
+#RL_LIB 			= /usr/local/opt/readline/lib
 
 CC = gcc
 CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address
@@ -73,7 +73,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	
+
 
 re: fclean all
 

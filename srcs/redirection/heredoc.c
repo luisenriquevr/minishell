@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 19:51:53 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/13 21:05:31 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,33 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	char	*line;
 	char	*limitor;
+	pid_t	pid;
 
-	*fd = open("/tmp/a", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
+	*fd = open("/tmp/_tmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	limitor = token->str;
-	line = readline("> ");
-	if (*fd < 0)
-		return (throw_error("Error: redirection"));
-	while (line && ft_strcmp(line, limitor))
+	pid = fork();
+	if (!pid)
 	{
-		signal(SIGINT, exit_heredoc);
-		line = expand_heredoc_line(line);
-		write(*fd, line, ft_strlen(line));
-		write(*fd, "\n", 1);
-		free(line);
 		line = readline("> ");
+		if (*fd < 0)
+			return (throw_error("Error: redirection"));
+		while (line && ft_strcmp(line, limitor))
+		{
+			signal(SIGINT, exit_heredoc);
+			line = expand_heredoc_line(line);
+			write(*fd, line, ft_strlen(line));
+			write(*fd, "\n", 1);
+			free(line);
+			line = readline("> ");
+		}
+		free(line);
+		close(*fd);
+		*fd = open("/tmp/_tmp", O_RDONLY | O_CREAT, 0644);
 	}
-	free(line);
-	close(*fd);
-	*fd = open("/tmp/_tmp", O_RDONLY | O_CREAT, 0644);
+	else if (pid)
+		waitpid(-1, &global.exit_status, 0);
+	else
+		perror("Error: fork");
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;

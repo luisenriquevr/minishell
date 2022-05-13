@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:52:50 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 18:03:55 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			builtin_cd(char **arg)
 
 	if (array_length(arg) > 2)
 	{
-		printf("cd: too many arguments\n");
+		ft_putstr_fd("minishell: cd: too many arguments\n", 2);
 		return (1);
 	}
 	if (!arg[1])
@@ -79,7 +79,9 @@ int			builtin_cd(char **arg)
 		old_pwd(&path);
 	if (chdir(path) < 0)
 	{
-		printf("cd: string not in pwd: %s\n", path);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": No such file or directory");
 		free(path);
 		return (1);
 	}

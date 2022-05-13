@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/11 20:43:24 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:58:14 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char	*get_path(void)
 		else
 			i++;
 	}
-	perror("$PATH's error"); // aqui deberia de haber un throw error
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("$PATH not found\n", 2);
 	return (NULL);
 }
 
@@ -91,6 +92,6 @@ int	access_checker(char **cmd_to_exec)
 		return (0);
 	}
 	if (access(cmd_to_exec[0], X_OK))
-		return (checker(cmd_to_exec, path)); // quizas haya que dar error si no hay acceso de ninguna manera
+		return (checker(cmd_to_exec, path));
 	return (1);
 }

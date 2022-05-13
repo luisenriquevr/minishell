@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:59:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 12:23:38 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:59:29 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		throw_error(const char *error)
 {
-	perror(error);
+	perror(error)
 	return (1);
 }
 

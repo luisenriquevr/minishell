@@ -6,15 +6,12 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/12 17:52:32 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 15:37:18 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Esta funcion nos viene bien para ahorrar lineas, a falta de probar. */
-
-/*
 void	dup_and_close(int old, int new)
 {
 	if (old)
@@ -23,20 +20,11 @@ void	dup_and_close(int old, int new)
 		close(old);
 	}
 }
-*/
-
 
 void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
 	// hay que recoger señales
-	//dup_and_close(cmd->fd_in, STDIN_FILENO);
-	
-	if (cmd->fd_in)
-	{
-		dup2(cmd->fd_in, STDIN_FILENO);
-		close(cmd->fd_in);
-	}
-	
+	dup_and_close(cmd->fd_in, STDIN_FILENO);
 	if (cmd->next != NULL)
 	{
 		if (cmd->fd_out)
@@ -45,25 +33,20 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 			cmd->fd_out = fd[WRITE_END];
 		close(fd[READ_END]);
 	}
-	//dup_and_close(cmd->fd_out, STDOUT_FILENO);
-	
-	if (cmd->fd_out)
-	{
-		dup2(cmd->fd_out, STDOUT_FILENO);
-		close(cmd->fd_out);
-	}
-	
-	if (builtin_checker(cmd_to_exec)) // aqui no comprobamos un builtin con path ?
+	dup_and_close(cmd->fd_out, STDOUT_FILENO);
+	if (builtin_checker(cmd_to_exec))
 		exit (global.exit_status);
 	access_checker(cmd_to_exec);
 	execve(cmd_to_exec[0], cmd_to_exec, global.env);
-	throw_error("Error: execution\n");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd->to_exec[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
 	exit(global.exit_status);
 }
 
 void	parent_process(int fd[2], t_cmd_line *cmd)
 {
-	if (cmd->fd_in > 0)
+	if (cmd->fd_in)
 		close(cmd->fd_in);
 	if (cmd->next)
 	{
@@ -87,7 +70,7 @@ int		exec_pipes(t_cmd_line *cmd)
 	while (tmp_cmd)
 	{
 		if (tmp_cmd->next && pipe(fd) < 0)
-			return (throw_error("Error: pipe error\n"));
+			return (throw_error("Error: pipe"));
 		if (tmp_cmd->exec)
 		{
 			pid = fork();
@@ -96,12 +79,11 @@ int		exec_pipes(t_cmd_line *cmd)
 			else if (pid)
 				global.contador++;
 			else
-				return (throw_error("Error: fork error\n"));
+				return (throw_error("Error: fork"));
 		}
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
-	// aqui conn un while poner el pid = -1 para que espere a cualquier proceso hijo hasta que se cierren todos
 	while (global.contador-- > 0)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
@@ -110,64 +92,42 @@ int	exec_simple(t_cmd_line *cmd)
 {
 	pid_t	pid;
 
-	//dup_and_close(cmd->fd_in, STDIN_FILENO);
-	
-	if (cmd->fd_in)
-	{
-		dup2(cmd->fd_in, STDIN_FILENO);
-		close(cmd->fd_in);
-	}
-	
-	//dup_and_close(cmd->fd_out, STDOUT_FILENO);
-	
-	if (cmd->fd_out)
-	{
-		dup2(cmd->fd_out, STDOUT_FILENO);
-		close(cmd->fd_out);
-	}
-	
 	// aqui deberiamos de recoger señales y no hacer nada (func signal)
+	dup_and_close(cmd->fd_in, STDIN_FILENO);
+	dup_and_close(cmd->fd_out, STDOUT_FILENO);
 	if (cmd->head_token->type == BUILTIN)
 	{
-		builtin_checker(cmd->to_exec); // aqui no comprobamos un builtin con path ?
+		builtin_checker(cmd->to_exec);
 		if (cmd->fd_in)
 			dup2(global.fd_stdin, STDIN_FILENO);
 		if (cmd->fd_out)
 			dup2(global.fd_stdout, STDOUT_FILENO);
 		return (0);
 	}
-	if (access_checker(cmd->to_exec)) // comprobamos acceso con y sin path
-		return (1); // error
+	access_checker(cmd->to_exec);
 	pid = fork();
 	if (!pid)
 	{
-		execve(cmd->to_exec[0], cmd->to_exec, global.env); // tiene un exit dentro, si se hace sale
-		perror("Error: execution\n");
+		execve(cmd->to_exec[0], cmd->to_exec, global.env);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd->to_exec[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 		exit(1); // gestion de errores
 	}
 	else if (pid)
-		waitpid(pid, &global.exit_status, 0); // en vez de NULL deberiamos de pasar &global.exit_status
+		waitpid(pid, &global.exit_status, 0);
 	else
-		perror("Error: fork\n");
+		perror("Error: fork");
 	if (cmd->fd_in)
 		dup2(global.fd_stdin, STDIN_FILENO);
 	if (cmd->fd_out)
 		dup2(global.fd_stdout, STDOUT_FILENO);
-	//if (cmd->fd_in)
-	//	close(cmd->fd_in);
-	//if (cmd->fd_out)
-	//	close(cmd->fd_out);
 	return (0);
 }
-/*
-** La variable enviroment la podiamos meter en la global pero luego
-** quizás tendremos problemas para el tema del shell level (SHLVL)
-*/
-// TODO => cat | ls no funciona se queda en bucle infinito
-// Por lo que he probado la parte de exec_simple la podemos eliminar =) ==> A falta de probarlo bien
+
 int	exec(t_cmd_line *cmd_line)
 {
-	if (!cmd_line) // con esto se rompe si despues de hacer export a=2 hacemos export
+	if (!cmd_line)
 		return (global.exit_status); // gestion de errores
 	if (!cmd_line->next)
 		return (exec_simple(cmd_line));

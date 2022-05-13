@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/12 18:04:57 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 12:23:17 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ void	free_token(t_cmd_line **cmd_line)
 int	free_all(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*aux;
-
-	//dup2(global.fd_stdin, STDIN_FILENO); // quizas ya no hagan falta
-	//dup2(STDOUT_FILENO, global.fd_stdout); // quizas ya no hagan falta
 	
 	if (cmd_line)
 	{

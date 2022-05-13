@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/12 18:04:21 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/13 12:33:36 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
-	system("lsof -c minishell");
 	if (token->type == OUT_FILE)
 		*fd = open(token->str, O_CREAT | O_WRONLY, 0644);
 	else

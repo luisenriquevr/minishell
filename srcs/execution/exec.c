@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/14 03:43:24 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 05:48:58 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 		else
 			close(fd[READ_END]);
 	}
-	// if (cmd->fd_out)
-		// 
 	if (cmd->fd_in)
 	{
 		close(cmd->fd_in);

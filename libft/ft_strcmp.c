@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 22:51:53 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/06 20:11:01 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 05:49:22 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
 
-	if (!s1 && !s2)
+	if (!s1 || !s2)
 		return (0);
 	i = 0;
 	while (s1[i] != '\0' || s2[i] != '\0')

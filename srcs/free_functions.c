@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/13 12:23:17 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 02:49:44 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	free_all(t_cmd_line **cmd_line)
 
 int	exit_free_cmdline(t_cmd_line **cmd_line)
 {
-	printf("exit\n");
+	//printf("exit\n");
 	if (free_all(cmd_line))
 		return (25);
 	return (0);

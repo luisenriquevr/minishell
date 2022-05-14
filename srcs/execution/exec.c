@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 20:45:22 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 02:58:01 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 		close(fd[READ_END]);
 	}
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
-	printf("%s\n", cmd_to_exec[0]);
 	if (builtin_checker(cmd_to_exec))
 		exit (global.exit_status);
 	access_checker(cmd_to_exec);
@@ -56,6 +55,10 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 		else
 			close(fd[READ_END]);
 	}
+	if (cmd->fd_in)
+		dup2(global.fd_stdin, STDIN_FILENO);
+	if (cmd->fd_out)
+		dup2(global.fd_stdout, STDOUT_FILENO);
 }
 
 int		exec_pipes(t_cmd_line *cmd)

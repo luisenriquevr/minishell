@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/13 19:27:24 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 02:50:34 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	check_str(char *str)
 		if (str[i] == '|')
 		{
 			if (!pipe_allowed)
-				return (errcode_print_return(12, "Syntax error"));
+				return (errcode_print_return(12, "minishell: syntax error\n"));
 			pipe_allowed = true;
 		}
 		if (str[i])

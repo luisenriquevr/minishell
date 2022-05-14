@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 20:44:53 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 03:06:59 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	if (token->type == OUT_FILE)
-		*fd = open(token->str, O_CREAT | O_WRONLY, 0644);
+		*fd = open(token->str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else
 		*fd = open(token->str, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (*fd < 0)

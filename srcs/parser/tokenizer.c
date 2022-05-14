@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:31:32 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/09 21:16:53 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 02:50:42 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int	tokenizer(t_cmd_line **cmd_line)
 	while (current_cmd)
 	{
 		if (set_limitor(current_cmd))
-			return (errcode_print_return(12, "Syntax error"));
+			return (errcode_print_return(12, "minishell: syntax error\n"));
 		if (set_file_type(current_cmd))
-			return (errcode_print_return(12, "Syntax error"));
+			return (errcode_print_return(12, "minishell: syntax error\n"));
 		current_cmd = current_cmd->next;
 	}
 	return (0);

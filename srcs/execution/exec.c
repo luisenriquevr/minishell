@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/14 02:58:01 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 03:43:24 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 
 void	parent_process(int fd[2], t_cmd_line *cmd)
 {
-	if (cmd->fd_in)
-		close(cmd->fd_in);
 	if (cmd->next)
 	{
 		close(fd[WRITE_END]);
@@ -55,10 +53,18 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 		else
 			close(fd[READ_END]);
 	}
+	// if (cmd->fd_out)
+		// 
 	if (cmd->fd_in)
+	{
+		close(cmd->fd_in);
 		dup2(global.fd_stdin, STDIN_FILENO);
+	}
 	if (cmd->fd_out)
+	{
 		dup2(global.fd_stdout, STDOUT_FILENO);
+		close(cmd->fd_out);
+	}
 }
 
 int		exec_pipes(t_cmd_line *cmd)

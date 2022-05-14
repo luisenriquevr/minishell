@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/14 02:49:44 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 04:22:28 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	free_all(t_cmd_line **cmd_line)
 			if ((*cmd_line)->str)
 				free((*cmd_line)->str);
 			if ((*cmd_line)->to_exec)
-				free((*cmd_line)->to_exec);
+				array_free((*cmd_line)->to_exec);
 			free((*cmd_line));
 			*cmd_line = aux;
 		}

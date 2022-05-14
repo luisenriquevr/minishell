@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 19:42:08 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 03:37:23 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,10 +170,7 @@ void		free_token(t_cmd_line **cmd_line);
 
 /* -------------------------GESTIÓN DE SENALES------------------------- */
 void		handle_signal(int sig);
-
-
-
-int				redirection(t_token *token, t_cmd_line *cmd);
+int			redirection(t_token *token, t_cmd_line *cmd);
 
 
 /* ------------------------------VARIOS-------------------------------- */

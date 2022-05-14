@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 19:21:53 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/13 19:27:38 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 03:40:25 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	handle_signal(int sig)
 	}
 	if (sig == SIGQUIT)
 	{
-		write(2, "Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
-		exit (1);
+		write()
+		signal(SIGQUIT, SIG_DFL);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		global.exit_status = 127;
 	}
 }

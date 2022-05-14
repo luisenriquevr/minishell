@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/13 20:46:02 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/14 03:41:45 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ int	main(int argc, char **argv, char **env)
 	global.fd_stdout = dup(STDOUT_FILENO); // -> 0
 	//printtitle();
 	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handle_signalx);
 	while (1)
 	{
 		str = readline("minishell $ ");
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
-			exit(EXIT_FAILURE);
+			return (1); //TODO: arreglar esta mierd*
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))

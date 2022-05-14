@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/14 02:50:34 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/14 06:55:49 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,11 @@ int	check_quotes(char *str)
 		quote = update_quotes(str[i], quote);
 		i++;
 	}
-	if (quote != NONE) //TODO: gestionar error
-		return (errcode_print_return(14, "Unclosed quotes")); //Las comillas no están cerradas
+	if (quote != NONE)
+		return (errcode_print_return(14, "minishell: unclosed quotes\n"));
 	return (0);
 }
 
-/*
-* Esta función está MAL (líneas 67-69)
-*/
 int	check_str(char *str)
 {
 	int		i;

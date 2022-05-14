@@ -136,7 +136,7 @@ int	exec_simple(t_cmd_line *cmd)
 
 int	exec(t_cmd_line *cmd_line)
 {
-	if (!cmd_line)
+	if (!cmd_line) // con esto se rompe si despues de hacer export a=2 hacemos export
 		return (global.exit_status); // gestion de errores
 	if (!cmd_line->next)
 		return (exec_simple(cmd_line));

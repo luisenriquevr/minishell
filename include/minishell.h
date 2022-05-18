@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/18 17:04:51 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:13:34 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,7 @@ void		free_token(t_cmd_line **cmd_line);
 
 /* -------------------------GESTIÓN DE SENALES------------------------- */
 void		handle_signal(int sig);
-
-
-
-int				redirection(t_token *token, t_cmd_line *cmd);
+int			redirection(t_token *token, t_cmd_line *cmd);
 
 
 /* ------------------------------VARIOS-------------------------------- */

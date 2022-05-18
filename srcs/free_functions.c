@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:48:58 by cristianama       #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/18 15:55:27 by lvarela          ###   ########.fr       */
+=======
+/*   Updated: 2022/05/14 06:58:10 by cmarcu           ###   ########.fr       */
+>>>>>>> 2df3d589d24949d1ef2d7da83da4d3473ea85988
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +34,7 @@ void	free_token(t_cmd_line **cmd_line)
 int	free_all(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*aux;
-	
+
 	if (cmd_line)
 	{
 		while (*cmd_line)

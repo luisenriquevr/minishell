@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/18 17:04:47 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/18 17:14:12 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,14 @@ int	main(int argc, char **argv, char **env)
 		exit(EXIT_FAILURE);
 	printtitle();
 	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handle_signal);
 	while (1)
 	{
 		str = readline("minishell $ ");
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
-			exit(EXIT_FAILURE);
+			return (1); //TODO: arreglar esta mierd*
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))

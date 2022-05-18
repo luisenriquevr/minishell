@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/22 13:25:44 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/01/29 13:15:29 by cmarcu           ###   ########.fr       */
+/*   Created: 2022/05/18 16:38:54 by lvarela           #+#    #+#             */
+/*   Updated: 2022/05/18 16:39:03 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*p;
-	int		a;
-	int		b;
+	char			*ptr;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	k;
 
-	if (!s1 || !s2)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	p = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!p)
+	k = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!(ptr = (char *)malloc(sizeof(char) * ((sizeof(char) * k)))))
 		return (NULL);
-	a = 0;
-	while (s1[a] != '\0')
-	{
-		p[a] = s1[a];
-		a++;
-	}
-	b = a;
-	a = 0;
-	while (s2[a] != '\0')
-	{
-		p[b] = s2[a];
-		a++;
-		b++;
-	}
-	p[b] = '\0';
-	return (p);
+	i = -1;
+	j = -1;
+	while (s1[++i] != '\0')
+		ptr[i] = s1[i];
+	while (s2[++j] != '\0')
+		ptr[i++] = s2[j];
+	ptr[i] = '\0';
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/14 05:48:58 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:34:01 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 	}
 	if (cmd->fd_out)
 	{
-		dup2(global.fd_stdout, STDOUT_FILENO);
 		close(cmd->fd_out);
+		dup2(global.fd_stdout, STDOUT_FILENO);
 	}
 }
 
@@ -70,29 +70,30 @@ int		exec_pipes(t_cmd_line *cmd)
 	t_cmd_line	*tmp_cmd;
 	int			fd[2];
 	pid_t		pid;
+	int			childs_counter;
 
 	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;
-	global.contador = 0;
+	childs_counter = 0;
 	while (tmp_cmd)
 	{
 
 		if (tmp_cmd->next && pipe(fd) < 0)
-			return (throw_error("Error: pipe"));
+			return (throw_error("minishell: error: pipe"));
 		if (tmp_cmd->exec)
 		{
 			pid = fork();
 			if (!pid)
 				child_process(fd, tmp_cmd, tmp_cmd->to_exec);
 			else if (pid)
-				global.contador++;
+				childs_counter++;
 			else
-				return (throw_error("Error: fork"));
+				return (throw_error("minishell: error: fork"));
 		}
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
-	while (global.contador-- > 0)
+	while (childs_counter-- > 0)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
 }
@@ -102,9 +103,9 @@ int	exec_simple(t_cmd_line *cmd)
 
 	dup_and_close(cmd->fd_in, STDIN_FILENO);
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
-	if (cmd->head_token->type == BUILTIN)
+	//if (cmd->head_token->type == BUILTIN)
+	if (builtin_checker(cmd->to_exec))
 	{
-		builtin_checker(cmd->to_exec);
 		if (cmd->fd_in)
 			dup2(global.fd_stdin, STDIN_FILENO);
 		if (cmd->fd_out)
@@ -124,7 +125,7 @@ int	exec_simple(t_cmd_line *cmd)
 	else if (pid)
 		waitpid(pid, &global.exit_status, 0);
 	else
-		perror("Error: fork");
+		perror("minishell: error: fork");
 	if (cmd->fd_in)
 		dup2(global.fd_stdin, STDIN_FILENO);
 	if (cmd->fd_out)

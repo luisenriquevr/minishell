@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 19:42:08 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/18 17:04:51 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,10 @@ enum	e_type
 	IN_FILE //Palabra después de <
 };
 
-struct	s_cmd_line
-{
-	char		*str;
-	char		**to_exec;
-	t_token		*head_token;
-	bool		exec;
-	t_cmd_line	*next;
-	int			fd_in;
-	int			fd_out;
-};
-
 struct	s_token
 {
-	char	*str;
-	t_type	type;
+	char	*str; // --
+	t_type	type; 
 	bool	exp;
 	t_quote	quote;
 	int		fd_in;
@@ -80,17 +69,27 @@ struct	s_token
 	t_token	*next;
 };
 
+struct	s_cmd_line
+{
+	char		*str; // --
+	char		**to_exec; // --
+	t_token		*head_token; // --
+	bool		exec;
+	int			fd_in;
+	int			fd_out;
+	t_cmd_line	*next;
+};
+
 struct s_global
 {
+	char	shlvl;
 	int		exit_status;
 	char	**env;
-	char	**export; //Para qué
+	char	**export;
 	int		env_len;
 	int		fd_stdin;
 	int		fd_stdout;
 	int		signal_status;
-	int		shlvl;
-	int		contador;
 } global;
 
 /* -------------------------------PARSEO------------------------------- */

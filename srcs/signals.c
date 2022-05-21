@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 19:21:53 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/14 07:00:57 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 13:08:47 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	handle_signal(int sig)
 	}
 	if (sig == SIGQUIT)
 	{
-		//write()
-		signal(SIGQUIT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

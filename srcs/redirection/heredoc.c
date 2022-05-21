@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/14 01:06:02 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 13:16:03 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ char	*expand_heredoc_line(char *line)
 
 void	exit_heredoc(int sig)
 {
-	global.exit_status += sig;
-	if (sig == 2)
-	{
-		global.exit_status = 130;
-		//ft_putstr_fd("\n", sig);
-		exit (1);
-	}
+	(void)sig;
+	global.exit_status = 130;
+	ft_putstr_fd("\n", sig);
+	exit (0);
 }
 
 int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)

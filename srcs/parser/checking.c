@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/21 14:31:11 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 16:35:01 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_str(char *str)
 		return (global.exit_status = 10);
 	while (str[i])
 	{
-		while (str[i] == ' ' ||  str[i] == '\t')
+		while (str[i] == ' ' || str[i] == '\t')
 			i++;
 		if (str[i] != '|')
 			pipe_allowed = true;
@@ -102,7 +102,8 @@ void	check_arg(char *s, int *i)
 			else if (quote == SINGLE)
 				quote = NONE;
 		}
-		if ((s[*i] == ' ' || s[*i] == '<' || s[*i] == '>') && quote == NONE)
+		if ((s[*i] == ' ' || s[*i] == '\t' || s[*i] == '<'
+				|| s[*i] == '>') && quote == NONE)
 			break ;
 		(*i)++;
 	}

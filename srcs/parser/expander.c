@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/09 21:16:02 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 14:21:31 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ char	*go_to_var_end(char *str)
 	while (ft_isalnum(*str) || *str == '_')
 		str++;
 	return (str - 1);
-}
-char	*expand_var(char *str, char *dest)
-{
-	int		var_length;
-	char	*var_name;
-	char	*var_content;
-
-	var_length = (int)(go_to_var_end(str) - str);
-	var_name = ft_substr(str, 1, var_length);
-	var_content = get_var(var_name);
-	if (!var_content)
-	{
-		free(var_content);
-		return (dest);
-	}
-	dest = ft_strjoin(dest, var_content);
-	free(var_name);
-	return (dest);
 }
 
 char	*push_char(char *str, char c)
@@ -74,13 +56,6 @@ bool	not_expand(char c, t_quote quote)
 	return (false);
 }
 
-// t_quote	update_may_expand(char c, t_quote quote)
-// {
-// 	if (c == '\'')
-// 		return (!expand);
-// 	return (expand);
-// }
-
 void	expand_token(t_token *token)
 {
 	char	*copy;
@@ -106,31 +81,7 @@ void	expand_token(t_token *token)
 	token->str = result;
 }
 
-void	trim_quotes(t_token *t)
-{
-	char	*str;
-	char	*copy;
-	t_quote	quote;
-
-	quote = NONE;
-	str = t->str;
-	copy = ft_strdup("");
-	while (*str)
-	{
-		quote = update_quotes(*str, quote);
-		if (quote != NONE)
-			str++;
-		while (*str && update_quotes(*str, quote) == quote)
-		{
-			copy = push_char(copy, *str);
-			str++;
-		}
-	}
-	free(t->str);
-	t->str = copy;
-}
-
-void    expander(t_cmd_line **cmd_line)
+void	expander(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*cmd;
 	t_token		*t;
@@ -153,4 +104,3 @@ void    expander(t_cmd_line **cmd_line)
 		cmd = cmd->next;
 	}
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 22:51:53 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/14 05:49:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 16:19:53 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (0);
 }
-

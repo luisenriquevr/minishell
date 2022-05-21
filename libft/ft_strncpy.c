@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 22:42:33 by cristianama       #+#    #+#             */
-/*   Updated: 2022/02/26 22:42:47 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/21 16:15:43 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristianamarcu <cristianamarcu@student.    +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 20:40:56 by cristianama       #+#    #+#             */
-/*   Updated: 2022/04/15 19:15:08 by cristianama      ###   ########.fr       */
+/*   Updated: 2022/05/21 14:15:50 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,7 +6,7 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/05/21 11:22:37 by cmarcu           ###   ########.fr        #
+#    Updated: 2022/05/21 14:26:43 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =	main/minishell.c \
 		parser/update_tokens.c \
 		parser/expander.c \
 		parser/prepare_exec.c \
+		parser/utils.c \
 		free_functions.c \
 		execution/exec.c \
 		execution/access_checker.c \

@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:39:24 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/01/27 15:18:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 16:11:48 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (a < n)
 	{
 		if (str[a] == (unsigned char)c)
-			return (void *)(str + a);
+			return ((void *)(str + a));
 		a++;
 	}
 	return (NULL);

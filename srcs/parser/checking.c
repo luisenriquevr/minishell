@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/14 06:55:49 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 14:31:11 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 bool	check_builtin(char *arg)
 {
-	/*
-	* Los builtins son> echo, cd, pwd, export, unset, env, exit.
-	*/
 	if (arg != NULL)
 	{
 		if (!ft_strcmp(arg, "echo") || !ft_strcmp(arg, "export")
@@ -28,33 +25,6 @@ bool	check_builtin(char *arg)
 	}
 	return (false);
 }
-
-t_quote	update_quotes(char c, t_quote quote)
-{
-	if (c == '"')
-	{
-		if (quote == NONE)
-			quote = DOUBLE;
-		else if (quote == DOUBLE)
-			quote = NONE;
-	}
-	if (c == '\'')
-	{
-		if (quote == NONE)
-			quote = SINGLE;
-		else if (quote == SINGLE)
-			quote = NONE;
-	}
-	return (quote);
-}
-/*
-* Esta función recibe por parámetro la línea de comandos y cuando encuentra
-* una comilla del tipo que sea setea el tipo de comillas a ese tipo y hasta
-* que no vuelve a encontrar una igual no lo cambia.
-* Si cuando acaba el tipo de comilla es distinto de NONE significa que alguna
-* se ha quedado sin cerrar y tenemos que gestionar el error, liberar lo que
-* sea y salir.
-*/
 
 int	check_quotes(char *str)
 {
@@ -84,7 +54,7 @@ int	check_str(char *str)
 		return (global.exit_status = 10);
 	while (str[i])
 	{
-		while (str[i] == ' ')
+		while (str[i] == ' ' ||  str[i] == '\t')
 			i++;
 		if (str[i] != '|')
 			pipe_allowed = true;
@@ -107,7 +77,6 @@ void	check_redirection(char *str, int *i)
 	char	redirection;
 
 	redirection = str[*i];
-	/*Check for <, >, << or >> and get the index to the end of redirection */
 	while (str[*i] && str[*i] == redirection)
 		(*i)++;
 }

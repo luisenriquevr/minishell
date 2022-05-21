@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 09:47:24 by cmarcu            #+#    #+#             */
-/*   Updated: 2021/02/01 09:49:29 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 16:10:13 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list *temp;
+	t_list	*temp;
 
 	if (!del || !lst || !*lst)
 		return ;

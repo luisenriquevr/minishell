@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prepare_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 13:32:14 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/09 21:14:27 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 14:18:36 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	prepare_exec(t_cmd_line **cmd_line)
 	cmd = *cmd_line;
 	while (cmd)
 	{
-		cmd_to_exec = malloc(sizeof(char *) * (count_args(cmd) + 1)); //TODO: liberar en gestión de errores
+		cmd_to_exec = malloc(sizeof(char *) * (count_args(cmd) + 1));
 		if (cmd_to_exec == NULL)
 			return (errcode_print_return(50, "Malloc error"));
 		cmd->to_exec = cmd_to_exec;

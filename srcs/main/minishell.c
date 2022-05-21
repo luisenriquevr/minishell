@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/18 17:14:12 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 18:02:49 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ char	put_quotes(char *str)
 	char	*firstquote;
 	char	*secondquote;
 	char	*final;
-	
+
 	tmp = ft_split(str, '=');
 	free(str);
 
-	
+
 	tmp1[0] = ft_strjoin('"', tmp[1]);
 	free(tmp[1]);
 	tmp1[1] = ft_strjoin(tmp1[0], '"');
 	free(tmp1[0]);
-	tmp[1] = 
+	tmp[1] =
 	return ();
-	
-	
-	
+
+
+
 }
 */
 void	init_export(void)
@@ -123,6 +123,7 @@ int	init_global(char **env)
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
 	global.signal_status = 0;
+	global.from_heredoc = false;
 	return (0);
 }
 
@@ -135,6 +136,19 @@ void	printtitle(void)
 	printf("      | | | | | | | | | | \\__ \\ | | |  __/ | |	\n");
 	printf("      |_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|	\n");
 	printf("----------------------------------------------------\n");
+}
+
+void	clear_line(char *str)
+{
+	if (str == NULL)
+	{
+		ft_putstr_fd("exit\n", 0);
+		exit(0);
+	}
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	str = NULL;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -159,7 +173,7 @@ int	main(int argc, char **argv, char **env)
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
-			return (1); //TODO: arreglar esta mierd*
+			clear_line(str); //TODO: arreglar esta mierd*
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))

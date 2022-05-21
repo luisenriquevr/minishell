@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/18 17:13:34 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/21 16:59:53 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ enum	e_type
 struct	s_token
 {
 	char	*str; // --
-	t_type	type; 
+	t_type	type;
 	bool	exp;
 	t_quote	quote;
 	int		fd_in;
@@ -90,6 +90,7 @@ struct s_global
 	int		fd_stdin;
 	int		fd_stdout;
 	int		signal_status;
+	bool	from_heredoc;
 } global;
 
 /* -------------------------------PARSEO------------------------------- */

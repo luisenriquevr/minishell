@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/21 16:35:01 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/21 16:51:07 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,3 +108,15 @@ void	check_arg(char *s, int *i)
 		(*i)++;
 	}
 }
+
+
+// echo $ "$'$USER'$ "''
+// echo $'$'$USER'$ '''
+// echo $'$'$USER'$ '''$
+// echo $"hola"$""
+// echo $"$'$USER'$ "''$ "$USER"
+// echo $"$'$USER'$ "''$"$USER"
+// echo $'$USER'
+// echo $"$USER"
+// echo $'$'$USER''
+// echo $"$USER"

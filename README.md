@@ -6,7 +6,6 @@ Cosas que faltan:
 
 ctrl+\ dentro de cat o cualquier proceso a la espera
 
-ctrl+C dentro de heredoc tiene que salir sin ejecutar
 
 Mirar el caso de "unclosed quotes" y decidir qué hacer: ahora lanza el mensaje pero aún así ejecuta. Yo lo pararía, pero lo que he intentado hacer no funciona (funcion clear_line del main.c)
 
@@ -16,6 +15,8 @@ arreglar SHLVL // no es obligatorio
 
 "<< h" da segfault -> solucionado
 
-no dar error cuando nos inicien el programa con env -i -> solucionado
+env -i ./minishell error -> solucionado
 
 arreglar la impresion de export -> solucionado
+
+ctrl+C dentro de heredoc tiene que salir sin ejecutar -> solucionado

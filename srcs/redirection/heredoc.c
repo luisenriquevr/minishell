@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 17:10:03 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 17:23:50 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exit_heredoc(int sig)
 	(void)sig;
 	global.exit_status = 130;
 	unlink("/tmp/_tmp");
-	exit (0);
+	exit (global.exit_status);
 }
 
 int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:45:38 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/13 20:00:52 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/24 11:03:09 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			builtin_checker(char **cmd)
 {
-	if (cmd == NULL)
+	if (cmd[0] == NULL)
 		return (0);
 	if (!ft_strcmp("cd", cmd[0]))
 		return (builtin_cd(cmd));
@@ -30,8 +30,5 @@ int			builtin_checker(char **cmd)
 		return (builtin_export(cmd));
 	else if (!ft_strcmp("unset", cmd[0]))
 		return (builtin_unset(cmd));
-	// if (token->type == LIMITOR)
-	// 	return (redir_heredoc(token, cmd, &fd));
 	return (0);
 }
-// si returnea que lo es, tiene que hacerlo

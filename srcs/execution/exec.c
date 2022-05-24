@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/18 17:13:56 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 10:56:23 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,29 +103,25 @@ int	exec_simple(t_cmd_line *cmd)
 
 	dup_and_close(cmd->fd_in, STDIN_FILENO);
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
-	//if (cmd->head_token->type == BUILTIN)
-	if (builtin_checker(cmd->to_exec))
-	{
-		if (cmd->fd_in)
-			dup2(global.fd_stdin, STDIN_FILENO);
-		if (cmd->fd_out)
-			dup2(global.fd_stdout, STDOUT_FILENO);
-		return (0);
-	}
-	access_checker(cmd->to_exec);
-	pid = fork();
-	if (!pid)
-	{
-		execve(cmd->to_exec[0], cmd->to_exec, global.env);
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->to_exec[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		exit(1); // gestion de errores
-	}
-	else if (pid)
-		waitpid(pid, &global.exit_status, 0);
+	if (cmd->head_token->type == BUILTIN)
+		builtin_checker(cmd->to_exec);
 	else
-		perror("minishell: error: fork");
+	{
+		access_checker(cmd->to_exec);
+		pid = fork();
+		if (!pid)
+		{
+			execve(cmd->to_exec[0], cmd->to_exec, global.env);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd->to_exec[0], 2);
+			ft_putstr_fd(": command not found\n", 2);
+			exit(1); // gestion de errores
+		}
+		else if (pid)
+			waitpid(pid, &global.exit_status, 0);
+		else
+			perror("minishell: error: fork");
+	}
 	if (cmd->fd_in)
 		dup2(global.fd_stdin, STDIN_FILENO);
 	if (cmd->fd_out)

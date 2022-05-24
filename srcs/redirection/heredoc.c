@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/21 17:18:51 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/24 09:42:44 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	*fd = open("/tmp/_tmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	limitor = token->str;
 	if (*fd < 0)
-			return (throw_error("Error: redirection"));
+			return (throw_error("minishell: error: redirection"));
 	pid = fork();
 	if (!pid)
 	{
@@ -73,7 +73,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	else if (pid)
 		waitpid(-1, &global.exit_status, 0);
 	else
-		perror("Error: fork");
+		perror("minishell: error: fork");
 	close(*fd);
 	*fd = open("/tmp/_tmp", O_RDONLY, 0644);
 	if (cmd->fd_in)

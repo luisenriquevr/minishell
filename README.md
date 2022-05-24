@@ -4,7 +4,7 @@ while ; true ; do leaks minishell ; sleep 1 ; done
 
 Cosas que faltan:
 
-"<< h" da segfault
+"<< h" da segfault -> arreglado tanto para un solo comando como si hay pipes =)
 
 ctrl+\ dentro de cat o cualquier proceso a la espera
 

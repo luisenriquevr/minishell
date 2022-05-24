@@ -4,8 +4,6 @@ while ; true ; do leaks minishell ; sleep 1 ; done
 
 Cosas que faltan:
 
-"<< h" da segfault -> arreglado tanto para un solo comando como si hay pipes =)
-
 ctrl+\ dentro de cat o cualquier proceso a la espera
 
 ctrl+C dentro de heredoc tiene que salir sin ejecutar
@@ -16,6 +14,8 @@ Cómo no, la expansión: arreglar el trim_quotes
 
 arreglar SHLVL // no es obligatorio
 
-arreglar la impresion de export -> solucionado
+"<< h" da segfault -> solucionado
 
-no dar error cuando nos inicien el programa con env -i
+no dar error cuando nos inicien el programa con env -i -> solucionado
+
+arreglar la impresion de export -> solucionado

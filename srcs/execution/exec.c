@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 11:08:03 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 15:58:22 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		exec_pipes(t_cmd_line *cmd)
 
 	tmp_cmd = cmd;
 	childs_counter = 0;
-	while (tmp_cmd)
+	while (tmp_cmd && *global.env)
 	{
 
 		if (tmp_cmd->next && pipe(fd) < 0)
@@ -105,7 +105,7 @@ int	exec_simple(t_cmd_line *cmd)
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
 	if (cmd->head_token->type == BUILTIN)
 		builtin_checker(cmd->to_exec);
-	else
+	else if (*global.env)
 	{
 		access_checker(cmd->to_exec);
 		pid = fork();

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/11 20:43:24 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 15:55:49 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*get_path(void)
 
 	i = 0;
 	j = 0;
+	
 	while (global.env[i][j])
 	{
 		if (!ft_strncmp(&global.env[i][j], "PATH", 4))
@@ -83,7 +84,8 @@ int	access_checker(char **cmd_to_exec)
 {
 	char	**path;
 
-
+	//if (!(*global.env))
+	//	return (1);
 	path = paths_pull();
 	if (!path || !*cmd_to_exec)
 	{

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/24 12:07:35 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 16:01:36 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	init_env(char **envp)
 	char	**new_envp;
 	int		i;
 
+	if (!envp)
+		return (1);
 	new_envp = (char **)calloc(global.env_len, sizeof(char *)); //TODO: liberar en gestión de errores
 	if (!new_envp)
 		return (errcode_print_return(50, "Malloc error"));
@@ -106,7 +108,6 @@ int	init_global(char **env)
 	if (!global.shlvl)
 		global.shlvl = 1;
 	global.shlvl += 1;
-	printf("%d\n", global.shlvl);
 	global.exit_status = 0;
 	global.env_len = array_length(env) + 1;
 	if (init_env(env))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/21 18:02:49 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/24 12:07:35 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,27 @@
 
 extern struct s_global		global;
 
-/*
-char	put_quotes(char *str)
+
+char	*put_quotes(char *str)
 {
 	char	**tmp;
-	//char	**tmp1;
-	char	*firstquote;
-	char	*secondquote;
-	char	*final;
-
+	char	*tmp1;
+	char	*tmp2;
+	
 	tmp = ft_split(str, '=');
-	free(str);
-
-
-	tmp1[0] = ft_strjoin('"', tmp[1]);
-	free(tmp[1]);
-	tmp1[1] = ft_strjoin(tmp1[0], '"');
-	free(tmp1[0]);
-	tmp[1] =
-	return ();
-
-
-
+	tmp1 = ft_strjoin("declare -x ", tmp[0]);
+	tmp2 = ft_strjoin(tmp1, "=");
+	free(tmp1);
+	tmp1 = ft_strjoin(tmp2, "\"");
+	free(tmp2);
+	tmp2 = ft_strjoin(tmp1, tmp[1]);
+	free(tmp1);
+	tmp1 = ft_strjoin(tmp2, "\"");
+	free(tmp2);
+	array_free(tmp);
+	return (tmp1);
 }
-*/
+
 void	init_export(void)
 {
 	int		i;
@@ -50,12 +47,11 @@ void	init_export(void)
 	global.export = (char **)calloc(global.env_len, sizeof(char *));
 	while (i < global.env_len)
 	{
-		j = 0;
-		while (global.env[j])
+		j = -1;
+		while (global.env[++j])
 		{
 			if (global.env[j][0] == abc)
-				global.export[i++] = ft_strjoin("declare -x ", global.env[j]);
-			j++; // esto quizás se puede sumar en el while y ya no nos pasariamos de lineas
+				global.export[i++] = put_quotes(global.env[j]);
 		}
 		if (++abc == '`')
 			break ;
@@ -95,7 +91,7 @@ int	init_env(char **envp)
 	while (envp[i])
 	{
 		if (!ft_strncmp("SHLVL=\n", envp[i], 6))
-			new_envp[i] = ft_strjoin("SHLVL=", &global.shlvl);
+			new_envp[i] = ft_strjoin("SHLVL=", ft_itoa(global.shlvl));
 		else
 			new_envp[i] = ft_strdup(envp[i]);
 		i++;
@@ -107,14 +103,10 @@ int	init_env(char **envp)
 
 int	init_global(char **env)
 {
-	//int	i;
-
-	//i = 0;
-	//while (env[i])
-	//	i++;
-	if (global.shlvl == 48 || !global.shlvl)
-		global.shlvl = 49;
+	if (!global.shlvl)
+		global.shlvl = 1;
 	global.shlvl += 1;
+	printf("%d\n", global.shlvl);
 	global.exit_status = 0;
 	global.env_len = array_length(env) + 1;
 	if (init_env(env))

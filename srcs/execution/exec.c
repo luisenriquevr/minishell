@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 10:56:23 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 11:08:03 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int		exec_pipes(t_cmd_line *cmd)
 	pid_t		pid;
 	int			childs_counter;
 
-	// recoger señales y no hacer nada (funcion signal)
 	tmp_cmd = cmd;
 	childs_counter = 0;
 	while (tmp_cmd)
@@ -97,6 +96,7 @@ int		exec_pipes(t_cmd_line *cmd)
 		waitpid(-1, &global.exit_status, 0);
 	return (0);
 }
+
 int	exec_simple(t_cmd_line *cmd)
 {
 	pid_t	pid;

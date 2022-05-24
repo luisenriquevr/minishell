@@ -1,3 +1,0 @@
-- si se hace un export y un unset todo bien pero si se exporta de nuevo falla
-- cambiar manera de lanzar los errores a ft_putstr_fd y hacer mensajes mas parecidos a bash
-- 

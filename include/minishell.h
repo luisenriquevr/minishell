@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/21 16:59:53 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/24 11:29:53 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ enum	e_type
 
 struct	s_token
 {
-	char	*str; // --
+	char	*str;
 	t_type	type;
 	bool	exp;
 	t_quote	quote;
@@ -71,9 +71,9 @@ struct	s_token
 
 struct	s_cmd_line
 {
-	char		*str; // --
-	char		**to_exec; // --
-	t_token		*head_token; // --
+	char		*str;
+	char		**to_exec;
+	t_token		*head_token;
 	bool		exec;
 	int			fd_in;
 	int			fd_out;
@@ -82,7 +82,7 @@ struct	s_cmd_line
 
 struct s_global
 {
-	char	shlvl;
+	int		shlvl;
 	int		exit_status;
 	char	**env;
 	char	**export;
@@ -179,4 +179,5 @@ t_quote		update_quotes(char c, t_quote quote);
 char		*push_char(char *str, char c);
 int			throw_error(const char *error);
 int			throw_error_exit_status(const char *error, int error_code, int ret);
+
 #endif

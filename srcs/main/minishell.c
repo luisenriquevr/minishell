@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/24 16:01:36 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/24 17:21:02 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	init_global(char **env)
 	global.fd_stdin = dup(STDIN_FILENO);
 	global.fd_stdout = dup(STDOUT_FILENO);
 	global.signal_status = 0;
-	global.from_heredoc = false;
+	global.from_heredoc = true;
 	return (0);
 }
 
@@ -162,7 +162,11 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, handle_signal);
 	while (1)
 	{
-		str = readline("minishell $ ");
+		if (global.from_heredoc)
+			str = readline("minishell $ ");
+		else
+			str = readline(NULL);
+		global.from_heredoc = true;
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
@@ -174,11 +178,12 @@ int	main(int argc, char **argv, char **env)
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
-		exec(cmd_line);
+		if(global.from_heredoc)
+			exec(cmd_line);
 		free(str); //TODO: gestionar en la liberación final
 		free_all(&cmd_line);
 	}
 	close(global.fd_stdin);
 	close(global.fd_stdout);
-	return (0);
+	exit (0);
 }

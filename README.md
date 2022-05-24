@@ -14,3 +14,8 @@ Mirar el caso de "unclosed quotes" y decidir qué hacer: ahora lanza el mensaje 
 
 Cómo no, la expansión: arreglar el trim_quotes
 
+arreglar SHLVL // no es obligatorio
+
+arreglar la impresion de export -> solucionado
+
+no dar error cuando nos inicien el programa con env -i

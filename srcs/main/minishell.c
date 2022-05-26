@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/24 17:21:02 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:33:39 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	init_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		if (!ft_strncmp("SHLVL=\n", envp[i], 6))
-			new_envp[i] = ft_strjoin("SHLVL=", ft_itoa(global.shlvl));
-		else
+		//if (!ft_strncmp("SHLVL=\n", envp[i], 6))
+		//	new_envp[i] = ft_strjoin("SHLVL=", ft_itoa(global.shlvl));
+		//else
 			new_envp[i] = ft_strdup(envp[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 17:23:50 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/26 17:14:33 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	pid = fork();
 	if (!pid)
 	{
+		signal(SIGINT, exit_heredoc);
 		line = readline("> ");
 		while (line && ft_strcmp(line, limitor))
 		{
-			signal(SIGINT, exit_heredoc);
 			line = expand_heredoc_line(line);
 			write(*fd, line, ft_strlen(line));
 			write(*fd, "\n", 1);

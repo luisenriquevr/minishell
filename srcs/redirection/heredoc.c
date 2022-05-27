@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/26 17:14:33 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:00:07 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	*fd = open("/tmp/_tmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	limitor = token->str;
 	if (*fd < 0)
-			return (throw_error("minishell: error: redirection"));
+		return (throw_error("minishell: error: redirection"));
 	pid = fork();
 	if (!pid)
 	{

@@ -6,13 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:52:50 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:44:59 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		new_pwd(void)
+void	new_pwd(void)
 {
 	char	*tmp;
 	char	*old_path;
@@ -32,14 +32,14 @@ void		new_pwd(void)
 		free(pwd);
 }
 
-void		old_pwd(char **path)
+void	old_pwd(char **path)
 {
 	free(*path);
 	*path = get_var("OLDPWD");
 	printf("%s\n", *path);
 }
 
-char		*change_home(char *path)
+char	*change_home(char *path)
 {
 	char	*tmp1;
 	char	*tmp2;
@@ -60,31 +60,31 @@ char		*change_home(char *path)
 	return (path);
 }
 
-int			builtin_cd(char **arg)
+int	builtin_cd(char **arg)
 {
 	char	*path;
 
-	if (array_length(arg) > 2)
+	if (!global.env)
 	{
-		printf("cd: too many arguments\n");
-		return (1);
+		if (array_length(arg) > 2)
+			throw_error("cd: too many arguments\n");
+		if (!arg[1])
+			path = get_var("HOME");
+		else
+			path = ft_strdup(arg[1]);
+		if (path && path[0] == '~')
+			path = change_home(path);
+		if (path && path[0] == '-' && !path[1])
+			old_pwd(&path);
+		if (chdir(path) < 0)
+		{
+			printf("cd: string not in pwd: %s\n", path);
+			free(path);
+			return (1);
+		}
+		if (path)
+			free(path);
+		new_pwd();
 	}
-	if (!arg[1])
-		path = get_var("HOME");
-	else
-		path = ft_strdup(arg[1]);
-	if (path && path[0] == '~')
-		path = change_home(path);
-	if (path && path[0] == '-' && !path[1])
-		old_pwd(&path);
-	if (chdir(path) < 0)
-	{
-		printf("cd: string not in pwd: %s\n", path);
-		free(path);
-		return (1);
-	}
-	if (path)
-		free(path);
-	new_pwd();
 	return (1);
 }

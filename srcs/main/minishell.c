@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/26 16:33:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:58:56 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 extern struct s_global		global;
 
-
 char	*put_quotes(char *str)
 {
 	char	**tmp;
 	char	*tmp1;
 	char	*tmp2;
-	
+
 	tmp = ft_split(str, '=');
 	tmp1 = ft_strjoin("declare -x ", tmp[0]);
 	tmp2 = ft_strjoin(tmp1, "=");
@@ -69,7 +68,8 @@ char	*set_shlvl(void)
 	unsigned int	i;
 
 	i = -1;
-	if (!(ptr = (char *)malloc(sizeof(char) * ((sizeof(char) * 8)))))
+	ptr = (char *)malloc(sizeof(char) * ((sizeof(char) * 8)));
+	if (!ptr)
 		return (NULL);
 	name = "SHLVL=";
 	while (name[++i] != '\0')
@@ -86,15 +86,15 @@ int	init_env(char **envp)
 
 	if (!envp)
 		return (1);
-	new_envp = (char **)calloc(global.env_len, sizeof(char *)); //TODO: liberar en gestión de errores
+	new_envp = (char **)calloc(global.env_len, sizeof(char *));
 	if (!new_envp)
 		return (errcode_print_return(50, "Malloc error"));
 	i = 0;
 	while (envp[i])
 	{
-		//if (!ft_strncmp("SHLVL=\n", envp[i], 6))
-		//	new_envp[i] = ft_strjoin("SHLVL=", ft_itoa(global.shlvl));
-		//else
+		/*if (!ft_strncmp("SHLVL=\n", envp[i], 6))
+			new_envp[i] = ft_strjoin("SHLVL=", ft_itoa(global.shlvl));
+		else*/
 			new_envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
@@ -170,7 +170,7 @@ int	main(int argc, char **argv, char **env)
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
-			clear_line(str); //TODO: arreglar esta mierd*
+			clear_line(str);
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))
@@ -178,9 +178,9 @@ int	main(int argc, char **argv, char **env)
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
-		if(global.from_heredoc)
+		if (global.from_heredoc)
 			exec(cmd_line);
-		free(str); //TODO: gestionar en la liberación final
+		free(str);
 		free_all(&cmd_line);
 	}
 	close(global.fd_stdin);

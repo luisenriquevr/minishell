@@ -6,13 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:28:39 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:53:12 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 18:32:35 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			n_checker(char **cmd)
+int	n_checker(char **cmd)
 {
 	int		i;
 	int		j;
@@ -39,19 +39,12 @@ int			n_checker(char **cmd)
 	return (pos);
 }
 
-// **cmd ==> echo hola que tal		==>	hola que tal$
-// **cmd ==> echo -n hola que tal	==> hola que tal%
-// **cmd ==> echo -n -n -n -n hola	==> hola%
-// **cmd ==> echo -nnn -nnnnn hola	==> hola%
-// **cmd ==> echo -nnn -nnnnl hola	==> -nnnnl hola%
-// **cmd ==> echo -nnnnnl hola		==> -nnnnnl hola$
-int			builtin_echo(char **cmd)
+int	builtin_echo(char **cmd)
 {
 	int		i;
 	int		n;
 
 	i = 0;
-	// Comprobamos flags -n y devolvemos cuantos hay para imprimir a partir de ahí
 	n = n_checker(++cmd);
 	if (n > 0)
 		i++;

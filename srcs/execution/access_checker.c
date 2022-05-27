@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/26 16:42:27 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:49:43 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*get_path(void)
 
 	i = 0;
 	j = 0;
-	
 	while (global.env[i][j])
 	{
 		if (!ft_strncmp(&global.env[i][j], "PATH", 4))
@@ -42,7 +41,7 @@ char	*get_path(void)
 		else
 			i++;
 	}
-	perror("$PATH's error"); // aqui deberia de haber un throw error
+	perror("minishell: $PATH's error");
 	return (NULL);
 }
 
@@ -54,7 +53,7 @@ char	**paths_pull(void)
 
 	path = get_path();
 	i = 0;
-	while (path && path[i++] != '=');
+	while (path && path[i++] != '=')
 	all_paths = ft_split(&path[++i], ':');
 	slashjoin(all_paths);
 	return (all_paths);
@@ -85,8 +84,6 @@ int	access_checker(char **cmd_to_exec)
 {
 	char	**path;
 
-	//if (!(*global.env))
-	//	return (1);
 	path = paths_pull();
 	if (!path || !*cmd_to_exec)
 	{
@@ -94,6 +91,6 @@ int	access_checker(char **cmd_to_exec)
 		return (0);
 	}
 	if (access(cmd_to_exec[0], X_OK))
-		return (checker(cmd_to_exec, path)); // quizas haya que dar error si no hay acceso de ninguna manera
+		return (checker(cmd_to_exec, path));
 	return (1);
 }

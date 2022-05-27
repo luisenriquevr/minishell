@@ -6,13 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:39:27 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:53:17 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 18:33:15 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			builtin_env(char **cmd)
+int	builtin_env(char **cmd)
 {
 	int		i;
 
@@ -23,20 +23,3 @@ int			builtin_env(char **cmd)
 		printf("%s\n", global.env[i++]);
 	return (1);
 }
-
-/*
-int			print_export(char **cmd, int var)
-{
-	int		i;
-	
-	i = 0;
-
-	if (var == 1 && array_length(cmd))
-		throw_error("Error: Too many arguments");
-	if (var == 1)
-		printf("%s\n", global.env[i++]);
-	else if (var == 2)
-		printf("%s\n", global.export[i++]);
-	return (1);
-
-	*/

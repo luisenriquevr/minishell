@@ -6,13 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/14 03:44:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 20:01:53 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
+int	redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	if (token->type == OUT_FILE)
 		*fd = open(token->str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -26,7 +26,7 @@ int				redir_out_file(t_token *token, t_cmd_line *cmd, int *fd)
 	return (0);
 }
 
-int				redir_in_file(t_token *token,t_cmd_line *cmd, int *fd)
+int	redir_in_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	*fd = open(token->str, O_RDONLY);
 	if (*fd < 0)
@@ -37,9 +37,9 @@ int				redir_in_file(t_token *token,t_cmd_line *cmd, int *fd)
 	return (0);
 }
 
-int				redirection(t_token *token, t_cmd_line *cmd)
+int	redirection(t_token *token, t_cmd_line *cmd)
 {
-	int			fd;
+	int	fd;
 
 	fd = 0;
 	if (token->type == IN_FILE)
@@ -53,7 +53,7 @@ int				redirection(t_token *token, t_cmd_line *cmd)
 	return (0);
 }
 
-void			redirector(t_cmd_line **cmd_line)
+void	redirector(t_cmd_line **cmd_line)
 {
 	t_cmd_line	*cmd;
 	t_token		*token;
@@ -64,7 +64,7 @@ void			redirector(t_cmd_line **cmd_line)
 		token = cmd->head_token;
 		while (token)
 		{
-			if(redirection(token, cmd))
+			if (redirection(token, cmd))
 			{
 				cmd->exec = false;
 				break ;

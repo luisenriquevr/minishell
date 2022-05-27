@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 15:58:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:55:08 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 	}
 }
 
-int		exec_pipes(t_cmd_line *cmd)
+int	exec_pipes(t_cmd_line *cmd)
 {
 	t_cmd_line	*tmp_cmd;
 	int			fd[2];
@@ -76,7 +76,6 @@ int		exec_pipes(t_cmd_line *cmd)
 	childs_counter = 0;
 	while (tmp_cmd && *global.env)
 	{
-
 		if (tmp_cmd->next && pipe(fd) < 0)
 			return (throw_error("minishell: error: pipe"));
 		if (tmp_cmd->exec)
@@ -115,7 +114,7 @@ int	exec_simple(t_cmd_line *cmd)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd->to_exec[0], 2);
 			ft_putstr_fd(": command not found\n", 2);
-			exit(1); // gestion de errores
+			exit(1);
 		}
 		else if (pid)
 			waitpid(pid, &global.exit_status, 0);
@@ -132,7 +131,7 @@ int	exec_simple(t_cmd_line *cmd)
 int	exec(t_cmd_line *cmd_line)
 {
 	if (!cmd_line)
-		return (global.exit_status); // gestion de errores
+		return (global.exit_status);
 	if (!cmd_line->next)
 		return (exec_simple(cmd_line));
 	else

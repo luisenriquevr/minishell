@@ -6,20 +6,20 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/08 17:54:48 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:33:35 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		add_new_var(char *new_var)
+void	add_new_var(char *new_var)
 {
 	int		i;
 	char	**tmp;
 
 	i = 0;
 	tmp = global.env;
-	init_env(tmp); // TODO : hay que liberar pero hay que mandar error
+	init_env(tmp);
 	array_free(tmp);
 	while (global.env[i])
 		i++;
@@ -27,24 +27,24 @@ void		add_new_var(char *new_var)
 	global.env[i + 1] = NULL;
 }
 
-bool		var_valid_name(char *name)
+bool	var_valid_name(char *name)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!name)
 		return (false);
-	while(name[i])
+	while (name[i])
 	{
 		if ((!ft_isalnum(name[i]) && name[i] != '_')
-				|| (name[0] != '_' && !ft_isalpha(name[0])))
+			|| (name[0] != '_' && !ft_isalpha(name[0])))
 			return (false);
 		i++;
 	}
 	return (true);
 }
 
-void		change_var(char *name, char *arg) // esta caca no va
+void	change_var(char *name, char *arg)
 {
 	int		i;
 	char	**aux;
@@ -54,12 +54,11 @@ void		change_var(char *name, char *arg) // esta caca no va
 	while (aux[i] && !ft_strnstr(aux[i], name, ft_strlen(name)))
 		i++;
 	aux = 0;
-	//printf("%s\n", global.env[0]); // IMPORTANTE => llega global.env vacio
 	free(global.env[i]);
 	global.env[i] = ft_strdup(arg);
 }
 
-char		*get_var_name(char *envp)
+char	*get_var_name(char *envp)
 {
 	int		i;
 	char	*var_name;
@@ -73,14 +72,14 @@ char		*get_var_name(char *envp)
 	i = 0;
 	while (envp[i] && envp[i] != '=')
 	{
-		var_name[i] = envp[i]; // comprobar si funciona bien con el i++ asi
+		var_name[i] = envp[i];
 		i++;
 	}
 	var_name[i] = '\0';
 	return (var_name);
 }
 
-char		*get_var(char *var)
+char	*get_var(char *var)
 {
 	int		i;
 	char	*str;

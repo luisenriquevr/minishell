@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/21 16:51:07 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/05/27 19:59:37 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	check_arg(char *s, int *i)
 		(*i)++;
 	}
 }
-
 
 // echo $ "$'$USER'$ "''
 // echo $'$'$USER'$ '''

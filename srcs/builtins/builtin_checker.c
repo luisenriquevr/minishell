@@ -6,13 +6,13 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 13:45:38 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 11:03:09 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:44:38 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			builtin_checker(char **cmd)
+int	builtin_checker(char **cmd)
 {
 	if (cmd[0] == NULL)
 		return (0);

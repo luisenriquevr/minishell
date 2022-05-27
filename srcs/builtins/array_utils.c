@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:45:40 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/09 12:20:46 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/05/27 18:28:49 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	array_length(char **array)
 	return (i);
 }
 
-void		array_free(char **array)
+void	array_free(char **array)
 {
-	int 	i;
-	
+	int	i;
+
 	i = 0;
 	if (!array)
 		return ;

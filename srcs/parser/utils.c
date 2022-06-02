@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:15:36 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/22 14:04:50 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/02 21:17:21 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	trim_quotes(t_token *t)
 		{
 			copy = push_char(copy, *str);
 			str++;
+		}
+		if (quote != NONE)
+		{
+			str++;
+			quote = NONE;
 		}
 	}
 	free(t->str);

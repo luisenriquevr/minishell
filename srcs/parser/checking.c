@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/27 19:59:37 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/02 20:33:16 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,3 +119,7 @@ void	check_arg(char *s, int *i)
 // echo $"$USER"
 // echo $'$'$USER''
 // echo $"$USER"
+//Si lo que hay depsués del $ es una " o una ' lo hace mal porque imprime el $
+// Rotas comillas sin cerrar
+// int *array;
+// &array[0]

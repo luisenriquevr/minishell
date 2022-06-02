@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/05/27 19:58:56 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/02 21:24:05 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	printtitle(void)
 	printf("----------------------------------------------------\n");
 }
 
-void	clear_line(char *str)
+char	*clear_line(char *str)
 {
 	if (str == NULL)
 	{
@@ -141,7 +141,8 @@ void	clear_line(char *str)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	str = NULL;
+	free(str);
+	return (ft_strdup(""));
 }
 
 int	main(int argc, char **argv, char **env)
@@ -170,7 +171,7 @@ int	main(int argc, char **argv, char **env)
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
-			clear_line(str);
+			str = clear_line(str);
 		if (get_cmd_line(str, &cmd_line))
 			exit_free_cmdline(&cmd_line);
 		if (tokenizer(&cmd_line))

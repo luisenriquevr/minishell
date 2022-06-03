@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
+#    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/03 21:10:07 by cmarcu           ###   ########.fr        #
+#    Updated: 2022/06/03 21:22:46 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH = srcs/
 SRCS =	main/minishell.c \
 		main/main_utils.c \
+		main/free_functions.c \
 		parser/checking.c \
 		parser/fill_cmd_line.c \
 		parser/list_cmd_line.c \
@@ -21,15 +22,15 @@ SRCS =	main/minishell.c \
 		parser/expander.c \
 		parser/prepare_exec.c \
 		parser/utils.c \
-		free_functions.c \
 		execution/exec.c \
 		execution/exec_simple.c \
 		execution/exec_pipes.c \
+		execution/exec_utils.c \
 		execution/access_checker.c \
-		errors.c \
 		redirection/redirector.c \
 		redirection/heredoc.c \
-		signals.c
+		utils/errors.c \
+		utils/signals.c
 
 BUILTINPATH	= ./srcs/builtins/
 BSRCS = builtin_checker.c builtin_cd.c builtin_echo.c builtin_env.c \

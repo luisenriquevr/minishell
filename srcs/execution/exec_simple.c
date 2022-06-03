@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:14 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:22:10 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:39:13 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	exec_simple(t_cmd_line *cmd)
 		if (!pid)
 		{
 			execve(cmd->to_exec[0], cmd->to_exec, g_global.env);
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd->to_exec[0], 2);
-			ft_putstr_fd(": command not found\n", 2);
-			exit(1);
+			exec_error_exit(cmd->to_exec[0], ": command not found\n");
 		}
 		else if (pid)
 			waitpid(pid, &g_global.exit_status, 0);

@@ -6,17 +6,22 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:16 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:32:01 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 21:05:49 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	put_error_exit(char *str1, char *str2)
+void	make_pipes(t_cmd_line	*tmp_cmd, int *fd)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(str1, 2);
-	ft_putstr_fd(str2, 2);
+	if (tmp_cmd->next && pipe(fd) < 0)
+		return (throw_error("minishell: error: pipe"));
+}
+
+void	wait_childs(int childs_counter)
+{
+	while (childs_counter-- > 0)
+		waitpid(-1, &g_global.exit_status, 0);
 }
 
 void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
@@ -35,7 +40,7 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 		exit (g_global.exit_status);
 	access_checker(cmd_to_exec);
 	execve(cmd_to_exec[0], cmd_to_exec, g_global.env);
-	put_error_exit(cmd->to_exec[0], ": command not found\n");
+	exec_error_exit(cmd->to_exec[0], ": command not found\n");
 	exit(g_global.exit_status);
 }
 
@@ -72,8 +77,7 @@ int	exec_pipes(t_cmd_line *cmd)
 	childs_counter = 0;
 	while (tmp_cmd && *g_global.env)
 	{
-		if (tmp_cmd->next && pipe(fd) < 0)
-			return (throw_error("minishell: error: pipe"));
+		make_pipes(tmp_cmd->next, fd);
 		if (tmp_cmd->exec)
 		{
 			pid = fork();
@@ -87,7 +91,6 @@ int	exec_pipes(t_cmd_line *cmd)
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;
 	}
-	while (childs_counter-- > 0)
-		waitpid(-1, &g_global.exit_status, 0);
+	wait_childs(childs_counter);
 	return (0);
 }

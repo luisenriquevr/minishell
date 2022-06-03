@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 19:33:35 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:36:46 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*get_var(char *var)
 		free(var_name);
 	if (global.env[i])
 		str = global.env[i] + (ft_strlen(var) + 1);
-	else if (!ft_strncmp(var, "?", ft_strlen(var)))
+	else if (!ft_strncmp(var, "?", 1))
 	{
 		if (global.exit_status > 255)
 			global.exit_status = global.exit_status >> 8;

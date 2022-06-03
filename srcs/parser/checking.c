@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/06/02 20:33:16 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 17:07:25 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,4 @@ void	check_arg(char *s, int *i)
 //Si lo que hay depsués del $ es una " o una ' lo hace mal porque imprime el $
 // Rotas comillas sin cerrar
 // int *array;
-// &array[0]
+// &array[0] 

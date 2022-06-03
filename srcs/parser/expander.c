@@ -6,12 +6,28 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 11:29:45 by cristianama       #+#    #+#             */
-/*   Updated: 2022/06/02 20:05:59 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 17:26:36 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+
+char	*go_to_var_end_quotes(char *str, t_quote quote)
+{
+	if (*str != '$')
+		return (str);
+	str++;
+	if (*str == '?')
+		return (str);
+	if ((*str == '\'' || *str == '"') && quote == NONE)
+		return (str);
+	if (!ft_isalpha(*str))
+		return (str - 1);
+	while (ft_isalnum(*str) || *str == '_')
+		str++;
+	return (str - 1);
+}
 
 char	*go_to_var_end(char *str)
 {
@@ -67,7 +83,7 @@ void	expand_token(t_token *token)
 	quote = NONE;
 	while (*copy)
 	{
-		if (not_expand(*copy, quote) || go_to_var_end(copy) == copy)
+		if (not_expand(*copy, quote) || go_to_var_end_quotes(copy, quote) == copy)
 			result = push_char(result, *copy);
 		else
 		{

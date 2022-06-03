@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/24 11:29:53 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:18:05 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ bool		update_may_expand(char c, bool expand);
 bool		may_expand(char c, bool expand);
 char		*expand_var(char *str, char *dest);
 char		*go_to_var_end(char *str);
+char		*go_to_var_end_quotes(char *str, t_quote quote);
 
 /*PREPARAR EJECUCION*/
 int			prepare_exec(t_cmd_line **cmd_line);

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:08:03 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 19:18:21 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	unset(char *cmd, char **env)
 			i++;
 		}
 		free(old_var);
-		global.env_len -= 1;
+		g_global.env_len -= 1;
 	}
 }
 
@@ -46,16 +46,16 @@ int	builtin_unset(char **cmd)
 	char	**tmp;
 
 	i = 0;
-	tmp = global.env;
+	tmp = g_global.env;
 	while (cmd[i])
 	{
 		if (cmd[i])
 			unset(cmd[i], tmp);
 		i++;
 	}
-	if (global.export)
+	if (g_global.export)
 	{
-		array_free(global.export);
+		array_free(g_global.export);
 		init_export();
 	}
 	return (1);

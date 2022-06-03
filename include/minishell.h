@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 17:18:05 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_cmd_line	t_cmd_line;
 typedef struct s_token		t_token;
 typedef enum e_quote		t_quote;
 typedef enum e_type			t_type;
-extern struct s_global		global; // hay que mirar bien la definicion y uso de la estructura
+extern struct s_global		g_global; // hay que mirar bien la definicion y uso de la estructura
 
 enum	e_quote
 {
@@ -91,7 +91,7 @@ struct s_global
 	int		fd_stdout;
 	int		signal_status;
 	bool	from_heredoc;
-} global;
+} g_global;
 
 /* -------------------------------PARSEO------------------------------- */
 
@@ -113,7 +113,8 @@ void		print_list(char *str);
 /*TOKENIZAR LA LISTA DE COMANDOS*/
 int			tokenizer(t_cmd_line **cmd_line);
 int			tokenize_cmd(t_cmd_line **cmd);
-int			fill_token_list(t_cmd_line **cmd, char *str, int curr_pos, int cmd_start);
+int			fill_token_list(t_cmd_line **cmd, char *str, \
+		int curr_pos, int cmd_start);
 void		set_token_type(t_token *t);
 void		lstadd_back_token(t_token **lst, t_token *new);
 bool		set_file_type(t_cmd_line *current_token);
@@ -172,7 +173,6 @@ void		free_token(t_cmd_line **cmd_line);
 /* -------------------------GESTIÓN DE SENALES------------------------- */
 void		handle_signal(int sig);
 int			redirection(t_token *token, t_cmd_line *cmd);
-
 
 /* ------------------------------VARIOS-------------------------------- */
 void		printtitle(void);

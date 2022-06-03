@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 19:54:32 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ char	*get_path(void)
 
 	i = 0;
 	j = 0;
-	while (global.env[i][j])
+	while (g_global.env[i][j])
 	{
-		if (!ft_strncmp(&global.env[i][j], "PATH", 4))
-			return (&global.env[i][j]);
+		if (!ft_strncmp(&g_global.env[i][j], "PATH", 4))
+			return (&g_global.env[i][j]);
 		else
 			i++;
 	}

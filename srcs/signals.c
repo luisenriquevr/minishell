@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 19:21:53 by cristianama       #+#    #+#             */
-/*   Updated: 2022/05/21 17:20:23 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	handle_signal(int sig)
 {
-	global.exit_status += sig;
+	g_global.exit_status += sig;
 	if (sig == 2)
 	{
-		global.exit_status = 130;
+		g_global.exit_status = 130;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -30,6 +30,6 @@ void	handle_signal(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		global.exit_status = 127;
+		g_global.exit_status = 127;
 	}
 }

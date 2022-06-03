@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 20:00:07 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	*expand_heredoc_line(char *line)
 void	exit_heredoc(int sig)
 {
 	(void)sig;
-	global.exit_status = 130;
+	g_global.exit_status = 130;
 	unlink("/tmp/_tmp");
-	exit (global.exit_status);
+	exit (g_global.exit_status);
 }
 
 int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
@@ -71,13 +71,13 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 		exit(1);
 	}
 	else if (pid)
-		waitpid(-1, &global.exit_status, 0);
+		waitpid(-1, &g_global.exit_status, 0);
 	else
 		perror("minishell: error: fork");
 	close(*fd);
 	*fd = open("/tmp/_tmp", O_RDONLY, 0644);
 	if (*fd == -1)
-		global.from_heredoc = false;
+		g_global.from_heredoc = false;
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 19:02:14 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	add_new_var(char *new_var)
 	char	**tmp;
 
 	i = 0;
-	tmp = global.env;
-	global.env_len +=1;
+	tmp = g_global.env;
+	g_global.env_len +=1;
 	init_env(tmp);
 	array_free(tmp);
-	while (global.env[i])
+	while (g_global.env[i])
 		i++;
-	global.env[i] = ft_strdup(new_var);
-	global.env[i + 1] = NULL;
+	g_global.env[i] = ft_strdup(new_var);
+	g_global.env[i + 1] = NULL;
 }
 
 bool	var_valid_name(char *name)
@@ -51,12 +51,12 @@ void	change_var(char *var_name, char *arg)
 	char	**aux;
 
 	i = 0;
-	aux = global.env;
+	aux = g_global.env;
 	while (aux[i] && (!ft_strnstr(aux[i], var_name, (size_t)ft_strlen(var_name)) || aux[i][ft_strlen(var_name)] != '='))
 		i++;
 	aux = 0;
-	free(global.env[i]);
-	global.env[i] = ft_strdup(arg);
+	free(g_global.env[i]);
+	g_global.env[i] = ft_strdup(arg);
 }
 
 char	*get_var_name(char *envp)
@@ -88,21 +88,21 @@ char	*get_var(char *var)
 
 	i = 0;
 	str = 0;
-	var_name = get_var_name(global.env[i]);
-	while (global.env[i] && ft_strcmp(var_name, var))
+	var_name = get_var_name(g_global.env[i]);
+	while (g_global.env[i] && ft_strcmp(var_name, var))
 	{
 		free(var_name);
-		var_name = get_var_name(global.env[++i]);
+		var_name = get_var_name(g_global.env[++i]);
 	}
 	if (var_name)
 		free(var_name);
-	if (global.env[i])
-		str = global.env[i] + (ft_strlen(var) + 1);
+	if (g_global.env[i])
+		str = g_global.env[i] + (ft_strlen(var) + 1);
 	else if (!ft_strncmp(var, "?", 1))
 	{
-		if (global.exit_status > 255)
-			global.exit_status = global.exit_status >> 8;
-		return (ft_itoa(global.exit_status));
+		if (g_global.exit_status > 255)
+			g_global.exit_status = g_global.exit_status >> 8;
+		return (ft_itoa(g_global.exit_status));
 	}
 	else
 		return (NULL);

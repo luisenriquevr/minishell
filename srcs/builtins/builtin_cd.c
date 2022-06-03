@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 19:44:59 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	builtin_cd(char **arg)
 {
 	char	*path;
 
-	if (!global.env)
+	if (!g_global.env)
 	{
 		if (array_length(arg) > 2)
 			throw_error("cd: too many arguments\n");

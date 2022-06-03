@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/02 21:24:05 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern struct s_global		global;
+extern struct s_global		g_global;
 
 char	*put_quotes(char *str)
 {
@@ -43,14 +43,14 @@ void	init_export(void)
 	i = 0;
 	j = 0;
 	abc = 'A';
-	global.export = (char **)calloc(global.env_len, sizeof(char *));
-	while (i < global.env_len)
+	g_global.export = (char **)calloc(g_global.env_len, sizeof(char *));
+	while (i < g_global.env_len)
 	{
 		j = -1;
-		while (global.env[++j])
+		while (g_global.env[++j])
 		{
-			if (global.env[j][0] == abc)
-				global.export[i++] = put_quotes(global.env[j]);
+			if (g_global.env[j][0] == abc)
+				g_global.export[i++] = put_quotes(g_global.env[j]);
 		}
 		if (++abc == '`')
 			break ;
@@ -74,7 +74,7 @@ char	*set_shlvl(void)
 	name = "SHLVL=";
 	while (name[++i] != '\0')
 		ptr[i] = name[i];
-	ptr[i++] = global.shlvl;
+	ptr[i++] = g_global.shlvl;
 	ptr[i] = '\0';
 	return (ptr);
 }
@@ -86,7 +86,7 @@ int	init_env(char **envp)
 
 	if (!envp)
 		return (1);
-	new_envp = (char **)calloc(global.env_len, sizeof(char *));
+	new_envp = (char **)calloc(g_global.env_len, sizeof(char *));
 	if (!new_envp)
 		return (errcode_print_return(50, "Malloc error"));
 	i = 0;
@@ -99,24 +99,24 @@ int	init_env(char **envp)
 		i++;
 	}
 	new_envp[i] = NULL;
-	global.env = new_envp;
+	g_global.env = new_envp;
 	return (0);
 }
 
 int	init_global(char **env)
 {
-	if (!global.shlvl)
-		global.shlvl = 1;
-	global.shlvl += 1;
-	global.exit_status = 0;
-	global.env_len = array_length(env) + 1;
+	if (!g_global.shlvl)
+		g_global.shlvl = 1;
+	g_global.shlvl += 1;
+	g_global.exit_status = 0;
+	g_global.env_len = array_length(env) + 1;
 	if (init_env(env))
 		return (50);
 	init_export();
-	global.fd_stdin = dup(STDIN_FILENO);
-	global.fd_stdout = dup(STDOUT_FILENO);
-	global.signal_status = 0;
-	global.from_heredoc = true;
+	g_global.fd_stdin = dup(STDIN_FILENO);
+	g_global.fd_stdout = dup(STDOUT_FILENO);
+	g_global.signal_status = 0;
+	g_global.from_heredoc = true;
 	return (0);
 }
 
@@ -163,11 +163,11 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, handle_signal);
 	while (1)
 	{
-		if (global.from_heredoc)
+		if (g_global.from_heredoc)
 			str = readline("minishell $ ");
 		else
 			str = readline(NULL);
-		global.from_heredoc = true;
+		g_global.from_heredoc = true;
 		if (str && *str)
 			add_history(str);
 		if (check_str(str))
@@ -179,12 +179,12 @@ int	main(int argc, char **argv, char **env)
 		expander(&cmd_line);
 		prepare_exec(&cmd_line);
 		redirector(&cmd_line);
-		if (global.from_heredoc)
+		if (g_global.from_heredoc)
 			exec(cmd_line);
 		free(str);
 		free_all(&cmd_line);
 	}
-	close(global.fd_stdin);
-	close(global.fd_stdout);
+	close(g_global.fd_stdin);
+	close(g_global.fd_stdout);
 	exit (0);
 }

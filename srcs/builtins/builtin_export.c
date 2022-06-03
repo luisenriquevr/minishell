@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 14:10:02 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 18:38:27 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	print_export(void)
 	int		i;
 
 	i = 0;
-	while (global.export[i])
-		printf("%s\n", global.export[i++]);
+	while (g_global.export[i])
+		printf("%s\n", g_global.export[i++]);
 }
 
 int	builtin_export(char **cmd)
@@ -61,9 +61,9 @@ int	builtin_export(char **cmd)
 		}
 		i++;
 	}
-	if (global.export)
+	if (g_global.export)
 	{
-		array_free(global.export);
+		array_free(g_global.export);
 		init_export();
 	}
 	return (1);

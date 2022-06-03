@@ -6,7 +6,7 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/03 21:04:42 by cmarcu           ###   ########.fr        #
+#    Updated: 2022/06/03 21:10:07 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRCS =	main/minishell.c \
 		parser/utils.c \
 		free_functions.c \
 		execution/exec.c \
+		execution/exec_simple.c \
+		execution/exec_pipes.c \
 		execution/access_checker.c \
 		errors.c \
 		redirection/redirector.c \

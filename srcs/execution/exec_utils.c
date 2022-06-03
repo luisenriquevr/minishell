@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 09:28:09 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:24:03 by lvarela          ###   ########.fr       */
+/*   Created: 2022/06/03 20:23:41 by lvarela           #+#    #+#             */
+/*   Updated: 2022/06/03 20:39:30 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec(t_cmd_line *cmd_line)
+void	dup_and_close(int old, int new)
 {
-	if (!cmd_line)
-		return (g_global.exit_status);
-	if (!cmd_line->next)
-		return (exec_simple(cmd_line));
-	else
-		return (exec_pipes(cmd_line));
-	return (0);
+	if (old)
+	{
+		dup2(old, new);
+		close(old);
+	}
+}
+
+void	exec_error_exit(char *str1, char *str2)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str1, 2);
+	ft_putstr_fd(str2, 2);
+	exit(1);
 }

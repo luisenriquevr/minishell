@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:07:47 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:24:36 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int			prepare_exec(t_cmd_line **cmd_line);
 /* -----------------------------EJECUCIÓN------------------------------ */
 
 int			exec(t_cmd_line *cmd_line);
+int			exec_simple(t_cmd_line *cmd);
 int			access_checker(char **cmd_to_exec);
 void		redirector(t_cmd_line **cmd_line);
 int			redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd);
@@ -158,6 +159,7 @@ int			init_env(char **envp);
 void		init_export(void);
 void		add_new_var(char *new_var);
 char		*get_var_name(char *envp);
+void		dup_and_close(int old, int new);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int			print_error(const char *error);

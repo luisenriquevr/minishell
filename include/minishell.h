@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:07:47 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,11 @@
 # define READ_END	0
 # define WRITE_END	1
 
-/*
-* Hay que declarar todas las listas antes de definirlas para que el *next pueda
-* ser del tipo de la lista
-*/
 typedef struct s_cmd_line	t_cmd_line;
 typedef struct s_token		t_token;
 typedef enum e_quote		t_quote;
 typedef enum e_type			t_type;
-extern struct s_global		g_global; // hay que mirar bien la definicion y uso de la estructura
+extern struct s_global		g_global;
 
 enum	e_quote
 {
@@ -48,14 +44,14 @@ enum	e_type
 	EMPTY,
 	ARG,
 	BUILTIN,
-	LESS, //<
-	HERE_DOC, //<<
-	LIMITOR,//Palabra después de <<
-	GREATER, //>
-	D_GREATER, //>>
-	OUT_FILE_APPEND, //Palabra después de >>
-	OUT_FILE, //Palabra después de >
-	IN_FILE //Palabra después de <
+	LESS,
+	HERE_DOC,
+	LIMITOR,
+	GREATER,
+	D_GREATER,
+	OUT_FILE_APPEND,
+	OUT_FILE,
+	IN_FILE
 };
 
 struct	s_token

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:09:00 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	add_new_var(char *new_var)
 
 	i = 0;
 	tmp = g_global.env;
-	g_global.env_len +=1;
+	g_global.env_len += 1;
 	init_env(tmp);
 	array_free(tmp);
 	while (g_global.env[i])
@@ -52,7 +52,8 @@ void	change_var(char *var_name, char *arg)
 
 	i = 0;
 	aux = g_global.env;
-	while (aux[i] && (!ft_strnstr(aux[i], var_name, (size_t)ft_strlen(var_name)) || aux[i][ft_strlen(var_name)] != '='))
+	while (aux[i] && (!ft_strnstr(aux[i], var_name, (size_t)ft_strlen(var_name))
+			|| aux[i][ft_strlen(var_name)] != '='))
 		i++;
 	aux = 0;
 	free(g_global.env[i]);

@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:15:36 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/03 20:22:55 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 21:03:23 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,24 @@ char	*go_to_var_end_quotes(char *str, t_quote quote)
 	while (ft_isalnum(*str) || *str == '_')
 		str++;
 	return (str - 1);
+}
+
+char	*put_quotes(char *str)
+{
+	char	**tmp;
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp = ft_split(str, '=');
+	tmp1 = ft_strjoin("declare -x ", tmp[0]);
+	tmp2 = ft_strjoin(tmp1, "=");
+	free(tmp1);
+	tmp1 = ft_strjoin(tmp2, "\"");
+	free(tmp2);
+	tmp2 = ft_strjoin(tmp1, tmp[1]);
+	free(tmp1);
+	tmp1 = ft_strjoin(tmp2, "\"");
+	free(tmp2);
+	array_free(tmp);
+	return (tmp1);
 }

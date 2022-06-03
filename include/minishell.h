@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:07:47 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 21:07:59 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,10 @@ t_quote		update_quotes(char c, t_quote quote);
 char		*push_char(char *str, char c);
 int			throw_error(const char *error);
 int			throw_error_exit_status(const char *error, int error_code, int ret);
+char		*set_shlvl(void);
+char		*clear_line(char *str);
+void		check_args_init(int argc, char **argv, char **env);
+char		*put_quotes(char *str);
+int			init_global(char **env);
 
 #endif

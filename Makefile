@@ -6,12 +6,13 @@
 #    By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/03 19:06:43 by cmarcu           ###   ########.fr        #
+#    Updated: 2022/06/03 21:04:42 by cmarcu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSPATH = srcs/
 SRCS =	main/minishell.c \
+		main/main_utils.c \
 		parser/checking.c \
 		parser/fill_cmd_line.c \
 		parser/list_cmd_line.c \

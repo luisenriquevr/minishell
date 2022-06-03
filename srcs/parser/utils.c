@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:15:36 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/02 21:17:21 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 19:52:49 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*expand_var(char *str, char *dest)
 	int		var_length;
 	char	*var_name;
 	char	*var_content;
+	char	*aux;
 
 	var_length = (int)(go_to_var_end(str) - str);
 	var_name = ft_substr(str, 1, var_length);
@@ -46,7 +47,10 @@ char	*expand_var(char *str, char *dest)
 		free(var_content);
 		return (dest);
 	}
+	aux = dest;
 	dest = ft_strjoin(dest, var_content);
+	free(aux);
+	free(var_content);
 	free(var_name);
 	return (dest);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 19:49:43 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 19:54:32 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	**paths_pull(void)
 
 	path = get_path();
 	i = 0;
-	while (path && path[i++] != '=')
+	while (path && path[i] != '=')
+		i++;
 	all_paths = ft_split(&path[++i], ':');
 	slashjoin(all_paths);
 	return (all_paths);
@@ -77,6 +78,7 @@ int	checker(char **cmd_to_exec, char **path)
 		}
 		free(tmp_cmd);
 	}
+	array_free(path);
 	return (1);
 }
 

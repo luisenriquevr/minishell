@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 17:36:46 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 19:02:14 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	add_new_var(char *new_var)
 
 	i = 0;
 	tmp = global.env;
+	global.env_len +=1;
 	init_env(tmp);
 	array_free(tmp);
 	while (global.env[i])
@@ -44,14 +45,14 @@ bool	var_valid_name(char *name)
 	return (true);
 }
 
-void	change_var(char *name, char *arg)
+void	change_var(char *var_name, char *arg)
 {
 	int		i;
 	char	**aux;
 
 	i = 0;
 	aux = global.env;
-	while (aux[i] && !ft_strnstr(aux[i], name, ft_strlen(name)))
+	while (aux[i] && (!ft_strnstr(aux[i], var_name, (size_t)ft_strlen(var_name)) || aux[i][ft_strlen(var_name)] != '='))
 		i++;
 	aux = 0;
 	free(global.env[i]);

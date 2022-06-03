@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/03 20:24:18 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,26 @@ void	exit_heredoc(int sig)
 	exit (g_global.exit_status);
 }
 
-int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
+void	child_process_heredoc(int *fd, char *limitor)
 {
 	char	*line;
+
+	signal(SIGINT, exit_heredoc);
+	line = readline("> ");
+	while (line && ft_strcmp(line, limitor))
+	{
+		line = expand_heredoc_line(line);
+		write(*fd, line, ft_strlen(line));
+		write(*fd, "\n", 1);
+		free(line);
+		line = readline("> ");
+	}
+	free(line);
+	exit(1);
+}
+
+int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
+{
 	char	*limitor;
 	pid_t	pid;
 
@@ -56,20 +73,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 		return (throw_error("minishell: error: redirection"));
 	pid = fork();
 	if (!pid)
-	{
-		signal(SIGINT, exit_heredoc);
-		line = readline("> ");
-		while (line && ft_strcmp(line, limitor))
-		{
-			line = expand_heredoc_line(line);
-			write(*fd, line, ft_strlen(line));
-			write(*fd, "\n", 1);
-			free(line);
-			line = readline("> ");
-		}
-		free(line);
-		exit(1);
-	}
+		child_process_heredoc(fd, limitor);
 	else if (pid)
 		waitpid(-1, &g_global.exit_status, 0);
 	else

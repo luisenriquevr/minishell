@@ -6,7 +6,7 @@
 /*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:15:36 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/03 19:52:49 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/03 20:22:55 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,20 @@ void	trim_quotes(t_token *t)
 	}
 	free(t->str);
 	t->str = copy;
+}
+
+char	*go_to_var_end_quotes(char *str, t_quote quote)
+{
+	if (*str != '$')
+		return (str);
+	str++;
+	if (*str == '?')
+		return (str);
+	if ((*str == '\'' || *str == '"') && quote == NONE)
+		return (str);
+	if (!ft_isalpha(*str))
+		return (str - 1);
+	while (ft_isalnum(*str) || *str == '_')
+		str++;
+	return (str - 1);
 }

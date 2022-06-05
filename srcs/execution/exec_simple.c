@@ -6,11 +6,31 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:14 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:39:13 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 20:28:00 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	child_process(t_cmd_line *cmd)
+{
+	set_signals();
+	if (!access_checker(cmd->to_exec))
+	{
+		execve(cmd->to_exec[0], cmd->to_exec, g_global.env);
+		g_global.exit_status = 127;
+	}
+	if (cmd->to_exec[0])
+		exec_error_exit(cmd->to_exec[0], ": command not found\n");
+}
+
+void	set_fds(int fd_in, int fd_out)
+{
+	if (fd_in)
+		dup2(g_global.fd_stdin, STDIN_FILENO);
+	if (fd_out)
+		dup2(g_global.fd_stdout, STDOUT_FILENO);
+}
 
 int	exec_simple(t_cmd_line *cmd)
 {
@@ -22,21 +42,16 @@ int	exec_simple(t_cmd_line *cmd)
 		builtin_checker(cmd->to_exec);
 	else if (*g_global.env)
 	{
-		access_checker(cmd->to_exec);
 		pid = fork();
 		if (!pid)
 		{
-			execve(cmd->to_exec[0], cmd->to_exec, g_global.env);
-			exec_error_exit(cmd->to_exec[0], ": command not found\n");
+			child_process(cmd);
 		}
 		else if (pid)
-			waitpid(pid, &g_global.exit_status, 0);
+			waitpid(-1, &g_global.exit_status, 0);
 		else
 			perror("minishell: error: fork");
 	}
-	if (cmd->fd_in)
-		dup2(g_global.fd_stdin, STDIN_FILENO);
-	if (cmd->fd_out)
-		dup2(g_global.fd_stdout, STDOUT_FILENO);
+	set_fds(cmd->fd_in, cmd->fd_out);
 	return (0);
 }

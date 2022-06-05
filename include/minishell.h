@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 21:09:38 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/05 18:26:56 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
 # include "../libft/libft.h"
 
 # define READ_END	0
@@ -85,8 +86,7 @@ struct s_global
 	int		env_len;
 	int		fd_stdin;
 	int		fd_stdout;
-	int		signal_status;
-	bool	from_heredoc;
+	int		nheredoc;
 } g_global;
 
 /* -------------------------------PARSEO------------------------------- */
@@ -162,6 +162,7 @@ void		add_new_var(char *new_var);
 char		*get_var_name(char *envp);
 void		dup_and_close(int old, int new);
 void		exec_error_exit(char *str1, char *str2);
+void		set_signals(void);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */
 int			print_error(const char *error);
@@ -179,11 +180,13 @@ void		printtitle(void);
 t_quote		update_quotes(char c, t_quote quote);
 char		*push_char(char *str, char c);
 int			throw_error(const char *error);
-int			throw_error_exit_status(const char *error, int error_code, int ret);
+int			throw_error_exit_status(char *error, int error_code, int ret);
 char		*set_shlvl(void);
 char		*clear_line(char *str);
 void		check_args_init(int argc, char **argv, char **env);
 char		*put_quotes(char *str);
 int			init_global(char **env);
+int			get_shlvl(char **envp);
+int			only_space(char *str);
 
 #endif

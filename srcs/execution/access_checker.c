@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 21:45:52 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,15 @@ void	slashjoin(char **paths)
 char	*get_path(void)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (g_global.env[i][j])
+	while (g_global.env[i])
 	{
-		if (!ft_strncmp(&g_global.env[i][j], "PATH", 4))
-			return (&g_global.env[i][j]);
+		if (!ft_strncmp(g_global.env[i], "PATH", 4))
+			return (g_global.env[i]);
 		else
 			i++;
 	}
-	perror("minishell: $PATH's error");
 	return (NULL);
 }
 
@@ -53,6 +50,8 @@ char	**paths_pull(void)
 
 	path = get_path();
 	i = 0;
+	if (!path)
+		return (NULL);
 	while (path && path[i] != '=')
 		i++;
 	all_paths = ft_split(&path[++i], ':');
@@ -86,13 +85,16 @@ int	access_checker(char **cmd_to_exec)
 {
 	char	**path;
 
+	// solucionar por aqui la falta de env o de path
 	path = paths_pull();
-	if (!path || !*cmd_to_exec)
+	//ft_putendl_fd(cmd_to_exec, 2)
+	if (!path || !*cmd_to_exec || !**cmd_to_exec)
 	{
 		array_free(path);
-		return (0);
+		return (1);
 	}
 	if (access(cmd_to_exec[0], X_OK))
 		return (checker(cmd_to_exec, path));
-	return (1);
+	array_free(path);
+	return (0);
 }

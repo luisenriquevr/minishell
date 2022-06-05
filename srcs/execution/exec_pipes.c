@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:16 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 21:23:48 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 21:16:59 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	wait_childs(int childs_counter)
 		waitpid(-1, &g_global.exit_status, 0);
 }
 
-void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
+static 	void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
+	set_signals();
 	dup_and_close(cmd->fd_in, STDIN_FILENO);
 	if (cmd->next != NULL)
 	{
@@ -32,10 +33,13 @@ void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 	dup_and_close(cmd->fd_out, STDOUT_FILENO);
 	if (builtin_checker(cmd_to_exec))
 		exit (g_global.exit_status);
-	access_checker(cmd_to_exec);
-	execve(cmd_to_exec[0], cmd_to_exec, g_global.env);
-	exec_error_exit(cmd->to_exec[0], ": command not found\n");
-	exit(g_global.exit_status);
+	if (!access_checker(cmd_to_exec))
+	{
+		execve(cmd_to_exec[0], cmd_to_exec, g_global.env);
+		g_global.exit_status = 127;
+	}
+	if (cmd_to_exec[0])
+		exec_error_exit(cmd->to_exec[0], ": command not found\n");
 }
 
 void	parent_process(int fd[2], t_cmd_line *cmd)

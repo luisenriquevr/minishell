@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 12:39:57 by cristianama       #+#    #+#             */
-/*   Updated: 2022/06/03 20:04:41 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 19:13:33 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	check_str(char *str)
 		if (str[i] == '|')
 		{
 			if (!pipe_allowed)
-				return (errcode_print_return(12, "minishell: syntax error\n"));
-			pipe_allowed = true;
+				return (errcode_print_return(12, "minishell: syntax error"));
+			pipe_allowed = false;
 		}
 		if (str[i])
 			i++;

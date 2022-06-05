@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/05/27 20:01:53 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 17:24:01 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	redirector(t_cmd_line **cmd_line)
 	t_token		*token;
 
 	cmd = *cmd_line;
-	while (cmd)
+	while (cmd && g_global.exit_status != 130)
 	{
 		token = cmd->head_token;
 		while (token)

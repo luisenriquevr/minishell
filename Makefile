@@ -6,7 +6,7 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/03 21:22:46 by lvarela          ###   ########.fr        #
+#    Updated: 2022/06/05 12:34:06 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS =	main/minishell.c \
 		parser/expander.c \
 		parser/prepare_exec.c \
 		parser/utils.c \
+		parser/only_space.c \
 		execution/exec.c \
 		execution/exec_simple.c \
 		execution/exec_pipes.c \

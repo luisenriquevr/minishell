@@ -3,32 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 21:02:29 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/03 21:04:04 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/05 17:54:11 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-char	*set_shlvl(void)
+int	get_shlvl(char **envp)
 {
-	char			*ptr;
-	char			*name;
-	unsigned int	i;
+	int		i;
+	char	*str;
+	char	*var_name;
 
-	i = -1;
-	ptr = (char *)malloc(sizeof(char) * ((sizeof(char) * 8)));
-	if (!ptr)
-		return (NULL);
-	name = "SHLVL=";
-	while (name[++i] != '\0')
-		ptr[i] = name[i];
-	ptr[i++] = g_global.shlvl;
-	ptr[i] = '\0';
-	return (ptr);
+	i = 0;
+	str = 0;
+	var_name = get_var_name(envp[i]);
+	while (envp[i] && ft_strcmp(var_name, "SHLVL"))
+	{
+		free(var_name);
+		var_name = get_var_name(envp[++i]);
+	}
+	if (var_name)
+		free(var_name);
+	if (envp[i])
+		return (ft_atoi(&envp[i][6]));
+	return (0);
 }
 
 void	printtitle(void)
@@ -46,7 +49,7 @@ char	*clear_line(char *str)
 {
 	if (str == NULL)
 	{
-		ft_putstr_fd("exit\n", 0);
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		exit(0);
 	}
 	rl_replace_line("", 0);

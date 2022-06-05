@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/03 20:24:18 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/05 18:17:29 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	exit_heredoc(int sig)
 {
 	(void)sig;
 	g_global.exit_status = 130;
-	unlink("/tmp/_tmp");
-	exit (g_global.exit_status);
+	ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	rl_on_new_line();
 }
 
 void	child_process_heredoc(int *fd, char *limitor)
@@ -50,7 +50,7 @@ void	child_process_heredoc(int *fd, char *limitor)
 
 	signal(SIGINT, exit_heredoc);
 	line = readline("> ");
-	while (line && ft_strcmp(line, limitor))
+	while (line && ft_strcmp(line, limitor) && g_global.exit_status != 130)
 	{
 		line = expand_heredoc_line(line);
 		write(*fd, line, ft_strlen(line));
@@ -59,31 +59,29 @@ void	child_process_heredoc(int *fd, char *limitor)
 		line = readline("> ");
 	}
 	free(line);
-	exit(1);
 }
 
 int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	char	*limitor;
-	pid_t	pid;
+	char	*file_name;
+	char	*number;
 
-	*fd = open("/tmp/_tmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
+	number = ft_itoa(g_global.nheredoc++);
+	file_name = ft_strjoin("/tmp/_tmp", number);
+	free(number);
+	*fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0644);
 	limitor = token->str;
 	if (*fd < 0)
 		return (throw_error("minishell: error: redirection"));
-	pid = fork();
-	if (!pid)
-		child_process_heredoc(fd, limitor);
-	else if (pid)
-		waitpid(-1, &g_global.exit_status, 0);
-	else
-		perror("minishell: error: fork");
+	signal(SIGINT, SIG_IGN);
+	child_process_heredoc(fd, limitor);
+	signal(SIGINT, handle_signal);
 	close(*fd);
-	*fd = open("/tmp/_tmp", O_RDONLY, 0644);
-	if (*fd == -1)
-		g_global.from_heredoc = false;
+	*fd = open(file_name, O_RDONLY, 0644);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;
-	return (0);
+	free(file_name);
+	return (g_global.exit_status);
 }

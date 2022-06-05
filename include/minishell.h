@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 18:26:56 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 22:12:44 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
+# include <sys/errno.h>
 # include "../libft/libft.h"
 
 # define READ_END	0

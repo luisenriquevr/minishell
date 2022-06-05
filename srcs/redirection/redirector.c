@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 18:23:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 17:24:01 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 21:56:41 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	redir_in_file(t_token *token, t_cmd_line *cmd, int *fd)
 {
 	*fd = open(token->str, O_RDONLY);
 	if (*fd < 0)
-		return (throw_error("Error: redirection"));
+		return (throw_error("minishell: error: redirection"));
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;

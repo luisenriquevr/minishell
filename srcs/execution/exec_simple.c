@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:14 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 20:28:00 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/05 22:16:07 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 static void	child_process(t_cmd_line *cmd)
 {
 	set_signals();
-	if (!access_checker(cmd->to_exec))
+	if (cmd->exec && !access_checker(cmd->to_exec))
 	{
 		execve(cmd->to_exec[0], cmd->to_exec, g_global.env);
 		g_global.exit_status = 127;
 	}
-	if (cmd->to_exec[0])
-		exec_error_exit(cmd->to_exec[0], ": command not found\n");
+	if (cmd->exec && cmd->to_exec[0])
+		exec_error_exit(cmd->to_exec[0], /*strerror(errno)*/": command not found\n");
+	exit (g_global.exit_status);
 }
 
 void	set_fds(int fd_in, int fd_out)

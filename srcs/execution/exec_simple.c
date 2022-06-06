@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:14 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 22:16:07 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:11:55 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int	exec_simple(t_cmd_line *cmd)
 	{
 		pid = fork();
 		if (!pid)
-		{
 			child_process(cmd);
-		}
 		else if (pid)
 			waitpid(-1, &g_global.exit_status, 0);
 		else

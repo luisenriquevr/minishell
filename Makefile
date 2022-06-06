@@ -6,7 +6,7 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/06 15:21:59 by lvarela          ###   ########.fr        #
+#    Updated: 2022/06/06 16:55:17 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRCSPATH = srcs/
 SRCS =	main/minishell.c \
 		main/main_utils.c \
 		main/free_functions.c \
+		parser/parser.c \
 		parser/checking.c \
 		parser/fill_cmd_line.c \
 		parser/list_cmd_line.c \

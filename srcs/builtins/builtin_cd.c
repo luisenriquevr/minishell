@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:00:07 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 17:41:31 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:40:55 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,20 @@ void	new_pwd(void)
 	pwd = get_var("PWD");
 	old_path = ft_strjoin("OLDPWD=", pwd);
 	tmp = getcwd(NULL, 1000);
-	new_path = ft_strjoin("PWD=", tmp);
-	change_var("PWD", new_path);
-	change_var("OLDPWD", old_path);
+	if (tmp)
+	{
+		new_path = ft_strjoin("PWD=", tmp);
+		change_var("PWD", new_path);
+		change_var("OLDPWD", old_path);
+		free(new_path);
+	}
+	else
+	{
+		printf("minishell: cd: error retrieving current directory: getcwd: ");
+		printf("cannot access parent directories: No such file or directory\n");
+	}
 	free(old_path);
 	free(tmp);
-	free(new_path);
 	if (pwd)
 		free(pwd);
 }
@@ -49,7 +57,8 @@ char	*change_home(char *path)
 	if (path[1] != '/')
 	{
 		tmp2 = ft_strjoin(tmp1, "/");
-		free(tmp1);
+		if (tmp1)
+			free(tmp1);
 		tmp1 = tmp2;
 	}
 	tmp2 = ft_strjoin(tmp1, (path + 1));

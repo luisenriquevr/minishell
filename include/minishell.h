@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 22:12:44 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:35:47 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ struct s_global
 } g_global;
 
 /* -------------------------------PARSEO------------------------------- */
+
+int			parser(char *str, t_cmd_line **cmd_line);
 
 /*FUNCIONES DE CHEQUEOS VARIOS*/
 int			check_str(char *str);

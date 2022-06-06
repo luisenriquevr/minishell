@@ -25,3 +25,7 @@ ctrl+\ dentro de cat o cualquier proceso a la espera -> solucionado
 generacion de heredocs en distintos archivos -> solucionado
 
 salida de heredoc correctamente -> solucionado
+
+mkdir a ; cd a ; rmdir ../a/ ; cd . ; // esto daba segfault -> solucionado
+
+ahora cuando no hay env no hacemos nada, pero en este caso deberiamos de setear lo minimo

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 09:28:52 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 21:45:52 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:59:15 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ int	access_checker(char **cmd_to_exec)
 {
 	char	**path;
 
-	// solucionar por aqui la falta de env o de path
 	path = paths_pull();
-	//ft_putendl_fd(cmd_to_exec, 2)
 	if (!path || !*cmd_to_exec || !**cmd_to_exec)
 	{
 		array_free(path);

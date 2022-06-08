@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:16 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 21:16:59 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:49:57 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static 	void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 		g_global.exit_status = 127;
 	}
 	if (cmd_to_exec[0])
-		exec_error_exit(cmd->to_exec[0], ": command not found\n");
+		exec_error_exit(cmd->to_exec[0]);
 }
 
 void	parent_process(int fd[2], t_cmd_line *cmd)
@@ -64,7 +64,7 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 	}
 }
 
-int	joker(t_cmd_line	*tmp_cmd, int *fd, int *childs_counter)
+int	maker(t_cmd_line	*tmp_cmd, int *fd, int *childs_counter)
 {
 	pid_t		pid;
 
@@ -86,11 +86,11 @@ int	exec_pipes(t_cmd_line *cmd)
 
 	tmp_cmd = cmd;
 	childs_counter = 0;
-	while (tmp_cmd && *g_global.env)
+	while (tmp_cmd)
 	{
 		if (tmp_cmd->next && pipe(fd) < 0)
 			return (throw_error("minishell: error: pipe"));
-		if (tmp_cmd->exec && !joker(tmp_cmd, fd, &childs_counter))
+		if (tmp_cmd->exec && !maker(tmp_cmd, fd, &childs_counter))
 			return (throw_error("minishell: error: fork"));
 		parent_process(fd, tmp_cmd);
 		tmp_cmd = tmp_cmd->next;

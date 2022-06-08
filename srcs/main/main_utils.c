@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 21:02:29 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/06 16:46:47 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:13:13 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 int	get_shlvl(char **envp)
 {
 	int		i;
-	char	*str;
 	char	*var_name;
 
 	i = 0;
-	str = 0;
 	var_name = get_var_name(envp[i]);
 	while (envp[i] && ft_strcmp(var_name, "SHLVL"))
 	{

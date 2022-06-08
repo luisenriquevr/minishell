@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/06 16:58:24 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:39:08 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,36 @@ void	init_export(void)
 			abc = '_';
 	}
 }
-/*
+
 int	set_min_env(void)
 {
-	char	**min_env;
 	char	*pwd;
 	char	*shlvl;
+	char	*aux;
 
-	pwd = getcwd(NULL, 0);
-	shlvl = ft_itoa(g_global.shlvl);
-	min_env = (char **)malloc(sizeof(char *) * 4);
-	min_env[0] = ft_strjoin("PWD=", pwd);
+	aux = getcwd(NULL, 0);
+	pwd = ft_strjoin("PWD=", aux);
+	add_new_var(pwd);
 	free(pwd);
-	min_env[1] = ft_strjoin("SHLVL=", shlvl);
+	pwd = ft_strjoin("OLDPWD=", aux);
+	add_new_var(pwd);
+	free(pwd);
+	free(aux);
+	aux = ft_itoa(g_global.shlvl + 1);
+	shlvl = ft_strjoin("SHLVL=", shlvl);
+	free(aux);
+	add_new_var(shlvl);
 	free(shlvl);
-	min_env[2] = ft_strdup("_=/usr/bin/env");	
-	min_env[3] = NULL;
-	g_global.env = min_env;
+	add_new_var("_=/usr/bin/env");
 	return (0);
 }
-*/
+
 int	init_env(char **envp)
 {
 	char	**new_envp;
 	int		i;
 	char	*shlvl;
 
-	if (!envp)
-		return (1);
-	//if (envp == NULL && g_global.env == NULL)
-	//	return (set_min_env());
 	new_envp = (char **)calloc(g_global.env_len, sizeof(char *));
 	if (!new_envp)
 		return (errcode_print_return(50, "Malloc error"));
@@ -99,6 +99,8 @@ int	init_global(char **env)
 		g_global.shlvl = 0;
 	g_global.shlvl += 1;
 	init_env(env);
+	if (g_global.env_len == 1)
+		set_min_env();
 	init_export();
 	g_global.fd_stdin = dup(STDIN_FILENO);
 	g_global.fd_stdout = dup(STDOUT_FILENO);

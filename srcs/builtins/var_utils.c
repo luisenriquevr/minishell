@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:29:35 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 12:54:33 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 17:55:10 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	add_new_var(char *new_var)
 	i = 0;
 	tmp = g_global.env;
 	g_global.env_len += 1;
+	printf("%p\n", g_global.env);
 	init_env(tmp);
+	write(1, "-----\n", 6);
 	array_free(tmp);
 	while (g_global.env[i])
 		i++;

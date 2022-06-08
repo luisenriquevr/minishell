@@ -28,4 +28,6 @@ salida de heredoc correctamente -> solucionado
 
 mkdir a ; cd a ; rmdir ../a/ ; cd . ; // esto daba segfault -> solucionado
 
-ahora cuando no hay env no hacemos nada, pero en este caso deberiamos de setear lo minimo
+CREO QUE HE SOLUCIONADO EL CASO DE EJECUCION SIN ENV, HAY QUE PROBAR -- HE CREADO UN ENV MINIMO
+
+HAY QUE HACER PRUEBAS EN GENERAL Y QUE INTENTEN ROMPERNOSLO

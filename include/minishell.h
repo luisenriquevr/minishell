@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:50:08 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/06 16:35:47 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 18:49:45 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void		init_export(void);
 void		add_new_var(char *new_var);
 char		*get_var_name(char *envp);
 void		dup_and_close(int old, int new);
-void		exec_error_exit(char *str1, char *str2);
+void		exec_error_exit(char *str1);
 void		set_signals(void);
 
 /* -------------------------GESTIÓN DE ERRORES------------------------- */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
+/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:16 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/08 18:49:57 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/08 19:09:04 by cmarcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	wait_childs(int childs_counter)
 		waitpid(-1, &g_global.exit_status, 0);
 }
 
-static 	void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
+static void	child_process(int fd[2], t_cmd_line *cmd, char **cmd_to_exec)
 {
 	set_signals();
 	dup_and_close(cmd->fd_in, STDIN_FILENO);

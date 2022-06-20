@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:23:41 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/08 18:49:20 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/20 13:13:57 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	exec_error_exit(char *str1)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(str1, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(strerror(errno), STDERR_FILENO);
+	if (ft_strncmp(str1, "./", 2))
+		ft_putstr_fd("comand not found", STDERR_FILENO);
+	else
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 	exit(g_global.exit_status);
 }

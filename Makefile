@@ -6,7 +6,7 @@
 #    By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/23 20:13:17 by cmarcu            #+#    #+#              #
-#    Updated: 2022/06/17 12:19:57 by lvarela          ###   ########.fr        #
+#    Updated: 2022/06/25 17:21:42 by lvarela          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,15 +45,15 @@ OBJS = $(SRC:.c=.o)
 
 NAME = minishell
 
-#RL_INC			= $(HOME)/.brew/opt/readline/include
-#RL_LIB			= $(HOME)/.brew/opt/readline/lib
+RL_INC			= $(HOME)/.brew/opt/readline/include
+RL_LIB			= $(HOME)/.brew/opt/readline/lib
 
-RL_INC			= /usr/local/opt/readline/include
-RL_LIB 			= /usr/local/opt/readline/lib
+#RL_INC			= /usr/local/opt/readline/include
+#RL_LIB 			= /usr/local/opt/readline/lib
 
 CC = gcc
-CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 -fsanitize=address
-LDFLAGS = -L$(LIBFTPATH) -lft -lreadline -L$(RL_LIB) -g3 -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall $(INCLUDES) -g3 #-fsanitize=address
+LDFLAGS = -L$(LIBFTPATH) -lft -lreadline -L$(RL_LIB) -g3 #-fsanitize=address
 RM = rm -f
 
 SRCINC = include/

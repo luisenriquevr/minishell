@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/05 18:17:29 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/25 19:00:06 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	free(file_name);
 	return (g_global.exit_status);
 }
+
+/* TODO: Tenemos el problema de que si nos cierran el heredoc con señales,	*
+ * dejamos abiertos los fd. Seguramente si hiciesemos el heredoc en un		*
+ * hijo no tendríamos este problema, pero tendríamos los del pasado. 		*/

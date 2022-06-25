@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/08 18:39:08 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/25 19:06:20 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,3 +131,15 @@ int	main(int argc, char **argv, char **env)
 	close(g_global.fd_stdout);
 	exit (0);
 }
+
+/* TODO: al hacer [cat << "hola" - $PWD - hola], nos expande PWD y	* 
+ * no tendría que hacerlo ni con "" ni con ''.						*/
+
+/* TODO: cuando hacemos export A=A y luego hacemos A=$A123 nos deja	*
+ * A= sin valor y al hacer unset de A, nos deja el =  en env.		*/
+
+/* TODO: seguimos teniendo leaks en export en algún caso extraño;	*
+ * yo creo que han sido todos a raiz del TODO anterior.				*/
+
+/* TODO: >>a | >a nos rompe el prompt y todo funciona mal a partir	*
+ * de ahí. No se cual puede ser el motivo.							*/

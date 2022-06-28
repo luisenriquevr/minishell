@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/25 19:00:06 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/28 21:38:25 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 		return (throw_error("minishell: error: redirection"));
 	signal(SIGINT, SIG_IGN);
 	child_process_heredoc(fd, limitor);
-	signal(SIGINT, handle_signal);
 	close(*fd);
-	*fd = open(file_name, O_RDONLY, 0644);
+	if (cmd->head_token->type != HERE_DOC)
+		*fd = open(file_name, O_RDONLY, 0644);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
 	cmd->fd_in = *fd;
 	free(file_name);
+	signal(SIGINT, handle_signal);
 	return (g_global.exit_status);
 }
-
-/* TODO: Tenemos el problema de que si nos cierran el heredoc con señales,	*
- * dejamos abiertos los fd. Seguramente si hiciesemos el heredoc en un		*
- * hijo no tendríamos este problema, pero tendríamos los del pasado. 		*/

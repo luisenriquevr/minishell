@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmarcu <cmarcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:11:16 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/08 19:09:04 by cmarcu           ###   ########.fr       */
+/*   Updated: 2022/06/28 21:33:32 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	parent_process(int fd[2], t_cmd_line *cmd)
 	}
 }
 
-int	maker(t_cmd_line	*tmp_cmd, int *fd, int *childs_counter)
+int	maker(t_cmd_line *tmp_cmd, int *fd, int *childs_counter)
 {
 	pid_t		pid;
 
@@ -86,7 +86,7 @@ int	exec_pipes(t_cmd_line *cmd)
 
 	tmp_cmd = cmd;
 	childs_counter = 0;
-	while (tmp_cmd)
+	while (tmp_cmd && (cmd->head_token->type != HERE_DOC))
 	{
 		if (tmp_cmd->next && pipe(fd) < 0)
 			return (throw_error("minishell: error: pipe"));

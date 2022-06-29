@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 18:06:32 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/28 21:38:25 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:25:55 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exit_heredoc(int sig)
 	rl_on_new_line();
 }
 
-void	child_process_heredoc(int *fd, char *limitor)
+void	process_heredoc(t_token *t, int *fd, char *limitor)
 {
 	char	*line;
 
@@ -52,7 +52,8 @@ void	child_process_heredoc(int *fd, char *limitor)
 	line = readline("> ");
 	while (line && ft_strcmp(line, limitor) && g_global.exit_status != 130)
 	{
-		line = expand_heredoc_line(line);
+		if (t->quote == NONE)
+			line = expand_heredoc_line(line);
 		write(*fd, line, ft_strlen(line));
 		write(*fd, "\n", 1);
 		free(line);
@@ -75,7 +76,7 @@ int	redir_heredoc(t_token *token, t_cmd_line *cmd, int *fd)
 	if (*fd < 0)
 		return (throw_error("minishell: error: redirection"));
 	signal(SIGINT, SIG_IGN);
-	child_process_heredoc(fd, limitor);
+	process_heredoc(token, fd, limitor);
 	close(*fd);
 	if (cmd->head_token->type != HERE_DOC)
 		*fd = open(file_name, O_RDONLY, 0644);

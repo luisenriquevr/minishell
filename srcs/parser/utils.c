@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 14:15:36 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/28 20:37:39 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:35:27 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,24 +109,22 @@ char	*put_quotes(char *str)
 
 	tmp = ft_split(str, '=');
 	tmp1 = ft_strjoin("declare -x ", tmp[0]);
-	tmp2 = ft_strjoin(tmp1, "=");
+	tmp2 = ft_strjoin(tmp1, "=\"");
 	free(tmp1);
-	tmp1 = ft_strjoin(tmp2, "\"");
-	free(tmp2);
 	if (tmp[1] != NULL)
 	{
-		tmp2 = ft_strjoin(tmp1, tmp[1]);
-		free(tmp1);
-		tmp1 = ft_strjoin(tmp2, "\"");
+		tmp1 = ft_strjoin(tmp2, tmp[1]);
 		free(tmp2);
-		array_free(tmp);
-		return (tmp1);
-	}
-	else
-	{
 		tmp2 = ft_strjoin(tmp1, "\"");
 		free(tmp1);
 		array_free(tmp);
 		return (tmp2);
+	}
+	else
+	{
+		tmp1 = ft_strjoin(tmp2, "\"");
+		free(tmp2);
+		array_free(tmp);
+		return (tmp1);
 	}
 }

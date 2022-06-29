@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 20:23:41 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/20 13:13:57 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/29 18:20:51 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	exec_error_exit(char *str1)
 	else
 		ft_putstr_fd(strerror(errno), STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
+	g_global.exit_status = 127;
 	exit(g_global.exit_status);
 }
 

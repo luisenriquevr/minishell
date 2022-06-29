@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:21:51 by lvarela           #+#    #+#             */
-/*   Updated: 2022/06/17 16:17:22 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:52:17 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	builtin_exit(char **cmd)
 {
 	if (array_length(cmd) > 2)
 		return (throw_error_exit_status("minishell: \
-			exit: too many arguments", 1, 1));
+exit: too many arguments", 1, 1));
 	printf("exit\n");
 	if (array_length(cmd) == 2 && !only_digits(cmd[1]))
 	{
 		ft_putendl_fd("minishell: \
-			exit: numeric argument required", STDERR_FILENO);
+exit: numeric argument required", STDERR_FILENO);
 		exit(255);
 	}
 	if (array_length(cmd) < 2)

@@ -6,7 +6,7 @@
 /*   By: lvarela <lvarela@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 18:36:17 by cmarcu            #+#    #+#             */
-/*   Updated: 2022/06/28 21:40:43 by lvarela          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:51:21 by lvarela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,3 @@ int	main(int argc, char **argv, char **env)
 	close(g_global.fd_stdout);
 	exit (0);
 }
-
-/* TODO: al hacer [cat << "hola" - $PWD - hola], nos expande PWD y	* 
- * no tendría que hacerlo ni con "" ni con ''.						*/
